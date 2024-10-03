@@ -1,0 +1,29 @@
+function lerp(v0: number, v1: number, t: number) {
+  return v0 * (1 - t) + v1 * t
+}
+
+class LerpedValue {
+  private targetValue: number;
+  private value: number;
+  private strength: number;
+
+  constructor(value: number, strength: number) {
+    this.targetValue = value;
+    this.value = value;
+    this.strength = strength;
+  }
+
+  set(value: number) {
+    this.targetValue = value;
+  }
+
+  tick() {
+    this.value = lerp(this.value, this.targetValue, this.strength);
+  }
+
+  get() {
+    return this.value;
+  }
+}
+
+export default LerpedValue;

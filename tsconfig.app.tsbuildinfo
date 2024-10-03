@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/index.tsx","./src/vite-env.d.ts","./src/background/BackgroundRenderer.ts","./src/background/RenderLoop.ts","./src/context/CursorProvider.tsx","./src/screens/Home/assets.ts","./src/screens/Home/index.tsx","./src/utility/assetLoader.test.ts","./src/utility/assetLoader.ts","./src/utility/delay.ts"],"version":"5.6.2"}
