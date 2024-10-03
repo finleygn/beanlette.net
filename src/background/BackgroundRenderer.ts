@@ -46,6 +46,7 @@ class BackgroundRenderer {
     const renderer = new Renderer({
       antialias: false,
       depth: false,
+      dpr: window.devicePixelRatio
     });
 
     this.renderer = renderer;
