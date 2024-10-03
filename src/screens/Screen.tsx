@@ -12,12 +12,21 @@ interface ScreenProps {
 
 function Screen(props: ScreenProps) {
   onMount(async () => {
-    const assets = await props.assetLoader();
-    
-    props.backgroundRender.setInitialBackgroundTexture({
-      colour: assets.color,
-      depth: assets.depth
-    });
+    if(props.backgroundRender.hasBackgroundTexture()) {
+      props.backgroundRender.prepNextBackground();
+      const assets = await props.assetLoader();
+
+      props.backgroundRender.startBackgroundTransition({
+        colour: assets.color,
+        depth: assets.depth
+      });
+    } else {
+      const assets = await props.assetLoader();
+      props.backgroundRender.setCurrentBackgroundTexture({
+        colour: assets.color,
+        depth: assets.depth
+      });
+    }
   });
 
   return <>{props.children}</>;

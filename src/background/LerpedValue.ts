@@ -13,6 +13,10 @@ class LerpedValue {
     this.strength = strength;
   }
 
+  setStrength(value: number) {
+    this.strength = value;
+  }
+
   set(value: number) {
     this.targetValue = value;
   }
@@ -23,6 +27,10 @@ class LerpedValue {
 
   get() {
     return this.value;
+  }
+
+  isFinished(threshold = 0.001) {
+    return Math.abs(this.value - this.targetValue) < threshold;
   }
 }
 

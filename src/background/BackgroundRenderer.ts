@@ -6,6 +6,12 @@ import MousePositionTracker from "./MousePositionTracker";
 import LerpedValue from "./LerpedValue";
 
 
+enum ScreenTransitionState {
+  Finished,
+  Loading,
+  InProgress
+}
+
 class BackgroundRenderer {
   private renderer: Renderer;
   private gl: OGLRenderingContext;
@@ -21,6 +27,15 @@ class BackgroundRenderer {
     colour: Texture;
     depth : Texture;
   };
+
+  private nextBackgrounds: {
+    colour: Texture;
+    depth : Texture;
+  };
+
+  private animationTransitionState: ScreenTransitionState = ScreenTransitionState.Finished;
+  private animationPercentage: LerpedValue = new LerpedValue(0, 0.05);
+  private loadingTime: LerpedValue = new LerpedValue(0, 0.02);
 
   private currentMousePosition: {
     x: LerpedValue,
@@ -47,6 +62,15 @@ class BackgroundRenderer {
        })
     };
 
+    this.nextBackgrounds = {
+      colour: new Texture(this.gl, {
+        generateMipmaps: false,
+      }),
+      depth: new Texture(this.gl, {
+        generateMipmaps: false,
+       })
+    };
+
     this.currentMousePosition = {
       x: new LerpedValue(this.mousePositionTracker.getX(), 0.1),
       y: new LerpedValue(this.mousePositionTracker.getY(), 0.1)
@@ -65,6 +89,10 @@ class BackgroundRenderer {
         u_resolution: { value: [this.renderer.width, this.renderer.height] },
         u_depth_texture: { value: this.currentBackgrounds.depth },
         u_color_texture: { value: this.currentBackgrounds.colour },
+        u_next_depth_texture: { value: this.nextBackgrounds.depth },
+        u_next_color_texture: { value: this.nextBackgrounds.colour },
+        u_animation_progress: { value: 0 },
+        u_loading_time: { value: 0 }
       },
     });
 
@@ -94,12 +122,40 @@ class BackgroundRenderer {
     resize();
   }
 
-  public setInitialBackgroundTexture({ colour, depth }:  {
+  public hasBackgroundTexture = () => {
+    return !!this.currentBackgrounds.colour.image;
+  }
+
+  public setCurrentBackgroundTexture = ({ colour, depth }:  {
     colour: HTMLImageElement;
     depth : HTMLImageElement;
-  }) {
+  }) => {
     this.currentBackgrounds.colour.image = colour;
     this.currentBackgrounds.depth.image = depth;
+  }
+
+  public prepNextBackground = () => {
+    this.loadingTime.setStrength(0.02);
+    this.loadingTime.set(1);
+  }
+
+  public startBackgroundTransition = ({ colour, depth }:  {
+    colour: HTMLImageElement;
+    depth : HTMLImageElement;
+  }) => {
+    this.nextBackgrounds.colour.image = colour;
+    this.nextBackgrounds.depth.image = depth;
+    this.animationPercentage.set(1);
+    this.loadingTime.set(0);
+    this.loadingTime.setStrength(0.5);
+    this.animationTransitionState = ScreenTransitionState.InProgress;
+  }
+
+  private finishBackgroundTransition = () => {
+    this.animationPercentage = new LerpedValue(0, 0.05);
+    this.currentBackgrounds.colour.image = this.nextBackgrounds.colour.image;
+    this.currentBackgrounds.depth.image = this.nextBackgrounds.depth.image;
+    this.animationTransitionState = ScreenTransitionState.Finished;
   }
 
   private render = (timings: LoopTimings) => {
@@ -107,6 +163,27 @@ class BackgroundRenderer {
     this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_WRAP_T, this.gl.MIRRORED_REPEAT);
     this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
     this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+
+    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_WRAP_S, this.gl.MIRRORED_REPEAT);
+    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_WRAP_T, this.gl.MIRRORED_REPEAT);
+    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
+    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+
+    /**
+     * Transition updates
+     */
+    this.loadingTime.tick();
+
+    if(this.animationTransitionState === ScreenTransitionState.InProgress) {
+      this.animationPercentage.tick();
+ 
+      if(this.animationPercentage.isFinished()){
+        return this.finishBackgroundTransition()
+      }
+    }
+    
+    this.program.uniforms.u_loading_time.value = this.loadingTime.get();
+    this.program.uniforms.u_animation_progress.value = this.animationPercentage.get();
 
     /**
      * Mouse position updates
@@ -120,7 +197,6 @@ class BackgroundRenderer {
     const lerpedMouseX = this.currentMousePosition.x.get();
     const lerpedMouseY = this.currentMousePosition.y.get();
 
-    console.log(lerpedMouseX)
     this.program.uniforms.u_mouse.value[0] = lerpedMouseX;
     this.program.uniforms.u_mouse.value[1] = lerpedMouseY;
 
