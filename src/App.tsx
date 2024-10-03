@@ -2,7 +2,6 @@ import { createEffect, createSignal, Match, onMount, Show, Switch } from 'solid-
 import createAssetLoader, { AssetLoaders } from './utility/assetLoader';
 import BackgroundRenderer from './background/BackgroundRenderer';
 import CursorProvider from './context/CursorProvider';
-import Screen from './screens/Screen';
 import homeScreenAssets from './screens/Home/assets';
 import HomeScreen from './screens/Home';
 import CommissionScreen from './screens/Commissions';

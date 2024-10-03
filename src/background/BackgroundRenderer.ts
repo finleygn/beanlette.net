@@ -158,7 +158,7 @@ class BackgroundRenderer {
     this.animationTransitionState = ScreenTransitionState.Finished;
   }
 
-  private render = (timings: LoopTimings) => {
+  private render = (_: LoopTimings) => {
     this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_WRAP_S, this.gl.MIRRORED_REPEAT);
     this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_WRAP_T, this.gl.MIRRORED_REPEAT);
     this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
