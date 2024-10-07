@@ -45,13 +45,11 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
 
   return (
     <Show when={!!assets()}>
-      <Show when={!assetsLoading()}>
-        <DogCursor
-          enabled={!assetsLoading()}
-          default={assets()!.cursor_bobocube_default}
-          hovered={assets()!.cursor_bobocube_hover}
-        />
-      </Show>
+      <DogCursor
+        enabled={!assetsLoading()}
+        default={assets()!.cursor_bobocube_default}
+        hovered={assets()!.cursor_bobocube_hover}
+      />
       <Menu />
       <Switch fallback={<div>Not Found</div>}>
         <Match when={a() === false}>

@@ -16,7 +16,6 @@ function Screen(props: ScreenProps) {
     if(props.backgroundRender.shouldSetInitialBackground()) {
       const assets = await props.assetLoader();
 
-      console.log("Loading initial")
       await props.backgroundRender.setCurrentBackground({
         color: assets.color,
         depth: assets.depth

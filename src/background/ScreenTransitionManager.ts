@@ -34,7 +34,6 @@ class ScreenTransitionManager {
   }
 
   public getStartTexture(): ScreenContent {
-    console.log(this.currentScreen)
     return this.currentScreen;
   }
 
