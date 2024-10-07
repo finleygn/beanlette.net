@@ -59,34 +59,31 @@ vec4 dither4x4(vec2 position, vec4 color) {
   return vec4(color.rgb * dither4x4(position, luma(color)), 1.0);
 }
 
-vec2 correctUv(vec2 uv, sampler2D texture, vec2 resolution) {
-  vec2 uvc = vec2(uv.x, uv.y);
-  // fuck me this is awful
-  ivec2 image_size_i=textureSize(texture,0);
+vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
+  vec2 cuv = uv;
+  vec2 new, offset;
+
+  ivec2 image_size_i=textureSize(texture, 0);
   vec2 image_size=vec2(float(image_size_i.x),float(image_size_i.y));
-  
-  if(image_size.x/image_size.y>resolution.x/resolution.y){
-    float l_image_ratio=image_size.x/image_size.y;
-    float l_viewport_ratio=resolution.x/resolution.y;
-    
-    // we allow a little distortion
-    float ratio=l_viewport_ratio/l_image_ratio;
-    uvc.x=(uvc.x*(ratio))+((1.-ratio)*.5);
-  }else{
-    float l_image_ratio=image_size.y/image_size.x;
-    float l_viewport_ratio=resolution.y/resolution.x;
-    
-    // and here
-    float ratio=l_viewport_ratio/l_image_ratio;
-    uvc.y=(uvc.y*(ratio))+((1.-ratio)*.5);
+
+  float ratio_screen = resolution.x/resolution.y;
+  float ratio_image = image_size.x/image_size.y;
+
+  if(ratio_screen < ratio_image) {
+    new = vec2(image_size.x * resolution.y / image_size.y, resolution.y);
+    offset = vec2((new.x - resolution.x) / 2.0, 0.0);
+  } else {
+    new = vec2(resolution.x, image_size.y * resolution.x / image_size.x);
+    offset = vec2(0.0, (new.y - resolution.y) / 2.0);
   }
 
-  return uvc;
+  cuv = uv * (resolution / new) + (offset / new);
+  return cuv;
 }
 
 void main(){
-  vec2 uv=correctUv(v_uv, u_a_color_texture, u_resolution);
-  vec2 uv_next=correctUv(v_uv, u_b_color_texture, u_resolution);
+  vec2 uv = coverBackgroundPosition(v_uv, u_a_color_texture, u_resolution);
+  vec2 uv_next = coverBackgroundPosition(v_uv, u_b_color_texture, u_resolution);
 
   vec2 center_vector = signedRange(u_mouse) + vec2(0.0, u_loading_time);
 
@@ -107,18 +104,12 @@ void main(){
 
   vec4 color=texture(
     u_a_color_texture,
-    vec2(
-      sample_position.x,
-      sample_position.y
-    )
+    vec2(sample_position.x, sample_position.y)
   );
 
   vec4 color_next=texture(
     u_b_color_texture,
-    vec2(
-      sample_position.x,
-      sample_position.y
-    )
+    vec2(sample_position.x, sample_position.y)
   );
 
   vec4 resulting_colour=mix(color, color_next, clamp(u_animation_progress+(depth*u_animation_progress), 0.0, 1.0));

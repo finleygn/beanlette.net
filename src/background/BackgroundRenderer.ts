@@ -169,8 +169,8 @@ class BackgroundRenderer {
     /**
      * Resolution updates
      */
-    this.program.uniforms.u_resolution[0] = this.renderer.width;
-    this.program.uniforms.u_resolution[1] = this.renderer.height;
+    this.program.uniforms.u_resolution.value[0] = this.renderer.width;
+    this.program.uniforms.u_resolution.value[1] = this.renderer.height;
 
     this.renderer.render({ scene: this.mesh });
   }

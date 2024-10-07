@@ -5,7 +5,7 @@ TODO:
 - [x] Black screen on loader
 - [x] Fix texture swap delay, potentially by swapping entire texture instead of src.
 - [x] Fix transition stacking
-- [ ] Cursor image swap, keep gif location
+- [x] Cursor image swap, keep gif location
 - [ ] Fix image aspect ratio backgrounds
 - [ ] Fix DPR on mobile devices
 - [ ] Remove touch on mobile devices
