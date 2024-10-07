@@ -1,12 +1,6 @@
-import { createContext, createEffect, createSignal, JSXElement, onCleanup, onMount, useContext } from "solid-js";
+import { createSignal, onCleanup, onMount } from "solid-js";
 import { Portal } from "solid-js/web";
 import './DogCursor.css';
-
-interface CursorContextValue {
-  setHovered(value: boolean): void;
-}
-
-export const CursorContext = createContext({} as CursorContextValue);
 
 interface DogCursorProps {
   enabled: boolean;
@@ -51,10 +45,6 @@ function DogCursor(props: DogCursorProps) {
       </div>
     </Portal>
   )
-}
-
-export const useCursorContext = () => {
-  return useContext(CursorContext);
 }
 
 export default DogCursor;
