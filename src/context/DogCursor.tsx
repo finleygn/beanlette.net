@@ -34,14 +34,8 @@ function DogCursor(props: DogCursorProps) {
         cursor: true,
         'cursor--enabled': props.enabled && hasMoved()
       }}>
-        <img
-          src={props.default.src}
-          class='cursor__image cursor__image--default'
-        />
-        <img
-          src={props.hovered.src}
-          class='cursor__image cursor__image--hovered'
-        />
+        <img src={props.default.src} class='cursor__image cursor__image--default' />
+        <img src={props.hovered.src} class='cursor__image cursor__image--hovered' />
       </div>
     </Portal>
   )

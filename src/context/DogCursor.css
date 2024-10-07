@@ -23,17 +23,23 @@
 }
 
 .cursor__image--default {
-  visibility: visible;
+  opacity: 1;
 }
 
 .cursor__image--hovered {
-  visibility: hidden;
+  opacity: 0.01;
+  width: 1px;
+  height: 1px;
 }
 
 html:has(a:hover) .cursor__image--default {
-  visibility: hidden;
+  opacity: 0.01;
+  width: 1px;
+  height: 1px;
 }
 
 html:has(a:hover) .cursor__image--hovered {
-  visibility: visible;
+  opacity: 1;
+  width: auto;
+  height: auto;
 }
