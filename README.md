@@ -6,10 +6,10 @@ TODO:
 - [x] Fix texture swap delay, potentially by swapping entire texture instead of src.
 - [x] Fix transition stacking
 - [x] Cursor image swap, keep gif location
-- [ ] Fix image aspect ratio backgrounds
+- [x] Fix image aspect ratio backgrounds
 - [ ] Fix DPR on mobile devices
 - [ ] Remove touch on mobile devices
-- [ ] Cursor hover effects
+- [x] Cursor hover effects
 - [ ] Background WoT (wiggle over time)
 - [ ] Change screens on routes
 - [ ] Content in & out animations
@@ -23,3 +23,4 @@ TODO:
 - [ ] Screen door effect on safari
 - [ ] Use white cursor instead of black
 - [ ] Image previews
+- [ ] Use delta time for transitions

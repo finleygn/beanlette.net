@@ -52,11 +52,12 @@ float dither4x4(vec2 position, float brightness) {
     if (index == 15) limit = 0.375;
   }
 
-  return brightness < limit ? 0.0 : 1.0;
+  
+  return brightness < limit ? 0.2 : 1.0;
 }
 
 vec4 dither4x4(vec2 position, vec4 color) {
-  return vec4(color.rgb * dither4x4(position, luma(color)), 1.0);
+  return vec4(color.rgb * dither4x4(position, luma(color)) * 1.0, 1.0);
 }
 
 vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {

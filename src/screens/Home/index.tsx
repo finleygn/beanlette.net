@@ -1,4 +1,5 @@
 import BackgroundRenderer from "../../background/BackgroundRenderer";
+import Icon from "../../components/Icon";
 import Screen from "../Screen";
 import homeScreenAssets from "./assets";
 
@@ -14,7 +15,25 @@ function HomeScreen(props: ScreenProps) {
       backgroundRender={props.backgroundRender}
       onBackgroundReady={props.onBackgroundReady}
     >
-      <h1>Helloo</h1>
+      <Icon
+        title="plast_emotion_2"
+        thumbnail="/artwork/plast_emotion_2/thumb.gif"
+        id="plast_emotion_2"
+        images={[]}
+      />
+      <Icon
+        title="plast_emotion_2"
+        thumbnail="/artwork/plast_emotion_2/thumb.gif"
+        id="plast_emotion_2"
+        images={[]}
+      />
+      <Icon
+        title="plast_emotion_2"
+        thumbnail="/artwork/plast_emotion_2/thumb.gif"
+        id="plast_emotion_2"
+        images={[]}
+      />
+      
     </Screen>
   )
 }
