@@ -4,6 +4,7 @@ import commissionScreenAssets from "./assets";
 
 interface ScreenProps {
   backgroundRender: BackgroundRenderer;
+  onBackgroundReady: () => void;
 }
 
 function CommissionScreen(props: ScreenProps) {
@@ -11,6 +12,7 @@ function CommissionScreen(props: ScreenProps) {
     <Screen
       assetLoader={commissionScreenAssets}
       backgroundRender={props.backgroundRender}
+      onBackgroundReady={props.onBackgroundReady}
     >
       <h1>Test</h1>
     </Screen>

@@ -15,6 +15,10 @@ body {
   place-items: center;
 }
 
+header h1 {
+  font-size: 16px;
+}
+
 #root {
   z-index: 1;
 }

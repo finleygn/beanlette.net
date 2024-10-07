@@ -4,13 +4,7 @@ import vertex_shader from './shaders/vertex.glsl?raw';
 import fragment_shader from './shaders/displace.glsl?raw';
 import MousePositionTracker from "./MousePositionTracker";
 import LerpedValue from "./LerpedValue";
-
-
-enum ScreenTransitionState {
-  Finished,
-  Loading,
-  InProgress
-}
+import ScreenTransitionManager from "./ScreenTransitionManager";
 
 class BackgroundRenderer {
   private renderer: Renderer;
@@ -23,54 +17,24 @@ class BackgroundRenderer {
   private program: Program;
   private mesh: Mesh;
 
-  private currentBackgrounds: {
-    colour: Texture;
-    depth : Texture;
-  };
-
-  private nextBackgrounds: {
-    colour: Texture;
-    depth : Texture;
-  };
-
-  private animationTransitionState: ScreenTransitionState = ScreenTransitionState.Finished;
-  private animationPercentage: LerpedValue = new LerpedValue(0, 0.05);
-  private loadingTime: LerpedValue = new LerpedValue(0, 0.02);
-
   private currentMousePosition: {
     x: LerpedValue,
     y: LerpedValue
   }
 
+  private screenTransitionManager: ScreenTransitionManager;
+
   constructor() {
     const renderer = new Renderer({
       antialias: false,
-      depth: false,
-      dpr: window.devicePixelRatio
+      depth: false
     });
 
     this.renderer = renderer;
     this.gl = renderer.gl;
     this.canvas = renderer.gl.canvas;
-    
 
-    this.currentBackgrounds = {
-      colour: new Texture(this.gl, {
-        generateMipmaps: false,
-      }),
-      depth: new Texture(this.gl, {
-        generateMipmaps: false,
-       })
-    };
-
-    this.nextBackgrounds = {
-      colour: new Texture(this.gl, {
-        generateMipmaps: false,
-      }),
-      depth: new Texture(this.gl, {
-        generateMipmaps: false,
-       })
-    };
+    this.screenTransitionManager = new ScreenTransitionManager(this.gl);
 
     this.currentMousePosition = {
       x: new LerpedValue(this.mousePositionTracker.getX(), 0.1),
@@ -88,21 +52,19 @@ class BackgroundRenderer {
       uniforms: {
         u_mouse: { value: [0.5, 0.5] },
         u_resolution: { value: [this.renderer.width, this.renderer.height] },
-        u_depth_texture: { value: this.currentBackgrounds.depth },
-        u_color_texture: { value: this.currentBackgrounds.colour },
-        u_next_depth_texture: { value: this.nextBackgrounds.depth },
-        u_next_color_texture: { value: this.nextBackgrounds.colour },
+        u_a_depth_texture: { value: this.screenTransitionManager.getStartTexture().depth },
+        u_a_color_texture: { value: this.screenTransitionManager.getStartTexture().color },
+        u_b_depth_texture: { value: this.screenTransitionManager.getEndTexture().depth },
+        u_b_color_texture: { value: this.screenTransitionManager.getEndTexture().color },
         u_animation_progress: { value: 0 },
         u_loading_time: { value: 0 }
       },
+      transparent: false,
+      cullFace: false,
+      depthTest: false
     });
 
     this.mesh = new Mesh(this.gl, { geometry: this.geometry, program: this.program });
-
-    this.currentBackgrounds = {
-      colour: new Texture(this.gl),
-      depth : new Texture(this.gl)
-    }
 
     document.body.prepend(this.canvas);
     this.canvas.style.position = 'fixed';
@@ -123,68 +85,71 @@ class BackgroundRenderer {
     resize();
   }
 
-  public hasBackgroundTexture = () => {
-    return !!this.currentBackgrounds.colour.image;
-  }
-
-  public setCurrentBackgroundTexture = ({ colour, depth }:  {
-    colour: HTMLImageElement;
-    depth : HTMLImageElement;
+  public setCurrentBackground = async ({ color, depth }:  {
+    color: HTMLImageElement;
+    depth: HTMLImageElement;
   }) => {
-    this.currentBackgrounds.colour.image = colour;
-    this.currentBackgrounds.depth.image = depth;
+    const newcolorTexture = new Texture(this.gl, { generateMipmaps: false });
+    const newDepthTexture = new Texture(this.gl, { generateMipmaps: false });
+
+    newcolorTexture.image = color;
+    newDepthTexture.image = depth;
+    
+    await this.screenTransitionManager.setScreen({
+      color: newcolorTexture,
+      depth: newDepthTexture,
+    });
   }
 
-  public prepNextBackground = () => {
-    this.loadingTime.setStrength(0.02);
-    this.loadingTime.set(1);
-  }
-
-  public startBackgroundTransition = ({ colour, depth }:  {
-    colour: HTMLImageElement;
-    depth : HTMLImageElement;
+  public setNextBackground = async ({ color, depth }:  {
+    color: HTMLImageElement;
+    depth: HTMLImageElement;
   }) => {
-    this.nextBackgrounds.colour.image = colour;
-    this.nextBackgrounds.depth.image = depth;
-    this.animationPercentage.set(1);
-    this.loadingTime.set(0);
-    this.loadingTime.setStrength(0.5);
-    this.animationTransitionState = ScreenTransitionState.InProgress;
+    const newcolorTexture = new Texture(this.gl, { generateMipmaps: false });
+    const newDepthTexture = new Texture(this.gl, { generateMipmaps: false });
+
+    newcolorTexture.image = color;
+    newDepthTexture.image = depth;
+
+    this.screenTransitionManager.addNextScreen({
+      color: newcolorTexture,
+      depth: newDepthTexture,
+    });
+
+    await this.screenTransitionManager.nextScreenLoaded()
   }
 
-  private finishBackgroundTransition = () => {
-    this.animationPercentage = new LerpedValue(0, 0.05);
-    this.currentBackgrounds.colour.image = this.nextBackgrounds.colour.image;
-    this.currentBackgrounds.depth.image = this.nextBackgrounds.depth.image;
-    this.animationTransitionState = ScreenTransitionState.Finished;
+  public shouldSetInitialBackground() {
+    return !this.screenTransitionManager.hasInitialCurrentScreen()
   }
 
   private render = (_: LoopTimings) => {
-    this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_WRAP_S, this.gl.MIRRORED_REPEAT);
-    this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_WRAP_T, this.gl.MIRRORED_REPEAT);
-    this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
-    this.gl.texParameteri(this.currentBackgrounds.colour.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-
-    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_WRAP_S, this.gl.MIRRORED_REPEAT);
-    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_WRAP_T, this.gl.MIRRORED_REPEAT);
-    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
-    this.gl.texParameteri(this.nextBackgrounds.colour.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-
     /**
-     * Transition updates
+     * Background textures and transition
      */
-    this.loadingTime.tick();
+    this.screenTransitionManager.tick();
 
-    if(this.animationTransitionState === ScreenTransitionState.InProgress) {
-      this.animationPercentage.tick();
- 
-      if(this.animationPercentage.isFinished()){
-        return this.finishBackgroundTransition()
-      }
+    const currentScreen = this.screenTransitionManager.getStartTexture();
+    const nextScreen = this.screenTransitionManager.getEndTexture();
+
+    if(currentScreen.color.image) {
+      this.gl.texParameteri(currentScreen.color.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
+      this.gl.texParameteri(currentScreen.color.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
     }
-    
-    this.program.uniforms.u_loading_time.value = this.loadingTime.get();
-    this.program.uniforms.u_animation_progress.value = this.animationPercentage.get();
+
+    if(nextScreen.color.image) {
+      this.gl.texParameteri(nextScreen.color.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
+      this.gl.texParameteri(nextScreen.color.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+    }
+
+    this.program.uniforms.u_loading_time.value = 0;
+    this.program.uniforms.u_animation_progress.value = this.screenTransitionManager.getProgress();
+
+    this.program.uniforms.u_a_color_texture.value = currentScreen.color;
+    this.program.uniforms.u_a_depth_texture.value = currentScreen.depth;
+
+    this.program.uniforms.u_b_color_texture.value = nextScreen.color;
+    this.program.uniforms.u_b_depth_texture.value = nextScreen.depth;
 
     /**
      * Mouse position updates
@@ -206,12 +171,6 @@ class BackgroundRenderer {
      */
     this.program.uniforms.u_resolution[0] = this.renderer.width;
     this.program.uniforms.u_resolution[1] = this.renderer.height;
-
-    /**
-     * Background updates
-     */
-    this.program.uniforms.u_color_texture.value = this.currentBackgrounds.colour;
-    this.program.uniforms.u_depth_texture.value = this.currentBackgrounds.depth;
 
     this.renderer.render({ scene: this.mesh });
   }

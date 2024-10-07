@@ -4,6 +4,7 @@ import homeScreenAssets from "./assets";
 
 interface ScreenProps {
   backgroundRender: BackgroundRenderer;
+  onBackgroundReady: () => void;
 }
 
 function HomeScreen(props: ScreenProps) {
@@ -11,8 +12,9 @@ function HomeScreen(props: ScreenProps) {
     <Screen
       assetLoader={homeScreenAssets}
       backgroundRender={props.backgroundRender}
+      onBackgroundReady={props.onBackgroundReady}
     >
-      <h1>Test</h1>
+      <h1>Helloo</h1>
     </Screen>
   )
 }

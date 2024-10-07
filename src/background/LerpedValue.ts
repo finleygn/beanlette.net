@@ -21,6 +21,12 @@ class LerpedValue {
     this.targetValue = value;
   }
 
+  setAbsolute(value: number) {
+    this.value = value;
+    this.targetValue = value;
+  }
+
+
   tick() {
     this.value = lerp(this.value, this.targetValue, this.strength);
   }

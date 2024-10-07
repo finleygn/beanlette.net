@@ -49,8 +49,7 @@ function createAssetLoader<const T extends { [k: string]: AssetLoaderFn<unknown>
             // Should probably do something here
           }
         })
-    )
-    console.log('done loading')
+    );
 
     return loaded as AssetLoadableToLoaded<T>;
   }

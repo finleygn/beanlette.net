@@ -6,10 +6,10 @@ uniform vec2 u_mouse;
 uniform vec2 u_resolution;
 uniform float u_animation_progress;
 uniform float u_loading_time;
-uniform sampler2D u_depth_texture;
-uniform sampler2D u_color_texture;
-uniform sampler2D u_next_depth_texture;
-uniform sampler2D u_next_color_texture;
+uniform sampler2D u_a_depth_texture;
+uniform sampler2D u_a_color_texture;
+uniform sampler2D u_b_depth_texture;
+uniform sampler2D u_b_color_texture;
 
 in vec2 v_uv;
 
@@ -85,13 +85,13 @@ vec2 correctUv(vec2 uv, sampler2D texture, vec2 resolution) {
 }
 
 void main(){
-  vec2 uv=correctUv(v_uv, u_color_texture, u_resolution);
-  vec2 uv_next=correctUv(v_uv, u_next_color_texture, u_resolution);
+  vec2 uv=correctUv(v_uv, u_a_color_texture, u_resolution);
+  vec2 uv_next=correctUv(v_uv, u_b_color_texture, u_resolution);
 
   vec2 center_vector = signedRange(u_mouse) + vec2(0.0, u_loading_time);
 
-  float depth=texture(u_depth_texture,uv).g;
-  float next_depth=texture(u_next_depth_texture,uv_next).g;
+  float depth=texture(u_a_depth_texture,uv).g;
+  float next_depth=texture(u_b_depth_texture,uv_next).g;
 
   vec2 sample_position=mix(
     vec2(
@@ -106,7 +106,7 @@ void main(){
   );
 
   vec4 color=texture(
-    u_color_texture,
+    u_a_color_texture,
     vec2(
       sample_position.x,
       sample_position.y
@@ -114,7 +114,7 @@ void main(){
   );
 
   vec4 color_next=texture(
-    u_next_color_texture,
+    u_b_color_texture,
     vec2(
       sample_position.x,
       sample_position.y

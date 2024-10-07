@@ -8,25 +8,29 @@ interface ScreenProps {
   }>,
   backgroundRender: BackgroundRenderer;
   children: JSXElement;
+  onBackgroundReady: () => void;
 }
 
 function Screen(props: ScreenProps) {
   onMount(async () => {
-    if(props.backgroundRender.hasBackgroundTexture()) {
-      props.backgroundRender.prepNextBackground();
+    if(props.backgroundRender.shouldSetInitialBackground()) {
       const assets = await props.assetLoader();
 
-      props.backgroundRender.startBackgroundTransition({
-        colour: assets.color,
+      console.log("Loading initial")
+      await props.backgroundRender.setCurrentBackground({
+        color: assets.color,
         depth: assets.depth
       });
     } else {
       const assets = await props.assetLoader();
-      props.backgroundRender.setCurrentBackgroundTexture({
-        colour: assets.color,
+      
+      await props.backgroundRender.setNextBackground({
+        color: assets.color,
         depth: assets.depth
       });
     }
+
+    props.onBackgroundReady();
   });
 
   return <>{props.children}</>;
