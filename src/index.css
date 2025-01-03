@@ -27,6 +27,7 @@ header h1 {
 
 canvas {
   image-rendering: pixelated;
+  min-height: 100vh;
 }
 
 main {
