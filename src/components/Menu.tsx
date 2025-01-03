@@ -23,7 +23,6 @@ function Menu({ backgroundRenderer }: MenuProps) {
     onCleanup(unsubscribe);
   });
 
-
   return (
     <div id="title" ref={containerRef}>
       <header>
