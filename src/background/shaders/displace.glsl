@@ -53,7 +53,7 @@ float dither4x4(vec2 position, float brightness) {
   }
 
   
-  return brightness < limit ? 0.2 : 1.0;
+  return brightness < limit ? 0.1 : 1.0;
 }
 
 vec4 dither4x4(vec2 position, vec4 color) {

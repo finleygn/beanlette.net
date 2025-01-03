@@ -13,7 +13,6 @@ const fetchGlobalAsssets = createAssetLoader({
 });
 
 function App(props: { backgroundRenderer: BackgroundRenderer }) {
-  const [a, setA] = createSignal(false)
   const [assets, setAssets] = createSignal<Awaited<ReturnType<typeof fetchGlobalAsssets>>>();
 
   const [assetsLoading, setAssetsLoading] = createSignal(true);
@@ -38,8 +37,6 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
 
       blockingLoader?.classList.add('blocking-loader--removed');
       blockingLoaderImage?.classList.add('blocking-loader-image--removed');
-
-      window.addEventListener('click', () => setA(!a()))
     }
   })
 
@@ -51,20 +48,12 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
         hovered={assets()!.cursor_bobocube_hover}
       />
       <Menu />
-      <Switch fallback={<div>Not Found</div>}>
-        <Match when={a() === false}>
-          <HomeScreen
-            backgroundRender={props.backgroundRenderer}
-            onBackgroundReady={() => setInitialBackgroundReady(true)}
-          />
-        </Match>
-        <Match when={a() === true}>
-          <CommissionScreen
-            backgroundRender={props.backgroundRenderer}
-            onBackgroundReady={() => setInitialBackgroundReady(true)}
-          />
-        </Match>
-      </Switch>
+
+      <HomeScreen
+        backgroundRender={props.backgroundRenderer}
+        onBackgroundReady={() => setInitialBackgroundReady(true)}
+      />
+      {/** Can add more pages here ig */}
     </Show>
     
   );
