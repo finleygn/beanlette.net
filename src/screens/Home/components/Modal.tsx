@@ -56,7 +56,7 @@ function Modal(props: ModalProps) {
       }}>
         <For each={images()}>
           {item => (
-            <div onClick={e => e.stopPropagation()}><img src={item.image.src}/>
+            <div onClick={e => e.stopPropagation()}><img src={item.image.src} draggable={false}/>
               <Show when={item.name}><p>{item.name}</p></Show>
             </div>
           )}
