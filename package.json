@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@solidjs/router": "^0.15.2",
     "ogl": "^1.0.8",
     "solid-js": "^1.8.20"
   },

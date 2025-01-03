@@ -21,8 +21,18 @@ header h1 {
 
 #root {
   z-index: 1;
+  width: 100%;
+  overflow: hidden;
 }
 
 canvas {
   image-rendering: pixelated;
+}
+
+main {
+  height: 200dvh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  pointer-events: none;
 }

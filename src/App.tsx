@@ -5,6 +5,7 @@ import DogCursor from './components/DogCursor';
 import homeScreenAssets from './screens/Home/assets';
 import HomeScreen from './screens/Home';
 import Menu from './components/Menu';
+import { Route, Router } from '@solidjs/router';
 
 const fetchGlobalAsssets = createAssetLoader({
   cursor_bobocube_default: AssetLoaders.image('/cursor/bobocube_default.gif'),
@@ -57,11 +58,15 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
 
       <Menu backgroundRenderer={props.backgroundRenderer} />
 
-      <HomeScreen
-        backgroundRender={props.backgroundRenderer}
-        onBackgroundReady={() => setInitialBackgroundReady(true)}
-      />
-      {/** Can add more pages here ig */}
+      <Router>
+        <Route
+          path="*"
+          component={() => <HomeScreen
+            backgroundRender={props.backgroundRenderer}
+            onBackgroundReady={() => setInitialBackgroundReady(true)}
+          />}
+        />
+      </Router>
     </Show>
     
   );
