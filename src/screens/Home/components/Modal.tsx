@@ -1,7 +1,7 @@
 import { createSignal, For, onCleanup, onMount, Show } from 'solid-js';
 import './Modal.css';
 import { useNavigate } from '@solidjs/router';
-import createAssetLoader, { AssetLoaders } from '../../../utility/assetLoader';
+import { AssetLoaders } from '../../../utility/assetLoader';
 
 interface ModalProps {
   images: { name?: string; image: string; }[]
@@ -16,15 +16,6 @@ function Modal(props: ModalProps) {
   let loaderRef: HTMLImageElement | undefined = undefined;
   let imageContainerRef: HTMLImageElement | undefined = undefined;
   
-  
-
-  // cool so we need to:
-  // show a black overlay
-  // show the dog loader when the images are loading...
-  // how can we connect that dog loader to the higher up loading state?
-  // create a layout engine of some sort?
-  // kill self
-
   function hideLoader() {
     if(loaderRef) loaderRef.classList.add("modal-loader-image--removed")
   }

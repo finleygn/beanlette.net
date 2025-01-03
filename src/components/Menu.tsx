@@ -1,5 +1,4 @@
 import { onCleanup, onMount } from 'solid-js';
-import MousePositionTracker from '../background/MousePositionTracker';
 import './menu.css';
 import BackgroundRenderer from '../background/BackgroundRenderer';
 

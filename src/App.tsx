@@ -1,4 +1,4 @@
-import { createEffect, createSignal, Match, onMount, Show, Switch } from 'solid-js';
+import { createEffect, createSignal, onMount, Show } from 'solid-js';
 import createAssetLoader, { AssetLoaders } from './utility/assetLoader';
 import BackgroundRenderer from './background/BackgroundRenderer';
 import DogCursor from './components/DogCursor';
@@ -16,7 +16,6 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
   const [assets, setAssets] = createSignal<Awaited<ReturnType<typeof fetchGlobalAsssets>>>();
 
   const [assetsLoading, setAssetsLoading] = createSignal(true);
-  const [entranceAnimationFinished, setEntranceAnimationFinished] = createSignal(true);
   const [initialBackgroundReady, setInitialBackgroundReady] = createSignal(false);
 
   onMount(async () => {
@@ -37,7 +36,7 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
       const blockingLoaderImage = document.getElementsByClassName('blocking-loader-image')[0] as HTMLElement;
 
       blockingLoader.addEventListener('animationend', () => {
-        setEntranceAnimationFinished(true);
+        // TODO
       });
 
       blockingLoaderImage.addEventListener('animationend', () => {

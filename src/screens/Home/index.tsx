@@ -1,4 +1,4 @@
-import { createSignal, Match, onCleanup, onMount, Switch } from "solid-js";
+import { Match, onCleanup, onMount, Switch } from "solid-js";
 import BackgroundRenderer from "../../background/BackgroundRenderer";
 import Icon from "./components/Icon";
 import Screen from "../Screen";
