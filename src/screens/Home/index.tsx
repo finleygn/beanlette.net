@@ -30,6 +30,16 @@ const artwork: Artwork[] = [
       { image: "/artwork/plast_emotion_2/full_2.jpg" }
     ],
     position: { y: 90, x: 70 }
+  },
+  {
+    title: "oaksplitt",
+    thumbnail: "/artwork/oaksplitt/thumb.gif",
+    id: "oaksplitt",
+    position: { y: 16, x: 8 },
+    images: [
+      { image: '/artwork/oaksplitt/full_1.gif', name: "oaksplitt" },
+      { image: '/artwork/oaksplitt/full_2.jpg', name: "oaksplit2" }
+    ]
   }
 ]
 
