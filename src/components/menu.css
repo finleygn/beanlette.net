@@ -9,7 +9,7 @@
 
 header h1 {
   color: white;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 footer {
@@ -19,6 +19,6 @@ footer {
 
 footer a {
   color: white;
-  font-size: 11px;
+  font-size: 13px;
   text-decoration: none;
 }

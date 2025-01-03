@@ -8,6 +8,12 @@ class MousePositionTracker {
     window.addEventListener('touchstart', this.handleTouch);
   }
 
+  destroy = () => {
+    window.removeEventListener('mousemove', this.handleMouseMove);
+    window.removeEventListener('touchmove', this.handleTouch);
+    window.removeEventListener('touchstart', this.handleTouch);
+  }
+
   handleMouseMove = (event: MouseEvent) => {
     this.x = event.clientX / window.innerWidth;
     this.y = event.clientY / window.innerHeight;

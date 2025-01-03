@@ -1,10 +1,9 @@
 import { createEffect, createSignal, Match, onMount, Show, Switch } from 'solid-js';
 import createAssetLoader, { AssetLoaders } from './utility/assetLoader';
 import BackgroundRenderer from './background/BackgroundRenderer';
-import DogCursor from './context/DogCursor';
+import DogCursor from './components/DogCursor';
 import homeScreenAssets from './screens/Home/assets';
 import HomeScreen from './screens/Home';
-import CommissionScreen from './screens/Commissions';
 import Menu from './components/Menu';
 
 const fetchGlobalAsssets = createAssetLoader({
@@ -16,6 +15,7 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
   const [assets, setAssets] = createSignal<Awaited<ReturnType<typeof fetchGlobalAsssets>>>();
 
   const [assetsLoading, setAssetsLoading] = createSignal(true);
+  const [entranceAnimationFinished, setEntranceAnimationFinished] = createSignal(true);
   const [initialBackgroundReady, setInitialBackgroundReady] = createSignal(false);
 
   onMount(async () => {
@@ -33,9 +33,16 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
        * Remove loading screen
        */
       const blockingLoader = document.getElementsByClassName('blocking-loader')[0];
-      const blockingLoaderImage = document.getElementsByClassName('blocking-loader-image')[0];
+      const blockingLoaderImage = document.getElementsByClassName('blocking-loader-image')[0] as HTMLElement;
 
-      blockingLoader?.classList.add('blocking-loader--removed');
+      blockingLoader.addEventListener('animationend', () => {
+        setEntranceAnimationFinished(true);
+      });
+
+      blockingLoaderImage.addEventListener('animationend', () => {
+        blockingLoader?.classList.add('blocking-loader--removed');
+      });
+      
       blockingLoaderImage?.classList.add('blocking-loader-image--removed');
     }
   })
@@ -47,7 +54,8 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
         default={assets()!.cursor_bobocube_default}
         hovered={assets()!.cursor_bobocube_hover}
       />
-      <Menu />
+
+      <Menu backgroundRenderer={props.backgroundRenderer} />
 
       <HomeScreen
         backgroundRender={props.backgroundRenderer}

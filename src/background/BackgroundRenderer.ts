@@ -13,11 +13,12 @@ class BackgroundRenderer {
 
   private mousePositionTracker: MousePositionTracker = new MousePositionTracker();
 
+  private subscribers: Set<() => void>;
   private geometry: Geometry;
   private program: Program;
   private mesh: Mesh;
 
-  private currentMousePosition: {
+  public currentMousePosition: {
     x: LerpedValue,
     y: LerpedValue
   }
@@ -33,6 +34,7 @@ class BackgroundRenderer {
     this.renderer = renderer;
     this.gl = renderer.gl;
     this.canvas = renderer.gl.canvas;
+    this.subscribers = new Set();
 
     this.screenTransitionManager = new ScreenTransitionManager(this.gl);
 
@@ -83,6 +85,11 @@ class BackgroundRenderer {
     }
     window.addEventListener('resize', resize, false);
     resize();
+  }
+
+  public onUpdate = (cb: () => void) => {
+    this.subscribers.add(cb);
+    return () => this.subscribers.delete(cb);
   }
 
   public setCurrentBackground = async ({ color, depth }:  {
@@ -173,6 +180,10 @@ class BackgroundRenderer {
     this.program.uniforms.u_resolution.value[1] = this.renderer.height;
 
     this.renderer.render({ scene: this.mesh });
+
+    for(const subscriber of this.subscribers) {
+      subscriber()
+    }
   }
 }
 
