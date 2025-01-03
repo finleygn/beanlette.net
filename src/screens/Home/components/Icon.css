@@ -5,15 +5,16 @@
   align-items: center;
   flex-direction: column;
   gap: 0.5rem;
-  font-size: 13px;
+  font-size: 12px;
   position: absolute;
   transform: scale(1);
   pointer-events: all;
-  text-shadow: 0px 0px 20px rgb(0,0,0), 0px 0px 20px rgb(0,0,0), 0px 0px 20px rgb(0,0,0);
+  text-shadow: 0px 0px 20px rgb(0,0,0), 0px 0px 20px rgb(0,0,0);
 }
 
 .artwork-icon img {
-  max-width: 60px;
+  width: 4.5vmax;
+  box-shadow: 0px 0px 30px #fff;
 }
 
 .artwork-icon:visited {
