@@ -8,4 +8,8 @@ import BackgroundRenderer from './background/BackgroundRenderer'
 const root = document.getElementById('root')
 const backgroundRenderer = new BackgroundRenderer();
 
+window.addEventListener('scroll', () => {
+  backgroundRenderer.scrollPercentage.set(window.scrollY / window.innerHeight);
+})
+
 render(() => <App backgroundRenderer={backgroundRenderer} />, root!);

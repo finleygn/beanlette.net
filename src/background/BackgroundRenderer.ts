@@ -23,6 +23,8 @@ class BackgroundRenderer {
     y: LerpedValue
   }
 
+  public scrollPercentage: LerpedValue;
+
   private screenTransitionManager: ScreenTransitionManager;
 
   constructor() {
@@ -35,6 +37,7 @@ class BackgroundRenderer {
     this.gl = renderer.gl;
     this.canvas = renderer.gl.canvas;
     this.subscribers = new Set();
+    this.scrollPercentage = new LerpedValue(0, 0.1);
 
     this.screenTransitionManager = new ScreenTransitionManager(this.gl);
 
@@ -54,6 +57,7 @@ class BackgroundRenderer {
       uniforms: {
         u_mouse: { value: [0.5, 0.5] },
         u_time: { value: 0 },
+        u_scroll_percent: { value: 0 },
         u_resolution: { value: [this.renderer.width, this.renderer.height] },
         u_a_depth_texture: { value: this.screenTransitionManager.getStartTexture().depth },
         u_a_color_texture: { value: this.screenTransitionManager.getStartTexture().color },
@@ -149,6 +153,10 @@ class BackgroundRenderer {
       this.gl.texParameteri(nextScreen.color.target, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
       this.gl.texParameteri(nextScreen.color.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
     }
+
+    this.scrollPercentage.tick();
+    console.log(this.scrollPercentage.get())
+    this.program.uniforms.u_scroll_percent.value = this.scrollPercentage.get();
 
     this.program.uniforms.u_time.value = elapsedTime;
     this.program.uniforms.u_loading_time.value = 0;

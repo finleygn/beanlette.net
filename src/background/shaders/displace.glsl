@@ -4,6 +4,7 @@ precision highp float;
 
 uniform vec2 u_mouse;
 uniform vec2 u_resolution;
+uniform float u_scroll_percent;
 uniform float u_animation_progress;
 uniform float u_loading_time;
 uniform float u_time;
@@ -23,6 +24,14 @@ vec2 signedRange(vec2 v) {
     (v.y * 2.0) - 1.0
   );
 }
+
+vec2 unsignedRange(vec2 v) {
+  return vec2(
+    (v.x + 1.0) * 0.5,
+    (v.y + 1.0) * 0.5
+  );
+}
+
 
 float luma(vec4 color) {
   return dot(color.rgb, vec3(0.3, 0.3, 0.3));
@@ -86,8 +95,9 @@ vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
 void main(){
   vec2 uv = coverBackgroundPosition(v_uv, u_a_color_texture, u_resolution);
 
-  // 5% zoom
-  uv *= 0.95;
+  // // 5% zoom
+  // uv = unsignedRange(signedRange(uv) * 0.95);
+
   // gives us wiggle room
   uv.x+=sin(u_time*.0000250*PI*2.)*.004*cos(u_time*.0006);;
   uv.y+=cos(u_time*.00004*PI*2.)*.004*sin(u_time*.001);
@@ -98,6 +108,8 @@ void main(){
 
   float depth=texture(u_a_depth_texture,uv).g;
   float next_depth=texture(u_b_depth_texture,uv_next).g;
+
+  uv.y-=(-.1)+(u_scroll_percent*.1);
 
   vec2 sample_position=mix(
     vec2(
@@ -110,6 +122,8 @@ void main(){
     ), 
     u_animation_progress
   );
+
+  
 
   vec4 color=texture(
     u_a_color_texture,
