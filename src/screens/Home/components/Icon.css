@@ -43,3 +43,14 @@
   }
 }
 
+
+@media screen and (max-width: 600px) {
+  .artwork-icon img {
+    width: 4vmax;
+  }
+  .artwork-icon span {
+    font-size: 10px;
+    min-width: 80px;
+    text-align: center;
+  }
+}
