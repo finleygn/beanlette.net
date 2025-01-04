@@ -111,7 +111,122 @@ const artwork: Artwork[] = [
     ],
     position: { y: 20, x: 70 }
   },
+  {
+    title: "jyoucyo_ascii_3_FINAL_MAYBE",
+    thumbnail: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/thumb.gif",
+    id: "jyoucyo_ascii_3_FINAL_MAYBE",
+    images: [
+      { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/full_1.jpg", name: "Oh?" },
+    ],
+    position: { y: 30, x: 80 }
+  },
+  {
+    title: "fetterless",
+    thumbnail: "/artwork/fetterless/thumb.gif",
+    id: "fetterless",
+    images: [
+      { image: "/artwork/fetterless/full_1.gif", name: "fetterless" },
+      { image: "/artwork/fetterless/full_2.jpg", name: "fetterless 2" },
+      { image: "/artwork/fetterless/full_3.jpg", name: "fetterless 3" },
+      { image: "/artwork/fetterless/full_4.jpg", name: "fetterless 7" },
+    ],
+    position: { y: 22, x: 24 }
+  },
+  {
+    title: "rei_displace_4",
+    thumbnail: "/artwork/rei_displace_4/thumb.gif",
+    id: "rei_displace_4",
+    images: [
+      { image: "/artwork/rei_displace_4/full_1.png", name: "reidisplace" },
+      { image: "/artwork/rei_displace_4/full_2.png" },
+    ],
+    position: { y: 32, x: 13 }
+  },
+  {
+    title: "img_2967_microcosm",
+    thumbnail: "/artwork/img_2967_microcosm/thumb.gif",
+    id: "img_2967_microcosm",
+    images: [
+      { image: "/artwork/img_2967_microcosm/full_1.jpg", name: "img_2967■□microcosm" },
+    ],
+    position: { y: 30, x: 37 }
+  },
+  {
+    title: "lovelyday1",
+    thumbnail: "/artwork/lovelyday1/thumb.gif",
+    id: "lovelyday1",
+    images: [
+      { image: "/artwork/lovelyday1/full_1.png", name: "lovelyday(soon→enough)" },
+    ],
+    position: { y: 38, x: 25 }
+  },
+  {
+    title: "tvr_kyoto",
+    thumbnail: "/artwork/tvr_kyoto/thumb.gif",
+    id: "tvr_kyoto",
+    images: [
+      { image: "/artwork/tvr_kyoto/full_1.gif", name: "tvr kyoto" },
+    ],
+    position: { y: 37, x: 63 }
+  },
+  {
+    title: "chiyo_chan_3",
+    thumbnail: "/artwork/chiyo_chan_3/thumb.gif",
+    id: "chiyo_chan_3",
+    images: [
+      { image: "/artwork/chiyo_chan_3/full_1.jpg", name: "im sorry for distorting u chii-chan from girls last tour." },
+      { image: "/artwork/chiyo_chan_3/full_2.jpg", name: "ちーちゃんごめんね" },
+    ],
+    position: { y: 42, x: 45 }
+  },
+  {
+    title: "moss_sit_7",
+    thumbnail: "/artwork/moss_sit_7/thumb.gif",
+    id: "moss_sit_7",
+    images: [
+      { image: "/artwork/moss_sit_7/full_1.jpg", name: "metalmoss" },
+      { image: "/artwork/moss_sit_7/full_2.jpg", name: "moss sit" },
+    ],
+    position: { y: 38, x: 92 }
+  },
+  {
+    title: "what_a_day_3",
+    thumbnail: "/artwork/what_a_day_3/thumb.gif",
+    id: "what_a_day_3",
+    images: [
+      { image: "/artwork/what_a_day_3/full_1.png", name: "what a day" },
+    ],
+    position: { y: 45, x: 75 }
+  },
+  {
+    title: "ikeriji_street_5",
+    thumbnail: "/artwork/ikeriji_street_5/thumb.gif",
+    id: "ikeriji_street_5",
+    images: [
+      { image: "/artwork/ikeriji_street_5/full_1.jpg", name: "池尻大橋通り ( Ikejiri-ōhashi street )" },
+    ],
+    position: { y: 50, x: 90 }
+  },
+  {
+    title: "dios_mio2",
+    thumbnail: "/artwork/dios_mio2/thumb.gif",
+    id: "dios_mio2",
+    images: [
+      { image: "/artwork/dios_mio2/full_1.gif", name: "日常displace (mio loses it) mio 3d model by snowtenkey _snow311" },
+    ],
+    position: { y: 45, x: 7 }
+  },
+  {
+    title: "yotsuba_clover_4_larger",
+    thumbnail: "/artwork/yotsuba_clover_4_larger/thumb.gif",
+    id: "yotsuba_clover_4_larger",
+    images: [
+      { image: "/artwork/yotsuba_clover_4_larger/full_1.jpg", name: "yotsuba in the clovers / クローバーでよつば" },
+    ],
+    position: { y: 48, x: 56 }
+  },
 ]
+
 
 function HomeScreen(props: ScreenProps) {
   let containerRef: HTMLImageElement | undefined;

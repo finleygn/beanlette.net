@@ -42,8 +42,8 @@ class BackgroundRenderer {
     this.screenTransitionManager = new ScreenTransitionManager(this.gl);
 
     this.currentMousePosition = {
-      x: new LerpedValue(this.mousePositionTracker.getX(), 0.1),
-      y: new LerpedValue(this.mousePositionTracker.getY(), 0.1)
+      x: new LerpedValue(this.mousePositionTracker.getX(), 0.05),
+      y: new LerpedValue(this.mousePositionTracker.getY(), 0.05)
     }
 
     this.geometry = new Geometry(renderer.gl, {
