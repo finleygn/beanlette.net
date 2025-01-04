@@ -225,7 +225,144 @@ const artwork: Artwork[] = [
     ],
     position: { y: 48, x: 56 }
   },
+  {
+    title: "img_4791_3",
+    thumbnail: "/artwork/img_4791_3/thumb.gif",
+    id: "img_4791_3",
+    images: [
+      { image: "/artwork/img_4791_3/full_1.gif", name: "img_4791_3" },
+    ],
+    position: { y: 53, x: 40 }
+  },
+  {
+    title: "egg_anime_2_no_dither_inklab2",
+    thumbnail: "/artwork/egg_anime_2_no_dither_inklab2/thumb.gif",
+    id: "egg_anime_2_no_dither_inklab2",
+    images: [
+      { image: "/artwork/egg_anime_2_no_dither_inklab2/full_1.jpg", name: "egg anime i cant remebmer the name of" },
+      { image: "/artwork/egg_anime_2_no_dither_inklab2/full_2.png", name: "i just rememebered its called wonder egg priority" },
+    ],
+    position: { y: 60, x: 64 }
+  },
+  {
+    title: "welcome_home_beanlet_final_white",
+    thumbnail: "/artwork/welcome_home_beanlet_final_white/thumb.gif",
+    id: "welcome_home_beanlet_final_white",
+    images: [
+      { image: "/artwork/welcome_home_beanlet_final_white/full_1.jfif", name: "Welcome Home! (daily 988)" },
+      { image: "/artwork/welcome_home_beanlet_final_white/full_2.jfif" },
+      { image: "/artwork/welcome_home_beanlet_final_white/full_3.jpg" },
+      { image: "/artwork/welcome_home_beanlet_final_white/full_4.jpg" },
+    ],
+    position: { y: 65, x: 85 }
+  },
+  {
+    title: "flitter1",
+    thumbnail: "/artwork/flitter1/thumb.gif",
+    id: "flitter1",
+    images: [
+      { image: "/artwork/flitter1/full_1.png", name: "flitter1" },
+      { image: "/artwork/flitter1/full_2.jpg", name: "flitter2" },
+      { image: "/artwork/flitter1/full_3.jpg", name: "flitter3" },
+      { image: "/artwork/flitter1/full_4.jpg", name: "flitter4" },
+    ],
+    position: { y: 57, x: 22 }
+  },
+  {
+    title: "blipblop21",
+    thumbnail: "/artwork/blipblop21/thumb.gif",
+    id: "blipblop21",
+    images: [
+      { image: "/artwork/blipblop21/full_1.jpg", name: "blipblop2" },
+      { image: "/artwork/blipblop21/full_2.jpg" },
+    ],
+    position: { y: 63, x: 12 }
+  },
+  {
+    title: "who_knows_3",
+    thumbnail: "/artwork/who_knows_3/thumb.gif",
+    id: "who_knows_3",
+    images: [
+      { image: "/artwork/who_knows_3/full_1.png", name: "who knows" },
+    ],
+    position: { y: 68, x: 34 }
+  },
+  {
+    title: "bluebell_process_4",
+    thumbnail: "/artwork/bluebell_process_4/thumb.gif",
+    id: "bluebell_process_4",
+    images: [
+      { image: "/artwork/bluebell_process_4/full_1.png", name: "i miss the bluebells" },
+      { image: "/artwork/bluebell_process_4/full_2.jpg" },
+    ],
+    position: { y: 75, x: 22 }
+  },
+  {
+    title: <>doesnt_<wbr/>have_<wbr/>to_<wbr/>make_<wbr/>much_<wbr/>sense_<wbr/>at_<wbr/>all_1.1</>,
+    thumbnail: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/thumb.gif",
+    id: "google_maps__doesnt_have_to_make_much_sense_at_all_1",
+    images: [
+      { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/full_1.jpg", name: "Doesn't have to mean much at all" },
+    ],
+    position: { y: 78, x: 40 }
+  },
+  {
+    title: "cube_rainbow_logo",
+    thumbnail: "/artwork/cube_rainbow_logo/thumb.gif",
+    id: "cube_rainbow_logo",
+    images: [
+      { image: "/artwork/cube_rainbow_logo/full_1.png", name: "something is wrong with my cube shaped car [rainbow cube]" },
+    ],
+    position: { y: 83, x: 10 }
+  },
+  {
+    title: "farreach1",
+    thumbnail: "/artwork/farreach1/thumb.gif",
+    id: "farreach1",
+    images: [
+      { image: "/artwork/farreach1/full_1.jpg", name: "farrreach" },
+    ],
+    position: { y: 94, x: 16 }
+  },
+  {
+    title: "menma5.1",
+    thumbnail: "/artwork/menma5/thumb.gif",
+    id: "menma5",
+    images: [
+      { image: "/artwork/menma5/full_1.jpg", name: "shes hiding in the flowers" },
+    ],
+    position: { y: 90, x: 35 }
+  },
+  {
+    title: <>playstation_<wbr/>cat_<wbr/>poster_1.1_process</>,
+    thumbnail: "/artwork/fucked_up_playstation_cat_poster_1/thumb.gif",
+    id: "fucked_up_playstation_cat_poster_1",
+    images: [
+      { image: "/artwork/fucked_up_playstation_cat_poster_1/full_1.jpg", name: "His fucked up" },
+    ],
+    position: { y: 83, x: 60 }
+  },
+  {
+    title: "plast_create",
+    thumbnail: "/artwork/plast_create/thumb.gif",
+    id: "plast_create",
+    images: [
+      { image: "/artwork/plast_create/full_1.jpg", name: "plast:create ₂₀₀₃" },
+    ],
+    position: { y: 85, x: 90 }
+  },
+  {
+    title: "vapour_levels4_dither",
+    thumbnail: "/artwork/vapour_levels4_dither/thumb.gif",
+    id: "vapour_levels4_dither",
+    images: [
+      { image: "/artwork/vapour_levels4_dither/full_1.png", name: "vapour levels" },
+    ],
+    position: { y: 73, x: 75 }
+  },
 ]
+
+
 
 
 function HomeScreen(props: ScreenProps) {
