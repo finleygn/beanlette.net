@@ -93,10 +93,9 @@ vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
 }
 
 void main(){
-  vec2 uv = coverBackgroundPosition(v_uv, u_a_color_texture, u_resolution);
-
-  // // 5% zoom
-  // uv = unsignedRange(signedRange(uv) * 0.95);
+  vec2 uvp = unsignedRange(signedRange(v_uv) * 0.9);
+  uvp.y -= (-.05)+(u_scroll_percent*.1);
+  vec2 uv = coverBackgroundPosition(uvp, u_a_color_texture, u_resolution);
 
   // gives us wiggle room
   uv.x+=sin(u_time*.0000250*PI*2.)*.004*cos(u_time*.0006);;
@@ -109,7 +108,7 @@ void main(){
   float depth=texture(u_a_depth_texture,uv).g;
   float next_depth=texture(u_b_depth_texture,uv_next).g;
 
-  uv.y-=(-.1)+(u_scroll_percent*.1);
+  
 
   vec2 sample_position=mix(
     vec2(
