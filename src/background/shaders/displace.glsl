@@ -6,6 +6,7 @@ uniform vec2 u_mouse;
 uniform vec2 u_resolution;
 uniform float u_animation_progress;
 uniform float u_loading_time;
+uniform float u_time;
 uniform sampler2D u_a_depth_texture;
 uniform sampler2D u_a_color_texture;
 uniform sampler2D u_b_depth_texture;
@@ -84,6 +85,13 @@ vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
 
 void main(){
   vec2 uv = coverBackgroundPosition(v_uv, u_a_color_texture, u_resolution);
+
+  // 5% zoom
+  uv *= 0.95;
+  // gives us wiggle room
+  uv.x+=sin(u_time*.0000250*PI*2.)*.004*cos(u_time*.0006);;
+  uv.y+=cos(u_time*.00004*PI*2.)*.004*sin(u_time*.001);
+
   vec2 uv_next = coverBackgroundPosition(v_uv, u_b_color_texture, u_resolution);
 
   vec2 center_vector = signedRange(u_mouse) + vec2(0.0, u_loading_time);

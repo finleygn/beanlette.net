@@ -53,6 +53,7 @@ class BackgroundRenderer {
       fragment: fragment_shader,
       uniforms: {
         u_mouse: { value: [0.5, 0.5] },
+        u_time: { value: 0 },
         u_resolution: { value: [this.renderer.width, this.renderer.height] },
         u_a_depth_texture: { value: this.screenTransitionManager.getStartTexture().depth },
         u_a_color_texture: { value: this.screenTransitionManager.getStartTexture().color },
@@ -130,7 +131,7 @@ class BackgroundRenderer {
     return !this.screenTransitionManager.hasInitialCurrentScreen()
   }
 
-  private render = (_: LoopTimings) => {
+  private render = ({ elapsedTime }: LoopTimings) => {
     /**
      * Background textures and transition
      */
@@ -149,6 +150,7 @@ class BackgroundRenderer {
       this.gl.texParameteri(nextScreen.color.target, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
     }
 
+    this.program.uniforms.u_time.value = elapsedTime;
     this.program.uniforms.u_loading_time.value = 0;
     this.program.uniforms.u_animation_progress.value = this.screenTransitionManager.getProgress();
 
