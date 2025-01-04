@@ -7,7 +7,7 @@
   gap: 0.5rem;
   font-size: 12px;
   position: absolute;
-  transform: scale(1);
+  transform: translate(-50%, -50%) scale(1);
   pointer-events: all;
   text-shadow: 0px 0px 20px rgb(0,0,0), 0px 0px 20px rgb(0,0,0);
 }
@@ -17,12 +17,18 @@
   box-shadow: 0px 0px 30px #fff;
 }
 
+.artwork-icon span {
+  max-width: 9vmax;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
 .artwork-icon:visited {
   color: white;
 }
 
 .artwork-icon:hover {
-  transform: scale(1.1)
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 @keyframes enter-in {

@@ -1,4 +1,4 @@
-import { Match, onCleanup, onMount, Switch } from "solid-js";
+import { JSX, Match, onCleanup, onMount, Switch } from "solid-js";
 import BackgroundRenderer from "../../background/BackgroundRenderer";
 import Icon from "./components/Icon";
 import Screen from "../Screen";
@@ -12,7 +12,7 @@ interface ScreenProps {
 }
 
 interface Artwork {
-  title: string;
+  title: JSX.Element;
   thumbnail: string;
   id: string;
   images: { image: string, name?: string }[];
@@ -21,6 +21,65 @@ interface Artwork {
 }
 
 const artwork: Artwork[] = [
+  {
+    title: "nagato_cherry_style",
+    thumbnail: "/artwork/nagato_cherry_style/thumb.gif",
+    id: "nagato_cherry_style",
+    position: { y: 3, x: 20 },
+    images: [
+      { image: '/artwork/nagato_cherry_style/full_1.jpg', name: "nagato (green)" },
+    ]
+  },
+  {
+    title: "water_cycle_13_2",
+    thumbnail: "/artwork/water_cycle_13_2/thumb.gif",
+    id: "water_cycle_13_2",
+    position: { y: 6, x: 45 },
+    images: [
+      { image: '/artwork/water_cycle_13_2/full_1.jpg', name: "water cycle↺↺↺" },
+    ]
+  },
+  {
+    title: "oaksplitt",
+    thumbnail: "/artwork/oaksplitt/thumb.gif",
+    id: "oaksplitt",
+    position: { y: 16, x: 8 },
+    images: [
+      { image: '/artwork/oaksplitt/full_1.gif', name: "oaksplitt" },
+      { image: '/artwork/oaksplitt/full_2.jpg', name: "oaksplit2" }
+    ]
+  },
+  {
+    title: "detachable1",
+    thumbnail: "/artwork/detachable1/thumb.gif",
+    id: "detachable1",
+    images: [
+      { image: "/artwork/detachable1/full_1.gif", name: "detachable" },
+      { image: "/artwork/detachable1/full_2.png" },
+      { image: "/artwork/detachable1/full_3.png" },
+      { image: "/artwork/detachable1/full_4.png" },
+    ],
+    position: { y: 10, x: 60 }
+  },
+  {
+    title: "hanbee_nya",
+    thumbnail: "/artwork/hanbee_nya/thumb.gif",
+    id: "hanbee_nya",
+    images: [
+      { image: "/artwork/hanbee_nya/full_1.jpg", name: "=) ⁿʸᵃ (with hanbee)" },
+    ],
+    position: { y: 7, x: 85 }
+  },
+  {
+    title: <>miku_interpolate_<wbr/>do_u_recognise_<wbr/>her_3</>,
+    thumbnail: "/artwork/miku_interpolate_do_u_recognise_her_3/thumb.gif",
+    id: "miku_interpolate_do_u_recognise_her_3",
+    images: [
+      { image: "/artwork/miku_interpolate_do_u_recognise_her_3/full_1.gif", name: "interpolate39" },
+      { image: "/artwork/miku_interpolate_do_u_recognise_her_3/full_2.jpg", name: "do u recognise her" },
+    ],
+    position: { y: 15, x: 90 }
+  },
   {
     title: "plast_emotion_2",
     thumbnail: "/artwork/plast_emotion_2/thumb.gif",
@@ -32,15 +91,26 @@ const artwork: Artwork[] = [
     position: { y: 90, x: 70 }
   },
   {
-    title: "oaksplitt",
-    thumbnail: "/artwork/oaksplitt/thumb.gif",
-    id: "oaksplitt",
-    position: { y: 16, x: 8 },
+    title: "forest_pixels_4",
+    thumbnail: "/artwork/forest_pixels_4/thumb.gif",
+    id: "forest_pixels_4",
     images: [
-      { image: '/artwork/oaksplitt/full_1.gif', name: "oaksplitt" },
-      { image: '/artwork/oaksplitt/full_2.jpg', name: "oaksplit2" }
-    ]
-  }
+      { image: "/artwork/forest_pixels_4/full_1.jpg", name: "fae forest down pixelly bluebell" },
+      { image: "/artwork/forest_pixels_4/full_2.jpg", name: "fae forest pfp" },
+      { image: "/artwork/forest_pixels_4/full_3.jpg", name: "bluebell forest pixelly" },
+      { image: "/artwork/forest_pixels_4/full_4.jpg", name: "bluebell forest fae entrance" },
+    ],
+    position: { y: 16, x: 40 }
+  },
+  {
+    title: "oh_2",
+    thumbnail: "/artwork/oh_2/thumb.gif",
+    id: "oh_2",
+    images: [
+      { image: "/artwork/oh_2/full_1.jpg", name: "Oh?" },
+    ],
+    position: { y: 20, x: 70 }
+  },
 ]
 
 function HomeScreen(props: ScreenProps) {

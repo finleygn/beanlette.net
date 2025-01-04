@@ -1,8 +1,9 @@
 import { A } from '@solidjs/router';
 import './Icon.css';
+import { JSX } from 'solid-js';
 
 interface IconProps {
-  title: string;
+  title: JSX.Element;
   thumbnail: string;
   id: string;
   position: { y: number, x: number };
