@@ -1,10 +1,11 @@
 import { Geometry, OGLRenderingContext, Program, Renderer, Mesh, Texture } from "ogl";
-import RenderLoop, { LoopTimings } from "./RenderLoop";
 import vertex_shader from './shaders/vertex.glsl?raw';
 import fragment_shader from './shaders/displace.glsl?raw';
 import MousePositionTracker from "./MousePositionTracker";
 import LerpedValue from "./LerpedValue";
 import ScreenTransitionManager from "./ScreenTransitionManager";
+import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
+import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
 
 class BackgroundRenderer {
   private renderer: Renderer;
@@ -17,6 +18,7 @@ class BackgroundRenderer {
   private geometry: Geometry;
   private program: Program;
   private mesh: Mesh;
+  private turbo: AutonomousSmoothValue;
 
   public currentMousePosition: {
     x: LerpedValue,
@@ -56,6 +58,7 @@ class BackgroundRenderer {
       fragment: fragment_shader,
       uniforms: {
         u_mouse: { value: [0.5, 0.5] },
+        u_mouse_turbo: { value: 0 },
         u_time: { value: 0 },
         u_scroll_percent: { value: 0 },
         u_resolution: { value: [this.renderer.width, this.renderer.height] },
@@ -71,6 +74,23 @@ class BackgroundRenderer {
       depthTest: false
     });
 
+    this.turbo = new AutonomousSmoothValue(0, 0.1);
+    let selected = false;
+    let timeout: ReturnType<typeof setTimeout>;
+    window.addEventListener("mousedown", () => {
+      selected = true;
+      timeout = setTimeout(() => {
+        if(selected) {
+          this.turbo.target = 1;
+        }
+      }, 75)
+    });
+    window.addEventListener("mouseup", () => {
+      this.turbo.target = 0;
+      selected = false;
+      if(timeout) clearTimeout(timeout)
+    });
+
     this.mesh = new Mesh(this.gl, { geometry: this.geometry, program: this.program });
 
     document.body.prepend(this.canvas);
@@ -81,7 +101,7 @@ class BackgroundRenderer {
     this.canvas.style.bottom = '0px';
 
     this.watchScreenResize();
-    RenderLoop.start(this.render)
+    renderLoop(this.render, { longestFrame: 60 });
   }
 
   private watchScreenResize = () => {
@@ -135,7 +155,7 @@ class BackgroundRenderer {
     return !this.screenTransitionManager.hasInitialCurrentScreen()
   }
 
-  private render = ({ elapsedTime }: LoopTimings) => {
+  private render = ({ elapsed, dt }: RenderLoopTimeData) => {
     /**
      * Background textures and transition
      */
@@ -158,8 +178,9 @@ class BackgroundRenderer {
     console.log(this.scrollPercentage.get())
     this.program.uniforms.u_scroll_percent.value = this.scrollPercentage.get();
 
-    this.program.uniforms.u_time.value = elapsedTime;
+    this.program.uniforms.u_time.value = elapsed;
     this.program.uniforms.u_loading_time.value = 0;
+    this.program.uniforms.u_mouse_turbo.value = this.turbo.value;
     this.program.uniforms.u_animation_progress.value = this.screenTransitionManager.getProgress();
 
     this.program.uniforms.u_a_color_texture.value = currentScreen.color;
@@ -168,8 +189,11 @@ class BackgroundRenderer {
     this.program.uniforms.u_b_color_texture.value = nextScreen.color;
     this.program.uniforms.u_b_depth_texture.value = nextScreen.depth;
 
+    this.turbo.tick(dt);
+    
     /**
      * Mouse position updates
+     * TODO: Move these to AutonomousSmoothedValue
      */
     this.currentMousePosition.x.tick();
     this.currentMousePosition.y.tick();

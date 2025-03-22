@@ -34,7 +34,7 @@ const artwork: Artwork[] = [
     title: "water_cycle_13_2",
     thumbnail: "/artwork/water_cycle_13_2/thumb.gif",
     id: "water_cycle_13_2",
-    position: { y: 6, x: 45 },
+    position: { y: 78, x: 40 },
     images: [
       { image: '/artwork/water_cycle_13_2/full_1.jpg', name: "water cycle↺↺↺" },
     ]
@@ -130,7 +130,7 @@ const artwork: Artwork[] = [
       { image: "/artwork/fetterless/full_3.jpg", name: "fetterless 3" },
       { image: "/artwork/fetterless/full_4.jpg", name: "fetterless 7" },
     ],
-    position: { y: 22, x: 24 }
+    position: { y: 26, x: 24 }
   },
   {
     title: "rei_displace_4",
@@ -158,7 +158,7 @@ const artwork: Artwork[] = [
     images: [
       { image: "/artwork/lovelyday1/full_1.png", name: "lovelyday(soon→enough)" },
     ],
-    position: { y: 38, x: 25 }
+    position: { y: 42, x: 25 }
   },
   {
     title: "tvr_kyoto",
@@ -304,7 +304,7 @@ const artwork: Artwork[] = [
     images: [
       { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/full_1.jpg", name: "Doesn't have to mean much at all" },
     ],
-    position: { y: 78, x: 40 }
+    position: { y: 6, x: 45 }
   },
   {
     title: "cube_rainbow_logo",
@@ -360,10 +360,16 @@ const artwork: Artwork[] = [
     ],
     position: { y: 73, x: 75 }
   },
+  {
+    title: "phritz_daisy",
+    thumbnail: "/artwork/daisy_phritz/thumb.gif",
+    id: "phritz_daisy",
+    images: [
+      { image: "/artwork/daisy_phritz/full_1.jpg", name: "daisy phritz" },
+    ],
+    position: { y: 12, x: 27 }
+  },
 ]
-
-
-
 
 function HomeScreen(props: ScreenProps) {
   let containerRef: HTMLImageElement | undefined;

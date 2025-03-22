@@ -10,6 +10,7 @@
   transform: translate(-50%, -50%) scale(1);
   pointer-events: all;
   text-shadow: 0px 0px 20px rgb(0,0,0), 0px 0px 20px rgb(0,0,0);
+  user-select: none;
 }
 
 .artwork-icon img {

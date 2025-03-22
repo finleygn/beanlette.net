@@ -3,6 +3,7 @@
 precision highp float;
 
 uniform vec2 u_mouse;
+uniform float u_mouse_turbo;
 uniform vec2 u_resolution;
 uniform float u_scroll_percent;
 uniform float u_animation_progress;
@@ -32,42 +33,39 @@ vec2 unsignedRange(vec2 v) {
   );
 }
 
-
-float luma(vec4 color) {
-  return dot(color.rgb, vec3(0.3, 0.3, 0.3));
+float basic_luma(vec3 color) {
+  return dot(color, vec3(0.299, 0.587, 0.114));
 }
 
-float dither4x4(vec2 position, float brightness) {
-  int x = int(mod(position.x, 4.0));
-  int y = int(mod(position.y, 4.0));
-  int index = x + y * 4;
-  float limit = 0.0;
-
-  if (x < 8) {
-    if (index == 0) limit = 0.0625;
-    if (index == 1) limit = 0.5625;
-    if (index == 2) limit = 0.1875;
-    if (index == 3) limit = 0.6875;
-    if (index == 4) limit = 0.8125;
-    if (index == 5) limit = 0.3125;
-    if (index == 6) limit = 0.9375;
-    if (index == 7) limit = 0.4375;
-    if (index == 8) limit = 0.25;
-    if (index == 9) limit = 0.75;
-    if (index == 10) limit = 0.125;
-    if (index == 11) limit = 0.625;
-    if (index == 12) limit = 1.0;
-    if (index == 13) limit = 0.5;
-    if (index == 14) limit = 0.875;
-    if (index == 15) limit = 0.375;
-  }
-
-  
-  return brightness < limit ? 0.1 : 1.0;
+vec3 quantize_colour(vec3 colour, float n) {
+    return floor(colour * (n - 1.0) + 0.5) / (n - 1.0);
 }
 
-vec4 dither4x4(vec2 position, vec4 color) {
-  return vec4(color.rgb * dither4x4(position, luma(color)) * 1.0, 1.0);
+const mat4 DITHER_BAYER_MAT_4x4 = mat4(
+    0.0,  8.0,  2.0, 10.0,
+    12.0, 4.0,  14.0, 6.0,
+    3.0,  11.0, 1.0, 9.0,
+    15.0, 7.0,  13.0, 5.0
+) / 16.0;
+
+vec3 dither_4x4_colour(
+    in vec2 position,
+    in vec2 resolution,
+    in vec3 colour,
+    in float colour_count
+) {
+    float step_size = 1.0 / (colour_count - 1.0);
+
+    // Get threshold required for this pixel to be active
+    int x_thresh = int(position.x * resolution.x) % 4;
+    int y_thresh = int(position.y * resolution.y) % 4;
+    float thresh = (DITHER_BAYER_MAT_4x4[x_thresh][y_thresh] - 0.5) * step_size;
+    
+    // Apply dither and quantize
+    colour.rgb += thresh;
+    colour = quantize_colour(colour, colour_count);
+
+    return colour;
 }
 
 vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
@@ -95,34 +93,33 @@ vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
 void main(){
   vec2 uvp = unsignedRange(signedRange(v_uv) * 0.9);
   uvp.y -= (-.05)+(u_scroll_percent*.1);
+
   vec2 uv = coverBackgroundPosition(uvp, u_a_color_texture, u_resolution);
-
-  // gives us wiggle room
-  uv.x+=sin(u_time*.0000250*PI*2.)*.004*cos(u_time*.0006);;
-  uv.y+=cos(u_time*.00004*PI*2.)*.004*sin(u_time*.001);
-
   vec2 uv_next = coverBackgroundPosition(v_uv, u_b_color_texture, u_resolution);
-
-  vec2 center_vector = signedRange(u_mouse) + vec2(0.0, u_loading_time);
 
   float depth=texture(u_a_depth_texture,uv).g;
   float next_depth=texture(u_b_depth_texture,uv_next).g;
 
-  
+  vec2 center_vector = mix(
+    signedRange(u_mouse) * 0.2,
+    signedRange(u_mouse),
+    u_mouse_turbo
+  )+ vec2(0.0, u_loading_time);
 
+  float x_wiggle = sin(u_time * 0.5 *.000125*PI*2.)*.004*cos(u_time * 0.5 *.003) * 0.75;
+  float y_wiggle = cos(u_time * 0.5 *.0002*PI*2.)*.004*sin(u_time * 0.5 *.005) * 0.75;
+  
   vec2 sample_position=mix(
     vec2(
-      uv.x+(depth*center_vector.x*0.4),
-      uv.y+(depth*center_vector.y*0.4)
+      uv.x+(depth*(center_vector.x + x_wiggle)),
+      uv.y+(depth*(center_vector.y + y_wiggle))
     ),
     vec2(
-      uv_next.x+(next_depth*center_vector.x*0.4),
-      uv_next.y+(next_depth*center_vector.y*0.4)
+      uv_next.x+(next_depth*(center_vector.x + x_wiggle)),
+      uv_next.y+(next_depth*(center_vector.y + y_wiggle))
     ), 
     u_animation_progress
   );
-
-  
 
   vec4 color=texture(
     u_a_color_texture,
@@ -135,17 +132,13 @@ void main(){
   );
 
   vec4 resulting_colour=mix(color, color_next, clamp(u_animation_progress+(depth*u_animation_progress), 0.0, 1.0));
-
-  float redColorCount = 8.;
-  float greenColorCount = 8.;
-  float blueColorCount = 8.;
-  
-  vec4 ditherFilter=dither4x4(gl_FragCoord.xy, resulting_colour);
-
   fragColor=vec4(
-    floor((redColorCount - 1.0) * ditherFilter.r + 0.5) / (redColorCount - 1.0),
-    floor((greenColorCount - 1.0) * ditherFilter.g + 0.5) / (greenColorCount - 1.0),
-    floor((blueColorCount - 1.0) * ditherFilter.b + 0.5) / (blueColorCount - 1.0),
+    dither_4x4_colour(
+      v_uv,
+      u_resolution,
+      resulting_colour.rgb, 
+      3.0
+    ), 
     1.0
   );
 }
