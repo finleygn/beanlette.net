@@ -5,6 +5,7 @@ import Screen from "../Screen";
 import homeScreenAssets from "./assets";
 import { useLocation } from "@solidjs/router";
 import Modal from "./components/Modal";
+import { clamp } from "@fishley/wwwgraphics/math";
 
 interface ScreenProps {
   backgroundRender: BackgroundRenderer;
@@ -18,6 +19,7 @@ interface Artwork {
   images: { image: string, name?: string }[];
   // percentage of 100vw for x or 200vh for y
   position: { y: number, x: number }
+  available?: boolean;
 }
 
 const artwork: Artwork[] = [
@@ -47,7 +49,8 @@ const artwork: Artwork[] = [
     images: [
       { image: '/artwork/oaksplitt/full_1.gif', name: "oaksplitt" },
       { image: '/artwork/oaksplitt/full_2.jpg', name: "oaksplit2" }
-    ]
+    ],
+    available: true
   },
   {
     title: "detachable1",
@@ -373,6 +376,7 @@ const artwork: Artwork[] = [
 
 function HomeScreen(props: ScreenProps) {
   let containerRef: HTMLImageElement | undefined;
+  let linkRefs: HTMLAnchorElement[] = [];
   const location = useLocation()
   
   onMount(() => {
@@ -382,6 +386,17 @@ function HomeScreen(props: ScreenProps) {
       const xTransform = `${((x.get() - 0.5) * -1) * 10}%`;
       const yTransform = `${((y.get() - 0.5) * 0.5) * 10}%`;
       containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
+
+  
+      // const scrollProgress = window.scrollY / (document.body.clientHeight - window.innerHeight);
+
+      // for(const link of linkRefs) {
+        // const box = link.getBoundingClientRect()
+        // const verticalCenterProximity = 1 - Math.abs(box.top / window.innerHeight - 0.5);
+        // const leftp = box.left / window.innerWidth;
+        // const xpower = (1 - Math.abs(leftp - 0.5)) * (leftp > 0.5 ? 1 : -1);
+        // link.style.transform = `translateX(${100 * xpower * verticalCenterProximity}px)`
+      // }
     })
     
     onCleanup(unsubscribe);
@@ -394,12 +409,14 @@ function HomeScreen(props: ScreenProps) {
       onBackgroundReady={props.onBackgroundReady}
     >
       <main ref={containerRef}>
-        {artwork.map(artwork => (
+        {artwork.map((artwork, i) => (
           <Icon
+            ref={el => linkRefs[i] = el}
             title={artwork.title}
             thumbnail={artwork.thumbnail}
             id={artwork.id}
             position={artwork.position}
+            available={artwork.available}
           />
         ))}
       </main>

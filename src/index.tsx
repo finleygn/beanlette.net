@@ -9,7 +9,7 @@ const root = document.getElementById('root')
 const backgroundRenderer = new BackgroundRenderer();
 
 window.addEventListener('scroll', () => {
-  backgroundRenderer.scrollPercentage.set(window.scrollY / window.innerHeight);
+  backgroundRenderer.scrollPercentage.set(window.scrollY / (document.body.clientHeight - window.innerHeight));
 })
 
 render(() => <App backgroundRenderer={backgroundRenderer} />, root!);

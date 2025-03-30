@@ -175,7 +175,6 @@ class BackgroundRenderer {
     }
 
     this.scrollPercentage.tick();
-    console.log(this.scrollPercentage.get())
     this.program.uniforms.u_scroll_percent.value = this.scrollPercentage.get();
 
     this.program.uniforms.u_time.value = elapsed;

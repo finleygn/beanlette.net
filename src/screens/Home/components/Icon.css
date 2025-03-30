@@ -9,19 +9,20 @@
   position: absolute;
   transform: translate(-50%, -50%) scale(1);
   pointer-events: all;
-  text-shadow: 0px 0px 20px rgb(0,0,0), 0px 0px 20px rgb(0,0,0);
   user-select: none;
 }
 
 .artwork-icon img {
   width: 4.5vmax;
   box-shadow: 0px 0px 30px #fff;
+  user-select: none;
 }
 
-.artwork-icon span {
+.artwork-icon .artwork-icon__text {
   max-width: 9vmax;
   overflow-wrap: break-word;
   text-align: center;
+  text-shadow: 0px 0px 20px rgb(0,0,0), 0px 0px 20px rgb(0,0,0);
 }
 
 .artwork-icon:visited {
@@ -49,7 +50,7 @@
   .artwork-icon img {
     width: 4vmax;
   }
-  .artwork-icon span {
+  .artwork-icon .artwork-icon__text {
     font-size: 10px;
     min-width: 80px;
     text-align: center;

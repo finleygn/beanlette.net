@@ -37,3 +37,12 @@ main {
   position: relative;
   pointer-events: none;
 }
+
+.for-sale-tag {
+  line-height: 1;
+  padding: 4px 5px;
+  background-color: white;
+  color: black;
+  mix-blend-mode: screen;
+  border-radius: 8px;
+}
