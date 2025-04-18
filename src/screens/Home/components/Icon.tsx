@@ -22,7 +22,7 @@ function Icon({ title, thumbnail, id, position, available, ref}: IconProps) {
     >
       <img src={thumbnail} draggable={false} alt={`${title} thumbnail`}/>
       <span class="artwork-icon__text">{title}</span>
-      {available && <span class="for-sale-tag">for sale</span>}
+      {available && <span class="for-sale-tag">prints available</span>}
     </A>
   )
 }

@@ -1,11 +1,10 @@
-import { JSX, Match, onCleanup, onMount, Switch } from "solid-js";
+import { JSX, JSXElement, Match, onCleanup, onMount, Switch } from "solid-js";
 import BackgroundRenderer from "../../background/BackgroundRenderer";
 import Icon from "./components/Icon";
 import Screen from "../Screen";
 import homeScreenAssets from "./assets";
 import { useLocation } from "@solidjs/router";
 import Modal from "./components/Modal";
-import { clamp } from "@fishley/wwwgraphics/math";
 
 interface ScreenProps {
   backgroundRender: BackgroundRenderer;
@@ -19,7 +18,11 @@ interface Artwork {
   images: { image: string, name?: string }[];
   // percentage of 100vw for x or 200vh for y
   position: { y: number, x: number }
-  available?: boolean;
+  prints?: {
+    available: boolean;
+    images: { image: string }[];
+    description: JSXElement;
+  };
 }
 
 const artwork: Artwork[] = [
@@ -50,7 +53,23 @@ const artwork: Artwork[] = [
       { image: '/artwork/oaksplitt/full_1.gif', name: "oaksplitt" },
       { image: '/artwork/oaksplitt/full_2.jpg', name: "oaksplit2" }
     ],
-    available: true
+    prints: {
+      available: true,
+      images: [
+        { image: '/artwork/oaksplitt/prints/oaksplit real 1.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 2.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 3.jpg' }
+      ],
+      description: (
+        <>
+          <p>Oaksplit — £300</p>
+          <p>A tree in Suffolk.</p>
+          <p>Limited run of 10 signed pieces.</p>
+          <p>300x400mm</p>
+          
+        </>
+      )
+    }
   },
   {
     title: "detachable1",
@@ -112,7 +131,22 @@ const artwork: Artwork[] = [
     images: [
       { image: "/artwork/oh_2/full_1.jpg", name: "Oh?" },
     ],
-    position: { y: 20, x: 70 }
+    position: { y: 20, x: 70 },
+    prints: {
+      available: true,
+      images: [
+        { image: '/artwork/oh_2/prints/oh real 1.jpg' },
+        { image: '/artwork/oh_2/prints/oh real 2.jpg' },
+        { image: '/artwork/oh_2/prints/oh real 3.jpg' }
+      ],
+      description: (
+        <>
+          <p>Oh? £250 300x300mm</p>
+          <p>Feels like discovery.</p>
+          <p>Limited run of 10 signed pieces.</p>
+        </>
+      )
+    }
   },
   {
     title: "jyoucyo_ascii_3_FINAL_MAYBE",
@@ -121,7 +155,22 @@ const artwork: Artwork[] = [
     images: [
       { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/full_1.jpg", name: "Oh?" },
     ],
-    position: { y: 30, x: 80 }
+    position: { y: 30, x: 80 },
+    prints: {
+      available: true,
+      images: [
+        { image: '/artwork/oaksplitt/prints/oaksplit real 1.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 2.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 3.jpg' }
+      ],
+      description: (
+        <>
+          <p>ascii girl: £900 400x506mm</p>
+          <p>From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and beanlette.</p>
+          <p>Signed 1 of 1.</p>
+        </>
+      )
+    }
   },
   {
     title: "fetterless",
@@ -190,7 +239,22 @@ const artwork: Artwork[] = [
       { image: "/artwork/moss_sit_7/full_1.jpg", name: "metalmoss" },
       { image: "/artwork/moss_sit_7/full_2.jpg", name: "moss sit" },
     ],
-    position: { y: 38, x: 92 }
+    position: { y: 38, x: 92 },
+    prints: {
+      available: true,
+      images: [
+        { image: '/artwork/moss_sit_7/prints/mossy real 1.jpg' },
+        { image: '/artwork/moss_sit_7/prints/mossy real 2.jpg' },
+        { image: '/artwork/moss_sit_7/prints/mossy real 3.jpg' }
+      ],
+      description: (
+        <>
+          <p>Mossy sit: £300 300x400mm</p>
+          <p>Girl sitting in a strange green world.</p>
+          <p>Limited run of 10 signed pieces.</p>
+        </>
+      )
+    }
   },
   {
     title: "what_a_day_3",
@@ -269,7 +333,22 @@ const artwork: Artwork[] = [
       { image: "/artwork/flitter1/full_3.jpg", name: "flitter3" },
       { image: "/artwork/flitter1/full_4.jpg", name: "flitter4" },
     ],
-    position: { y: 57, x: 22 }
+    position: { y: 57, x: 22 },
+    prints: {
+      available: true,
+      images: [
+        { image: '/artwork/oaksplitt/prints/oaksplit real 1.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 2.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 3.jpg' }
+      ],
+      description: (
+        <>
+          <p>flitter 1 + 2: £350 400x400mm</p>
+          <p>Distorted petals.</p>
+          <p>Limited run of 10 signed pieces.</p>
+        </>
+      )
+    }
   },
   {
     title: "blipblop21",
@@ -307,7 +386,22 @@ const artwork: Artwork[] = [
     images: [
       { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/full_1.jpg", name: "Doesn't have to mean much at all" },
     ],
-    position: { y: 6, x: 45 }
+    position: { y: 6, x: 45 },
+    prints: {
+      available: true,
+      images: [
+        { image: '/artwork/oaksplitt/prints/oaksplit real 1.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 2.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 3.jpg' }
+      ],
+      description: (
+        <>
+          <p>Doesn't have to mean much at all: £350 533x300mm</p>
+          <p>Computer screenshot.</p>
+          <p>Limited run of 10 signed pieces.</p>
+        </>
+      )
+    }
   },
   {
     title: "cube_rainbow_logo",
@@ -370,7 +464,22 @@ const artwork: Artwork[] = [
     images: [
       { image: "/artwork/daisy_phritz/full_1.jpg", name: "daisy phritz" },
     ],
-    position: { y: 12, x: 27 }
+    position: { y: 12, x: 27 },
+    prints: {
+      available: true,
+      images: [
+        { image: '/artwork/oaksplitt/prints/oaksplit real 1.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 2.jpg' },
+        { image: '/artwork/oaksplitt/prints/oaksplit real 3.jpg' }
+      ],
+      description: (
+        <>
+          <p>Daisy: £350 533x300mm</p>
+          <p>38.70560 N, 139.96610 E.</p>
+          <p>Limited run of 10 signed pieces.</p>
+        </>
+      )
+    }
   },
 ]
 
@@ -416,7 +525,7 @@ function HomeScreen(props: ScreenProps) {
             thumbnail={artwork.thumbnail}
             id={artwork.id}
             position={artwork.position}
-            available={artwork.available}
+            available={!!artwork.prints && artwork.prints.available}
           />
         ))}
       </main>
@@ -425,7 +534,7 @@ function HomeScreen(props: ScreenProps) {
       <Switch>
         {artwork.map(artwork => (
           <Match when={`/${artwork.id}` === location.pathname}>
-            <Modal images={artwork.images} />
+            <Modal images={artwork.images} print={artwork.prints} />
           </Match>
         ))}
       </Switch>

@@ -33,13 +33,15 @@
   height: 1px;
 }
 
-html:has(a:hover) .cursor__image--default {
+html:has(a:hover) .cursor__image--default,
+html:has(button:hover) .cursor__image--default {
   opacity: 0.01;
   width: 1px;
   height: 1px;
 }
 
-html:has(a:hover) .cursor__image--hovered {
+html:has(a:hover) .cursor__image--hovered,
+html:has(button:hover) .cursor__image--hovered {
   opacity: 1;
   width: 50px;
   height: 50px;

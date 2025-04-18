@@ -45,4 +45,11 @@ main {
   color: black;
   mix-blend-mode: screen;
   border-radius: 8px;
+  font-size: 10px;
+  text-align: center;
+  border: none;
+}
+.for-sale-tag--button {
+  font-family: pixel, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
