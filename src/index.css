@@ -1,55 +1,56 @@
 :root {
-  font-family: pixel, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: pixel, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+    margin: 0;
+    display: flex;
+    place-items: center;
 }
 
 header h1 {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 #root {
-  z-index: 1;
-  width: 100%;
-  overflow: hidden;
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
 }
 
 canvas {
-  image-rendering: pixelated;
-  min-height: 100vh;
+    image-rendering: pixelated;
+    min-height: 100vh;
 }
 
 main {
-  height: 200dvh;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  pointer-events: none;
+    min-height: 150vh;
+    height: 2000px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    pointer-events: none;
 }
 
 .for-sale-tag {
-  line-height: 1;
-  padding: 4px 5px;
-  background-color: white;
-  color: black;
-  mix-blend-mode: screen;
-  border-radius: 8px;
-  font-size: 10px;
-  text-align: center;
-  border: none;
+    line-height: 1;
+    padding: 4px 5px;
+    background-color: white;
+    color: black;
+    mix-blend-mode: screen;
+    border-radius: 8px;
+    font-size: 10px;
+    text-align: center;
+    border: none;
 }
 .for-sale-tag--button {
-  font-family: pixel, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 14px;
+    font-family: pixel, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 14px;
 }
