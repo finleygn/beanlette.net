@@ -1,4 +1,4 @@
-[beanlette.net](https://beanlette.net)
+# [beanlette.net](https://beanlette.net)
 
 Site for [beanlette](https://x.com/majorbean_)
 
