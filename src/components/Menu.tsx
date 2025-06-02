@@ -13,8 +13,8 @@ function Menu({ backgroundRenderer }: MenuProps) {
     const unsubscribe = backgroundRenderer.onUpdate(() => {
       if (!containerRef) return;
       const { x, y } = backgroundRenderer.currentMousePosition;
-      const xTransform = `calc(-50% + ${(x.value - 0.5) * -1 * 100}%)`;
-      const yTransform = `calc(-50% + ${(y.value - 0.5) * -1 * 100}%)`;
+      const xTransform = `calc(-50% + ${(x.value - 0.5) * -1 * 80}%)`;
+      const yTransform = `calc(-50% + ${(y.value - 0.5) * -1 * 80}%)`;
       containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
     });
 
