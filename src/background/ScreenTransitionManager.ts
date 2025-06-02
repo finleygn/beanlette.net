@@ -1,5 +1,5 @@
+import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
 import { OGLRenderingContext, Texture } from "ogl";
-import LerpedValue from "./LerpedValue";
 
 interface ScreenContent {
   color: Texture;
@@ -13,7 +13,7 @@ class ScreenTransitionManager {
   private currentScreen: ScreenContent;
   private backupTextures: ScreenContent;
 
-  private transitionProgress: LerpedValue;
+  private transitionProgress: AutonomousSmoothValue;
 
   constructor(gl: OGLRenderingContext) {
     this.hasCurrentScreen = false;
@@ -26,11 +26,11 @@ class ScreenTransitionManager {
     this.backupTextures = { ...emptyTextures };
     this.transitionQueue = [];
 
-    this.transitionProgress = new LerpedValue(0, 0.2);
+    this.transitionProgress = new AutonomousSmoothValue(0, 0.2);
   }
 
   public getProgress(): number {
-    return this.transitionProgress.get();
+    return this.transitionProgress.value;
   }
 
   public getStartTexture(): ScreenContent {
@@ -69,20 +69,20 @@ class ScreenTransitionManager {
     await depth.loaded;
 
     if (this.transitionQueue.length === 1) {
-      this.transitionProgress.set(1);
+      this.transitionProgress.target = 1;
     }
   }
 
-  public tick() {
+  public tick(dt: number) {
     if (!this.transitionQueue.length) return;
 
-    this.transitionProgress.tick();
+    this.transitionProgress.tick(dt);
 
     if (this.transitionProgress.isFinished()) {
       const completedTransition = this.transitionQueue.shift();
       if (completedTransition) this.currentScreen = completedTransition;
       this.transitionProgress.setAbsolute(0);
-      this.transitionProgress.set(1);
+      this.transitionProgress.target = 1;
     }
   }
 }

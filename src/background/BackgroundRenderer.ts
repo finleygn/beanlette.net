@@ -9,7 +9,6 @@ import {
 import vertex_shader from "./shaders/vertex.glsl?raw";
 import fragment_shader from "./shaders/displace.glsl?raw";
 import MousePositionTracker from "./MousePositionTracker";
-import LerpedValue from "./LerpedValue";
 import ScreenTransitionManager from "./ScreenTransitionManager";
 import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
 import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
@@ -36,11 +35,11 @@ class BackgroundRenderer {
   private turbo: AutonomousSmoothValue;
 
   public currentMousePosition: {
-    x: LerpedValue;
-    y: LerpedValue;
+    x: AutonomousSmoothValue;
+    y: AutonomousSmoothValue;
   };
 
-  public scrollPercentage: LerpedValue;
+  public scrollPercentage: AutonomousSmoothValue;
 
   private screenTransitionManager: ScreenTransitionManager;
 
@@ -54,13 +53,13 @@ class BackgroundRenderer {
     this.gl = renderer.gl;
     this.canvas = renderer.gl.canvas;
     this.subscribers = new Set();
-    this.scrollPercentage = new LerpedValue(0, 0.1);
+    this.scrollPercentage = new AutonomousSmoothValue(0, 0.1);
 
     this.screenTransitionManager = new ScreenTransitionManager(this.gl);
 
     this.currentMousePosition = {
-      x: new LerpedValue(this.mousePositionTracker.getX(), 0.05),
-      y: new LerpedValue(this.mousePositionTracker.getY(), 0.05),
+      x: new AutonomousSmoothValue(this.mousePositionTracker.getX(), 0.2),
+      y: new AutonomousSmoothValue(this.mousePositionTracker.getY(), 0.2),
     };
 
     this.geometry = new Geometry(renderer.gl, {
@@ -191,7 +190,7 @@ class BackgroundRenderer {
     /**
      * Background textures and transition
      */
-    this.screenTransitionManager.tick();
+    this.screenTransitionManager.tick(dt);
 
     const currentScreen = this.screenTransitionManager.getStartTexture();
     const nextScreen = this.screenTransitionManager.getEndTexture();
@@ -222,8 +221,8 @@ class BackgroundRenderer {
       );
     }
 
-    this.scrollPercentage.tick();
-    this.program.uniforms.u_scroll_percent.value = this.scrollPercentage.get();
+    this.scrollPercentage.tick(dt);
+    this.program.uniforms.u_scroll_percent.value = this.scrollPercentage.value;
 
     this.program.uniforms.u_time.value = elapsed;
     this.program.uniforms.u_loading_time.value = 0;
@@ -243,14 +242,14 @@ class BackgroundRenderer {
      * Mouse position updates
      * TODO: Move these to AutonomousSmoothedValue
      */
-    this.currentMousePosition.x.tick();
-    this.currentMousePosition.y.tick();
+    this.currentMousePosition.x.tick(dt);
+    this.currentMousePosition.y.tick(dt);
 
-    this.currentMousePosition.x.set(this.mousePositionTracker.getX());
-    this.currentMousePosition.y.set(this.mousePositionTracker.getY());
+    this.currentMousePosition.x.target = this.mousePositionTracker.getX();
+    this.currentMousePosition.y.target = this.mousePositionTracker.getY();
 
-    this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.get();
-    this.program.uniforms.u_mouse.value[1] = this.currentMousePosition.y.get();
+    this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
+    this.program.uniforms.u_mouse.value[1] = this.currentMousePosition.y.value;
 
     /**
      * Resolution updates
