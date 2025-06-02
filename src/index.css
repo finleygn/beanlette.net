@@ -13,6 +13,7 @@ body {
     margin: 0;
     display: flex;
     place-items: center;
+    overflow-x: hidden;
 }
 
 header h1 {
@@ -22,7 +23,6 @@ header h1 {
 #root {
     z-index: 1;
     width: 100%;
-    overflow: hidden;
 }
 
 canvas {
@@ -34,7 +34,6 @@ main {
     min-height: 150vh;
     height: 2000px;
     width: 100%;
-    overflow: hidden;
     position: relative;
     pointer-events: none;
 }
