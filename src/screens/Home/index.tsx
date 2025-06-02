@@ -585,7 +585,7 @@ function HomeScreen(props: ScreenProps) {
       if (!containerRef) return;
       const { x, y } = props.backgroundRender.currentMousePosition;
       const xTransform = `${(x.value - 0.5) * -1 * 10}%`;
-      const yTransform = `${(y.value - 0.5) * 0.5 * 10}%`;
+      const yTransform = `${(y.value - 0.5) * -1 * 0.5 * 10}%`;
       containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
     });
 

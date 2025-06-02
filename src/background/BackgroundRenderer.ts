@@ -249,7 +249,8 @@ class BackgroundRenderer {
     this.currentMousePosition.y.target = this.mousePositionTracker.y;
 
     this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
-    this.program.uniforms.u_mouse.value[1] = this.currentMousePosition.y.value;
+    this.program.uniforms.u_mouse.value[1] =
+      this.currentMousePosition.y.value * -1;
 
     /**
      * Resolution updates

@@ -12,6 +12,8 @@ Site for [beanlette](https://x.com/majorbean_)
 
 ## TODO
 
+- [ ] Correct print images
+- [ ] Print screen size
 - [ ] Mobile icons overlapping issue
 - [ ] Press esc to leave modal
 - [ ] Horizontal scroll problem
