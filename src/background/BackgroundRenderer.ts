@@ -14,6 +14,13 @@ import ScreenTransitionManager from "./ScreenTransitionManager";
 import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
 import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
 
+const TURBO_CLICK_DELAY_MS = 150;
+
+interface BackgroundPair {
+  color: HTMLImageElement;
+  depth: HTMLImageElement;
+}
+
 class BackgroundRenderer {
   private renderer: Renderer;
   private gl: OGLRenderingContext;
@@ -90,43 +97,55 @@ class BackgroundRenderer {
       depthTest: false,
     });
 
+    this.mesh = new Mesh(this.gl, {
+      geometry: this.geometry,
+      program: this.program,
+    });
+
     this.turbo = new AutonomousSmoothValue(0, 0.1);
+
+    this.initializeCanvasDOM();
+    this.initializeTurboMouseListener();
+
+    this.initializeResizeWatch();
+    renderLoop(this.render, { longestFrame: 60 });
+  }
+
+  // Initalizers
+  // ------
+
+  private initializeTurboMouseListener = () => {
     let selected = false;
     let timeout: ReturnType<typeof setTimeout>;
+
     window.addEventListener("mousedown", () => {
       selected = true;
       timeout = setTimeout(() => {
         if (selected) {
           this.turbo.target = 1;
         }
-      }, 150);
+      }, TURBO_CLICK_DELAY_MS);
     });
+
     window.addEventListener("mouseup", () => {
       this.turbo.target = 0;
       selected = false;
       if (timeout) clearTimeout(timeout);
     });
+  };
 
-    this.mesh = new Mesh(this.gl, {
-      geometry: this.geometry,
-      program: this.program,
-    });
-
+  private initializeCanvasDOM = () => {
     document.body.prepend(this.canvas);
     this.canvas.style.position = "fixed";
     this.canvas.style.top = "0px";
     this.canvas.style.left = "0px";
     this.canvas.style.right = "0px";
     this.canvas.style.bottom = "0px";
+  };
 
-    this.watchScreenResize();
-    renderLoop(this.render, { longestFrame: 60 });
-  }
-
-  private watchScreenResize = () => {
-    const resize = () => {
+  private initializeResizeWatch = () => {
+    const resize = () =>
       this.renderer.setSize(window.innerWidth, window.innerHeight);
-    };
     window.addEventListener("resize", resize, false);
     resize();
   };
@@ -136,13 +155,7 @@ class BackgroundRenderer {
     return () => this.subscribers.delete(cb);
   };
 
-  public setCurrentBackground = async ({
-    color,
-    depth,
-  }: {
-    color: HTMLImageElement;
-    depth: HTMLImageElement;
-  }) => {
+  public setCurrentBackground = async ({ color, depth }: BackgroundPair) => {
     const newcolorTexture = new Texture(this.gl, { generateMipmaps: false });
     const newDepthTexture = new Texture(this.gl, { generateMipmaps: false });
 
@@ -155,13 +168,7 @@ class BackgroundRenderer {
     });
   };
 
-  public setNextBackground = async ({
-    color,
-    depth,
-  }: {
-    color: HTMLImageElement;
-    depth: HTMLImageElement;
-  }) => {
+  public setNextBackground = async ({ color, depth }: BackgroundPair) => {
     const newcolorTexture = new Texture(this.gl, { generateMipmaps: false });
     const newDepthTexture = new Texture(this.gl, { generateMipmaps: false });
 
@@ -242,11 +249,8 @@ class BackgroundRenderer {
     this.currentMousePosition.x.set(this.mousePositionTracker.getX());
     this.currentMousePosition.y.set(this.mousePositionTracker.getY());
 
-    const lerpedMouseX = this.currentMousePosition.x.get();
-    const lerpedMouseY = this.currentMousePosition.y.get();
-
-    this.program.uniforms.u_mouse.value[0] = lerpedMouseX;
-    this.program.uniforms.u_mouse.value[1] = lerpedMouseY;
+    this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.get();
+    this.program.uniforms.u_mouse.value[1] = this.currentMousePosition.y.get();
 
     /**
      * Resolution updates
@@ -256,8 +260,8 @@ class BackgroundRenderer {
 
     this.renderer.render({ scene: this.mesh });
 
-    for (const subscriber of this.subscribers) {
-      subscriber();
+    for (const notifySubscriber of this.subscribers) {
+      notifySubscriber();
     }
   };
 }
