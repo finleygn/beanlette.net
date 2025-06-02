@@ -7,9 +7,8 @@ Site for [beanlette](https://x.com/majorbean_)
 - TypeScript
 - SolidJS
 - WebGL (using lightweight wraper [OGL](https://github.com/oframe/ogl))
+- [@fishley/wwwgraphics](https://jsr.io/@fishley/wwwgraphics) :3
 - Vite
-
-Also uses https://jsr.io/@fishley/wwwgraphics :3
 
 ## TODO
 
