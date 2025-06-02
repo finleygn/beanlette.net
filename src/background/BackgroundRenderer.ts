@@ -8,10 +8,10 @@ import {
 } from "ogl";
 import vertex_shader from "./shaders/vertex.glsl?raw";
 import fragment_shader from "./shaders/displace.glsl?raw";
-import MousePositionTracker from "./MousePositionTracker";
 import ScreenTransitionManager from "./ScreenTransitionManager";
 import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
 import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
+import { MousePositionTracker } from "@fishley/wwwgraphics/interaction";
 
 const TURBO_CLICK_DELAY_MS = 150;
 
@@ -58,8 +58,8 @@ class BackgroundRenderer {
     this.screenTransitionManager = new ScreenTransitionManager(this.gl);
 
     this.currentMousePosition = {
-      x: new AutonomousSmoothValue(this.mousePositionTracker.getX(), 0.2),
-      y: new AutonomousSmoothValue(this.mousePositionTracker.getY(), 0.2),
+      x: new AutonomousSmoothValue(this.mousePositionTracker.x, 0.2),
+      y: new AutonomousSmoothValue(this.mousePositionTracker.y, 0.2),
     };
 
     this.geometry = new Geometry(renderer.gl, {
@@ -245,8 +245,8 @@ class BackgroundRenderer {
     this.currentMousePosition.x.tick(dt);
     this.currentMousePosition.y.tick(dt);
 
-    this.currentMousePosition.x.target = this.mousePositionTracker.getX();
-    this.currentMousePosition.y.target = this.mousePositionTracker.getY();
+    this.currentMousePosition.x.target = this.mousePositionTracker.x;
+    this.currentMousePosition.y.target = this.mousePositionTracker.y;
 
     this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
     this.program.uniforms.u_mouse.value[1] = this.currentMousePosition.y.value;
