@@ -60,7 +60,7 @@ vec3 dither_4x4_colour(
     int x_thresh = int(position.x * resolution.x) % 4;
     int y_thresh = int(position.y * resolution.y) % 4;
     float thresh = (DITHER_BAYER_MAT_4x4[x_thresh][y_thresh] - 0.5) * step_size;
-    
+
     // Apply dither and quantize
     colour.rgb += thresh;
     colour = quantize_colour(colour, colour_count);
@@ -108,7 +108,7 @@ void main(){
 
   float x_wiggle = sin(u_time * 0.5 *.000125*PI*2.)*.004*cos(u_time * 0.5 *.003) * 0.75;
   float y_wiggle = cos(u_time * 0.5 *.0002*PI*2.)*.004*sin(u_time * 0.5 *.005) * 0.75;
-  
+
   vec2 sample_position=mix(
     vec2(
       uv.x+(depth*(center_vector.x + x_wiggle)),
@@ -117,7 +117,7 @@ void main(){
     vec2(
       uv_next.x+(next_depth*(center_vector.x + x_wiggle)),
       uv_next.y+(next_depth*(center_vector.y + y_wiggle))
-    ), 
+    ),
     u_animation_progress
   );
 
@@ -136,9 +136,9 @@ void main(){
     dither_4x4_colour(
       v_uv,
       u_resolution,
-      resulting_colour.rgb, 
-      3.0
-    ), 
+      resulting_colour.rgb,
+      4.0
+    ),
     1.0
   );
 }
