@@ -1,13 +1,18 @@
 [beanlette.net](https://beanlette.net)
 
-TODO: 
+Site for [beanlette](https://x.com/majorbean_)
 
-- [ ] Fix DPR on mobile devices
-- [ ] Remove touch on mobile devices
-- [ ] Background WoT (wiggle over time)
-- [ ] Change screens on routes
-- [ ] Fix white pixel gap on safari
-- [ ] Screen door effect on safari
-- [ ] Use white cursor instead of black
-- [ ] Pull on scroll
-- [ ] Finish images
+## Made with
+
+- TypeScript
+- SolidJS
+- WebGL (using lightweight wraper [OGL](https://github.com/oframe/ogl))
+- Vite
+
+Also uses https://jsr.io/@fishley/wwwgraphics :3
+
+## TODO
+
+- [ ] Mobile icons overlapping issue
+- [ ] Press esc to leave modal
+- [ ] Horizontal scroll problem
