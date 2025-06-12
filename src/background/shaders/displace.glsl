@@ -90,9 +90,12 @@ vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
     return cuv;
 }
 
+const float scroll_amount = 0.1;
+
 void main() {
     vec2 uvp = unsignedRange(signedRange(v_uv) * 0.95);
-    uvp.y -= (-.05) + (u_scroll_percent * .1);
+    uvp.y -= -(scroll_amount / 2.0);
+    uvp.y += (u_scroll_percent * scroll_amount);
 
     vec2 uv = coverBackgroundPosition(uvp, u_a_color_texture, u_resolution);
     vec2 uv_next = coverBackgroundPosition(v_uv, u_b_color_texture, u_resolution);
@@ -112,7 +115,7 @@ void main() {
     vec2 sample_position = mix(
             vec2(
                 uv.x + (depth * (center_vector.x + x_wiggle)),
-                uv.y + (depth * (center_vector.y + y_wiggle))
+                uv.y + (depth * (center_vector.y + y_wiggle - u_scroll_percent * 0.1))
             ),
             vec2(
                 uv_next.x + (next_depth * (center_vector.x + x_wiggle)),
