@@ -42,7 +42,7 @@ const artwork: Artwork[] = [
     title: "water_cycle_13_2",
     thumbnail: "/artwork/water_cycle_13_2/thumb.gif",
     id: "water_cycle_13_2",
-    position: { y: 78, x: 40 },
+    position: { y: 78, x: 47 },
     images: [
       { image: "/artwork/water_cycle_13_2/full_1.jpg", name: "water cycle↺↺↺" },
     ],
@@ -129,7 +129,7 @@ const artwork: Artwork[] = [
       },
       { image: "/artwork/plast_emotion_2/full_2.jpg" },
     ],
-    position: { y: 90, x: 70 },
+    position: { y: 90, x: 74 },
   },
   {
     title: "forest_pixels_4",
@@ -506,7 +506,7 @@ const artwork: Artwork[] = [
         name: "shes hiding in the flowers",
       },
     ],
-    position: { y: 90, x: 35 },
+    position: { y: 90, x: 40 },
   },
   {
     title: (

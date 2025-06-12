@@ -47,6 +47,7 @@ class BackgroundRenderer {
     const renderer = new Renderer({
       antialias: false,
       depth: false,
+      // dpr: window.devicePixelRatio,
     });
 
     this.renderer = renderer;
@@ -109,45 +110,6 @@ class BackgroundRenderer {
     this.initializeResizeWatch();
     renderLoop(this.render, { longestFrame: 60 });
   }
-
-  // Initalizers
-  // ------
-
-  private initializeTurboMouseListener = () => {
-    let selected = false;
-    let timeout: ReturnType<typeof setTimeout>;
-
-    window.addEventListener("mousedown", () => {
-      selected = true;
-      timeout = setTimeout(() => {
-        if (selected) {
-          this.turbo.target = 1;
-        }
-      }, TURBO_CLICK_DELAY_MS);
-    });
-
-    window.addEventListener("mouseup", () => {
-      this.turbo.target = 0;
-      selected = false;
-      if (timeout) clearTimeout(timeout);
-    });
-  };
-
-  private initializeCanvasDOM = () => {
-    document.body.prepend(this.canvas);
-    this.canvas.style.position = "fixed";
-    this.canvas.style.top = "0px";
-    this.canvas.style.left = "0px";
-    this.canvas.style.right = "0px";
-    this.canvas.style.bottom = "0px";
-  };
-
-  private initializeResizeWatch = () => {
-    const resize = () =>
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-    window.addEventListener("resize", resize, false);
-    resize();
-  };
 
   public onUpdate = (cb: () => void) => {
     this.subscribers.add(cb);
@@ -250,7 +212,7 @@ class BackgroundRenderer {
 
     this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
     this.program.uniforms.u_mouse.value[1] =
-      this.currentMousePosition.y.value * -1;
+      1 - this.currentMousePosition.y.value;
 
     /**
      * Resolution updates
@@ -263,6 +225,45 @@ class BackgroundRenderer {
     for (const notifySubscriber of this.subscribers) {
       notifySubscriber();
     }
+  };
+
+  // Initalizers
+  // ------
+
+  private initializeTurboMouseListener = () => {
+    let selected = false;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    window.addEventListener("mousedown", () => {
+      selected = true;
+      timeout = setTimeout(() => {
+        if (selected) {
+          this.turbo.target = 1;
+        }
+      }, TURBO_CLICK_DELAY_MS);
+    });
+
+    window.addEventListener("mouseup", () => {
+      this.turbo.target = 0;
+      selected = false;
+      if (timeout) clearTimeout(timeout);
+    });
+  };
+
+  private initializeCanvasDOM = () => {
+    document.body.prepend(this.canvas);
+    this.canvas.style.position = "fixed";
+    this.canvas.style.top = "0px";
+    this.canvas.style.left = "0px";
+    this.canvas.style.right = "0px";
+    this.canvas.style.bottom = "0px";
+  };
+
+  private initializeResizeWatch = () => {
+    const resize = () =>
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    window.addEventListener("resize", resize, false);
+    resize();
   };
 }
 

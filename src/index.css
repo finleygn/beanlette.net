@@ -16,10 +16,6 @@ body {
     overflow-x: hidden;
 }
 
-header h1 {
-    font-size: 16px;
-}
-
 #root {
     z-index: 1;
     width: 100%;
@@ -31,8 +27,8 @@ canvas {
 }
 
 main {
-    min-height: 150vh;
-    height: 2000px;
+    min-height: 200vh;
+    height: 1600px;
     width: 100%;
     position: relative;
     pointer-events: none;
