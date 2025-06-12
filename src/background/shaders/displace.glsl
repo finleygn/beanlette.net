@@ -147,7 +147,7 @@ void main() {
         );
 
     fragColor = vec4(
-            final.rgb,
+            final.rgb * 0.9,
             1.0
         );
 }
