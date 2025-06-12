@@ -1,22 +1,24 @@
-import { createEffect, createSignal, onMount, Show } from 'solid-js';
-import createAssetLoader, { AssetLoaders } from './utility/assetLoader';
-import BackgroundRenderer from './background/BackgroundRenderer';
-import DogCursor from './components/DogCursor';
-import homeScreenAssets from './screens/Home/assets';
-import HomeScreen from './screens/Home';
-import Menu from './components/Menu';
-import { Route, Router } from '@solidjs/router';
+import { createEffect, createSignal, onMount, Show } from "solid-js";
+import createAssetLoader, { AssetLoaders } from "./utility/assetLoader";
+import BackgroundRenderer from "./background/BackgroundRenderer";
+import DogCursor from "./components/DogCursor";
+import homeScreenAssets from "./screens/Home/assets";
+import HomeScreen from "./screens/Home";
+import Menu from "./components/Menu";
+import { Route, Router } from "@solidjs/router";
 
 const fetchGlobalAsssets = createAssetLoader({
-  cursor_bobocube_default: AssetLoaders.image('/cursor/bobocube_default.gif'),
-  cursor_bobocube_hover: AssetLoaders.image('/cursor/bobocube_hover.gif')
+  cursor_bobocube_default: AssetLoaders.image("/cursor/bobocube_default.gif"),
+  cursor_bobocube_hover: AssetLoaders.image("/cursor/bobocube_hover.gif"),
 });
 
 function App(props: { backgroundRenderer: BackgroundRenderer }) {
-  const [assets, setAssets] = createSignal<Awaited<ReturnType<typeof fetchGlobalAsssets>>>();
+  const [assets, setAssets] =
+    createSignal<Awaited<ReturnType<typeof fetchGlobalAsssets>>>();
 
   const [assetsLoading, setAssetsLoading] = createSignal(true);
-  const [initialBackgroundReady, setInitialBackgroundReady] = createSignal(false);
+  const [initialBackgroundReady, setInitialBackgroundReady] =
+    createSignal(false);
 
   onMount(async () => {
     await homeScreenAssets();
@@ -28,24 +30,23 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
   createEffect(() => {
     const finished = !assetsLoading() && initialBackgroundReady();
 
-    if(finished) {
+    if (finished) {
       /**
        * Remove loading screen
        */
-      const blockingLoader = document.getElementsByClassName('blocking-loader')[0];
-      const blockingLoaderImage = document.getElementsByClassName('blocking-loader-image')[0] as HTMLElement;
+      const blockingLoader =
+        document.getElementsByClassName("blocking-loader")[0];
+      const blockingLoaderImage = document.getElementsByClassName(
+        "blocking-loader-image"
+      )[0] as HTMLElement;
 
-      blockingLoader.addEventListener('animationend', () => {
-        // TODO
+      blockingLoaderImage.addEventListener("animationend", () => {
+        blockingLoader?.classList.add("blocking-loader--removed");
       });
 
-      blockingLoaderImage.addEventListener('animationend', () => {
-        blockingLoader?.classList.add('blocking-loader--removed');
-      });
-      
-      blockingLoaderImage?.classList.add('blocking-loader-image--removed');
+      blockingLoaderImage?.classList.add("blocking-loader-image--removed");
     }
-  })
+  });
 
   return (
     <Show when={!!assets()}>
@@ -60,15 +61,16 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
       <Router>
         <Route
           path="*"
-          component={() => <HomeScreen
-            backgroundRender={props.backgroundRenderer}
-            onBackgroundReady={() => setInitialBackgroundReady(true)}
-          />}
+          component={() => (
+            <HomeScreen
+              backgroundRender={props.backgroundRenderer}
+              onBackgroundReady={() => setInitialBackgroundReady(true)}
+            />
+          )}
         />
       </Router>
     </Show>
-    
   );
 }
 
-export default App
+export default App;

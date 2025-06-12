@@ -1,5 +1,5 @@
 import { onCleanup, onMount } from "solid-js";
-import "./menu.css";
+import "./Menu.css";
 import BackgroundRenderer from "../background/BackgroundRenderer";
 
 interface MenuProps {

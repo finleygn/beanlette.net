@@ -5,7 +5,7 @@ interface ScreenProps {
   assetLoader: () => Promise<{
     readonly color: HTMLImageElement;
     readonly depth: HTMLImageElement;
-  }>,
+  }>;
   backgroundRender: BackgroundRenderer;
   children: JSXElement;
   onBackgroundReady: () => void;
@@ -13,19 +13,18 @@ interface ScreenProps {
 
 function Screen(props: ScreenProps) {
   onMount(async () => {
-    if(props.backgroundRender.shouldSetInitialBackground()) {
-      const assets = await props.assetLoader();
-
+    const assets = await props.assetLoader();
+    if (props.backgroundRender.shouldSetInitialBackground()) {
       await props.backgroundRender.setCurrentBackground({
         color: assets.color,
-        depth: assets.depth
+        depth: assets.depth,
       });
     } else {
       const assets = await props.assetLoader();
-      
+
       await props.backgroundRender.setNextBackground({
         color: assets.color,
-        depth: assets.depth
+        depth: assets.depth,
       });
     }
 
