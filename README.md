@@ -6,12 +6,13 @@ Site for [beanlette](https://x.com/majorbean_)
 
 - TypeScript
 - SolidJS
-- WebGL (using lightweight wraper [OGL](https://github.com/oframe/ogl))
+- WebGL (using lightweight wrapper [OGL](https://github.com/oframe/ogl))
 - [@fishley/wwwgraphics](https://jsr.io/@fishley/wwwgraphics) :3
 - Vite
 
 ## TODO
 
+- [ ] Mobile scroll broken
 - [ ] Correct print images
 - [ ] Print screen size
 - [ ] Mobile icons overlapping issue
