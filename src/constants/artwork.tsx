@@ -31,7 +31,7 @@ export const artwork: Artwork[] = [
     title: "water_cycle_13_2",
     thumbnail: "/artwork/water_cycle_13_2/thumb.gif",
     id: "water_cycle_13_2",
-    position: { y: 78, x: 47 },
+    position: { y: 74, x: 47 },
     images: [
       { image: "/artwork/water_cycle_13_2/full_1.jpg", name: "water cycle↺↺↺" },
     ],
@@ -81,7 +81,7 @@ export const artwork: Artwork[] = [
     images: [
       { image: "/artwork/hanbee_nya/full_1.jpg", name: "=) ⁿʸᵃ (with hanbee)" },
     ],
-    position: { y: 7, x: 85 },
+    position: { y: 7, x: 80 },
   },
   {
     title: (
@@ -146,7 +146,7 @@ export const artwork: Artwork[] = [
     thumbnail: "/artwork/oh_2/thumb.gif",
     id: "oh_2",
     images: [{ image: "/artwork/oh_2/full_1.jpg", name: "Oh?" }],
-    position: { y: 20, x: 70 },
+    position: { y: 18, x: 70 },
     prints: {
       available: true,
       images: [
@@ -200,7 +200,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/fetterless/full_3.jpg", name: "fetterless 3" },
       { image: "/artwork/fetterless/full_4.jpg", name: "fetterless 7" },
     ],
-    position: { y: 26, x: 24 },
+    position: { y: 24, x: 22 },
   },
   {
     title: "rei_displace_4",
@@ -298,7 +298,7 @@ export const artwork: Artwork[] = [
         name: "池尻大橋通り ( Ikejiri-ōhashi street )",
       },
     ],
-    position: { y: 50, x: 90 },
+    position: { y: 52, x: 90 },
   },
   {
     title: "dios_mio2",
@@ -345,7 +345,7 @@ export const artwork: Artwork[] = [
         name: "i just rememebered its called wonder egg priority",
       },
     ],
-    position: { y: 60, x: 64 },
+    position: { y: 60, x: 60 },
   },
   {
     title: "welcome_home_beanlet_final_white",
@@ -397,7 +397,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/blipblop21/full_1.jpg", name: "blipblop2" },
       { image: "/artwork/blipblop21/full_2.jpg" },
     ],
-    position: { y: 63, x: 12 },
+    position: { y: 65, x: 10 },
   },
   {
     title: "who_knows_3",
@@ -417,14 +417,14 @@ export const artwork: Artwork[] = [
       },
       { image: "/artwork/bluebell_process_4/full_2.jpg" },
     ],
-    position: { y: 75, x: 22 },
+    position: { y: 77, x: 22 },
   },
   {
     title: (
       <>
-        doesnt_ have_ to_
+        doesnt_have_to_
         <wbr />
-        make_ much_ sense_
+        make_much_sense_
         <wbr />
         at_all_1.1
       </>
@@ -526,7 +526,7 @@ export const artwork: Artwork[] = [
         name: "vapour levels",
       },
     ],
-    position: { y: 73, x: 75 },
+    position: { y: 71, x: 70 },
   },
   {
     title: "phritz_daisy",
