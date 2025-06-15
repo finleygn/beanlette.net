@@ -12,7 +12,7 @@ Site for [beanlette](https://x.com/majorbean_)
 
 ## TODO
 
-- [ ] Mobile scroll broken
 - [ ] Correct print images
 - [ ] Print screen size
+- [ ] Scroll X overflow issue
 - [ ] Mobile icons overlapping issue

@@ -14,19 +14,11 @@ interface ScreenProps {
 function Screen(props: ScreenProps) {
   onMount(async () => {
     const assets = await props.assetLoader();
-    if (props.backgroundRender.shouldSetInitialBackground()) {
-      await props.backgroundRender.setCurrentBackground({
-        color: assets.color,
-        depth: assets.depth,
-      });
-    } else {
-      const assets = await props.assetLoader();
 
-      await props.backgroundRender.setNextBackground({
-        color: assets.color,
-        depth: assets.depth,
-      });
-    }
+    await props.backgroundRender.setTextures({
+      color: assets.color,
+      depth: assets.depth,
+    });
 
     props.onBackgroundReady();
   });

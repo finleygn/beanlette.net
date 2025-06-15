@@ -9,14 +9,19 @@ uniform float u_scroll_percent;
 uniform float u_animation_progress;
 uniform float u_loading_time;
 uniform float u_time;
-uniform sampler2D u_a_depth_texture;
-uniform sampler2D u_a_color_texture;
+uniform sampler2D u_depth_texture;
+uniform sampler2D u_color_texture;
 uniform sampler2D u_b_depth_texture;
 uniform sampler2D u_b_color_texture;
 
 in vec2 v_uv;
 
 out vec4 fragColor;
+
+const float MAX_SCROLL_AMOUNT = 0.05;
+const float SCROLL_DISTORT = 0.15;
+const float ZOOM = 0.99;
+const float PORTRAIT_ZOOM = 0.9;
 
 // 0-1 to -1-1 range
 vec2 signedRange(vec2 v) {
@@ -26,6 +31,7 @@ vec2 signedRange(vec2 v) {
     );
 }
 
+// -1-1 to 0-1 range
 vec2 unsignedRange(vec2 v) {
     return vec2(
         (v.x + 1.0) * 0.5,
@@ -33,11 +39,7 @@ vec2 unsignedRange(vec2 v) {
     );
 }
 
-float basic_luma(vec3 color) {
-    return dot(color, vec3(0.299, 0.587, 0.114));
-}
-
-vec3 quantize_colour(vec3 colour, float n) {
+vec3 quantizeColour(vec3 colour, float n) {
     return floor(colour * (n - 1.0) + 0.5) / (n - 1.0);
 }
 
@@ -48,7 +50,7 @@ const mat4 DITHER_BAYER_MAT_4x4 = mat4(
         15.0, 7.0, 13.0, 5.0
     ) / 16.0;
 
-vec3 dither_4x4_colour(
+vec3 dither4x4Colour(
     in vec2 position,
     in vec2 resolution,
     in vec3 colour,
@@ -63,91 +65,98 @@ vec3 dither_4x4_colour(
 
     // Apply dither and quantize
     colour.rgb += thresh;
-    colour = quantize_colour(colour, colour_count);
+    colour = quantizeColour(colour, colour_count);
 
     return colour;
 }
 
-vec2 coverBackgroundPosition(vec2 uv, sampler2D texture, vec2 resolution) {
-    vec2 cuv = uv;
-    vec2 new, offset;
+void main() {
+    vec2 uv = v_uv;
 
-    ivec2 image_size_i = textureSize(texture, 0);
+    ivec2 image_size_i = textureSize(u_color_texture, 0);
     vec2 image_size = vec2(float(image_size_i.x), float(image_size_i.y));
 
-    float ratio_screen = resolution.x / resolution.y;
     float ratio_image = image_size.x / image_size.y;
+    float ratio_frame = u_resolution.x / u_resolution.y;
 
-    if (ratio_screen < ratio_image) {
-        new = vec2(image_size.x * resolution.y / image_size.y, resolution.y);
-        offset = vec2((new.x - resolution.x) / 2.0, 0.0);
-    } else {
-        new = vec2(resolution.x, image_size.y * resolution.x / image_size.x);
-        offset = vec2(0.0, (new.y - resolution.y) / 2.0);
+    // Landscape
+    if(ratio_frame > ratio_image) {
+        // Zoom for fun
+        uv = unsignedRange(signedRange(uv) * ZOOM);
+
+        // Fix Y scaling
+        uv.y *= ratio_image;
+        uv.y /= ratio_frame;
+
+        // Get spare image size left to scroll
+        float max_uv = 1.0 * ratio_image / ratio_frame;
+        float remaining_uv = (1.0 - max_uv);
+
+        // Center image
+        uv.y += remaining_uv * .5;
+
+        // Pull image up, and pan across when scrolling
+        float full_scroll_range = min(remaining_uv, MAX_SCROLL_AMOUNT);
+        uv.y += full_scroll_range * .5;
+        uv.y -= (u_scroll_percent * full_scroll_range);
     }
 
-    cuv = uv * (resolution / new) + (offset / new);
-    return cuv;
-}
+    // Portrait
+    if(ratio_frame <= ratio_image) { 
+        // Zoom in a little for scroll
+        uv = unsignedRange(signedRange(uv) * PORTRAIT_ZOOM);
+        
+        // Fix X scaling
+        uv.x /= ratio_image;
+        uv.x *= ratio_frame;
 
-const float scroll_amount = 0.1;
+        // Get remaining visible X
+        float max_uv = 1.0 * ratio_frame / ratio_image;
+        float remaining_uv = (1.0 - max_uv);
 
-void main() {
-    vec2 uvp = unsignedRange(signedRange(v_uv) * 0.95);
-    uvp.y -= -(scroll_amount / 2.0);
-    uvp.y += (u_scroll_percent * scroll_amount);
+        // Get remaining visible Y
+        float max_uv_y = 1.0 * ratio_image / ratio_frame;
+        float remaining_uv_y = (1.0 - max_uv);
 
-    vec2 uv = coverBackgroundPosition(uvp, u_a_color_texture, u_resolution);
-    vec2 uv_next = coverBackgroundPosition(v_uv, u_b_color_texture, u_resolution);
+        // Center image
+        uv.x += remaining_uv * .5;
 
-    float depth = texture(u_a_depth_texture, uv).g;
-    float next_depth = texture(u_b_depth_texture, uv_next).g;
+        // Pull image up, and pan across when scrolling
+        float full_scroll_range = min(remaining_uv_y, MAX_SCROLL_AMOUNT);
+        uv.y += full_scroll_range * .5;
+        uv.y -= (u_scroll_percent * full_scroll_range);
+    }
 
-    vec2 center_vector = mix(
-            signedRange(u_mouse) * 0.2,
-            signedRange(u_mouse),
-            u_mouse_turbo
-        ) + vec2(0.0, u_loading_time);
+    // Take depth sample fixed in place
+    float depth = texture(u_depth_texture, uv).g;
 
-    float x_wiggle = sin(u_time * 0.5 * .5 * PI * 2.) * .15 * cos(u_time * .6) * 0.05;
-    float y_wiggle = cos(u_time * 0.5 * .8 * PI * 2.) * .025 * sin(u_time) * 0.1;
+    vec2 colour_distort = vec2(0.0);
 
-    vec2 sample_position = mix(
-            vec2(
-                uv.x + (depth * (center_vector.x + x_wiggle)),
-                uv.y + (depth * (center_vector.y + y_wiggle - u_scroll_percent * 0.1))
-            ),
-            vec2(
-                uv_next.x + (next_depth * (center_vector.x + x_wiggle)),
-                uv_next.y + (next_depth * (center_vector.y + y_wiggle))
-            ),
-            u_animation_progress
-        );
+    // Scroll distort
+    colour_distort.y += u_scroll_percent * SCROLL_DISTORT;
+    
+    // Wiggle wilglgel  wllgigleeellele 
+    colour_distort.x += sin(u_time * 0.5 * .5 * PI * 2.) * .15 * cos(u_time * .6) * 0.05;
+    colour_distort.y += cos(u_time * 0.5 * .8 * PI * 2.) * .025 * sin(u_time) * 0.1;
 
-    vec4 color = texture(
-            u_a_color_texture,
-            vec2(sample_position.x, sample_position.y)
-        );
+    // Mouse movement
+    colour_distort += mix(
+        signedRange(u_mouse) * 0.2,
+        signedRange(u_mouse),
+        u_mouse_turbo
+    );
 
-    vec4 color_next = texture(
-            u_b_color_texture,
-            vec2(sample_position.x, sample_position.y)
-        );
+    // Sample colour with displacement
+    vec4 colour = texture(u_color_texture, uv + colour_distort * depth);
 
-    vec4 resulting_colour = mix(color, color_next, clamp(u_animation_progress + (depth * u_animation_progress), 0.0, 1.0));
-    vec3 final = mix(
-            color.rgb,
-            dither_4x4_colour(
-                v_uv,
-                u_resolution,
-                resulting_colour.rgb,
-                4.0
-            ),
-            1.0
-        );
-
+    // Sickums
     fragColor = vec4(
-            final.rgb * 0.9,
-            1.0
-        );
+        dither4x4Colour(
+            v_uv,
+            u_resolution,
+            colour.rgb,
+            4.0
+        ).rgb,
+        1.0
+    );
 }

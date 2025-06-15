@@ -8,7 +8,6 @@ import {
 } from "ogl";
 import vertex_shader from "./shaders/vertex.glsl?raw";
 import fragment_shader from "./shaders/displace.glsl?raw";
-import ScreenTransitionManager from "./ScreenTransitionManager";
 import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
 import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
 import { MousePositionTracker } from "@fishley/wwwgraphics/interaction";
@@ -41,8 +40,6 @@ class BackgroundRenderer {
 
   public scrollPercentage: AutonomousSmoothValue;
 
-  private screenTransitionManager: ScreenTransitionManager;
-
   constructor() {
     const renderer = new Renderer({
       antialias: false,
@@ -55,8 +52,6 @@ class BackgroundRenderer {
     this.canvas = renderer.gl.canvas;
     this.subscribers = new Set();
     this.scrollPercentage = new AutonomousSmoothValue(0, 0.1);
-
-    this.screenTransitionManager = new ScreenTransitionManager(this.gl);
 
     this.currentMousePosition = {
       x: new AutonomousSmoothValue(this.mousePositionTracker.x, 0.2),
@@ -77,20 +72,12 @@ class BackgroundRenderer {
         u_time: { value: 0 },
         u_scroll_percent: { value: 0 },
         u_resolution: { value: [this.renderer.width, this.renderer.height] },
-        u_a_depth_texture: {
-          value: this.screenTransitionManager.getStartTexture().depth,
+        u_depth_texture: {
+          value: new Texture(this.gl),
         },
-        u_a_color_texture: {
-          value: this.screenTransitionManager.getStartTexture().color,
+        u_color_texture: {
+          value: new Texture(this.gl),
         },
-        u_b_depth_texture: {
-          value: this.screenTransitionManager.getEndTexture().depth,
-        },
-        u_b_color_texture: {
-          value: this.screenTransitionManager.getEndTexture().color,
-        },
-        u_animation_progress: { value: 0 },
-        u_loading_time: { value: 0 },
       },
       transparent: false,
       cullFace: false,
@@ -116,97 +103,41 @@ class BackgroundRenderer {
     return () => this.subscribers.delete(cb);
   };
 
-  public setCurrentBackground = async ({ color, depth }: BackgroundPair) => {
-    const newcolorTexture = new Texture(this.gl, { generateMipmaps: false });
+  public setTextures = async ({ color, depth }: BackgroundPair) => {
+    const newColorTexture = new Texture(this.gl, { generateMipmaps: false });
     const newDepthTexture = new Texture(this.gl, { generateMipmaps: false });
 
-    newcolorTexture.image = color;
+    newColorTexture.image = color;
     newDepthTexture.image = depth;
 
-    await this.screenTransitionManager.setScreen({
-      color: newcolorTexture,
-      depth: newDepthTexture,
-    });
+    await newColorTexture.loaded;
+    await newDepthTexture.loaded;
+
+    this.program.uniforms.u_color_texture.value = newColorTexture;
+    this.program.uniforms.u_depth_texture.value = newDepthTexture;
+
+    this.gl.texParameteri(
+      newColorTexture.target,
+      this.gl.TEXTURE_MIN_FILTER,
+      this.gl.NEAREST
+    );
+    this.gl.texParameteri(
+      newDepthTexture.target,
+      this.gl.TEXTURE_MAG_FILTER,
+      this.gl.NEAREST
+    );
   };
-
-  public setNextBackground = async ({ color, depth }: BackgroundPair) => {
-    const newcolorTexture = new Texture(this.gl, { generateMipmaps: false });
-    const newDepthTexture = new Texture(this.gl, { generateMipmaps: false });
-
-    newcolorTexture.image = color;
-    newDepthTexture.image = depth;
-
-    this.screenTransitionManager.addNextScreen({
-      color: newcolorTexture,
-      depth: newDepthTexture,
-    });
-
-    await this.screenTransitionManager.nextScreenLoaded();
-  };
-
-  public shouldSetInitialBackground() {
-    return !this.screenTransitionManager.hasInitialCurrentScreen();
-  }
 
   private render = ({ elapsed, dt }: RenderLoopTimeData) => {
-    /**
-     * Background textures and transition
-     */
-    this.screenTransitionManager.tick(dt);
-
-    const currentScreen = this.screenTransitionManager.getStartTexture();
-    const nextScreen = this.screenTransitionManager.getEndTexture();
-
-    if (currentScreen.color.image) {
-      this.gl.texParameteri(
-        currentScreen.color.target,
-        this.gl.TEXTURE_MIN_FILTER,
-        this.gl.NEAREST,
-      );
-      this.gl.texParameteri(
-        currentScreen.color.target,
-        this.gl.TEXTURE_MAG_FILTER,
-        this.gl.NEAREST,
-      );
-    }
-
-    if (nextScreen.color.image) {
-      this.gl.texParameteri(
-        nextScreen.color.target,
-        this.gl.TEXTURE_MIN_FILTER,
-        this.gl.NEAREST,
-      );
-      this.gl.texParameteri(
-        nextScreen.color.target,
-        this.gl.TEXTURE_MAG_FILTER,
-        this.gl.NEAREST,
-      );
-    }
-
     this.scrollPercentage.tick(dt);
-    this.program.uniforms.u_scroll_percent.value = this.scrollPercentage.value;
-
-    this.program.uniforms.u_time.value = elapsed;
-    this.program.uniforms.u_loading_time.value = 0;
-    this.program.uniforms.u_mouse_turbo.value = this.turbo.value;
-    this.program.uniforms.u_animation_progress.value =
-      this.screenTransitionManager.getProgress();
-
-    this.program.uniforms.u_a_color_texture.value = currentScreen.color;
-    this.program.uniforms.u_a_depth_texture.value = currentScreen.depth;
-
-    this.program.uniforms.u_b_color_texture.value = nextScreen.color;
-    this.program.uniforms.u_b_depth_texture.value = nextScreen.depth;
-
     this.turbo.tick(dt);
-
-    /**
-     * Mouse position updates
-     * TODO: Move these to AutonomousSmoothedValue
-     */
     this.currentMousePosition.x.tick(dt);
     this.currentMousePosition.y.tick(dt);
 
+    this.program.uniforms.u_scroll_percent.value = this.scrollPercentage.value;
+    this.program.uniforms.u_time.value = elapsed;
+
+    this.program.uniforms.u_mouse_turbo.value = this.turbo.value;
     this.currentMousePosition.x.target = this.mousePositionTracker.x;
     this.currentMousePosition.y.target = this.mousePositionTracker.y;
 
