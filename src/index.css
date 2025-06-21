@@ -9,27 +9,26 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  overflow-x: hidden;
+  z-index: 1;
+  min-height: 200vh;
+  height: 1600px;
+  position: relative;
 }
 
 #root {
-  z-index: 1;
+  height: 100%;
   width: 100%;
+  overflow: hidden;
+}
+
+main {
+  height: 100%;
 }
 
 canvas {
   image-rendering: pixelated;
-  min-height: 100vh;
-}
-
-main {
-  min-height: 200vh;
-  height: 1600px;
-  width: 100%;
-  position: relative;
-  pointer-events: none;
+  height: 100vh;
+  width: 100vw;
 }
 
 .for-sale-tag {
@@ -43,6 +42,7 @@ main {
   text-align: center;
   border: none;
 }
+
 .for-sale-tag--button {
   font-family: pixel, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 14px;

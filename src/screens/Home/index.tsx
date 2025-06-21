@@ -1,4 +1,4 @@
-import { Match, onCleanup, onMount, Switch } from "solid-js";
+import { createSignal, Match, onCleanup, onMount, Switch } from "solid-js";
 import BackgroundRenderer from "../../background/BackgroundRenderer";
 import Icon from "./components/Icon";
 import Screen from "../Screen";
@@ -29,6 +29,20 @@ function HomeScreen(props: ScreenProps) {
     onCleanup(unsubscribe);
   });
 
+  const [width, setWidth] = createSignal(window.innerWidth);
+
+  const handler = () => {
+    setWidth(window.innerWidth);
+  };
+
+  onMount(() => {
+    window.addEventListener("resize", handler);
+  });
+
+  onCleanup(() => {
+    window.removeEventListener("resize", handler);
+  });
+
   return (
     <Screen
       assetLoader={homeScreenAssets}
@@ -36,16 +50,23 @@ function HomeScreen(props: ScreenProps) {
       onBackgroundReady={props.onBackgroundReady}
     >
       <main ref={containerRef}>
-        {artwork.map((artwork, i) => (
-          <Icon
-            ref={(el) => (linkRefs[i] = el)}
-            title={artwork.title}
-            thumbnail={artwork.thumbnail}
-            id={artwork.id}
-            position={artwork.position}
-            available={!!artwork.prints && artwork.prints.available}
-          />
-        ))}
+        {artwork.map((artwork, i) => {
+          const key = Object.keys(artwork.position)
+            .map(Number)
+            .sort()
+            .filter((s) => s <= width())[0];
+
+          return (
+            <Icon
+              ref={(el) => (linkRefs[i] = el)}
+              title={artwork.title}
+              thumbnail={artwork.thumbnail}
+              id={artwork.id}
+              position={artwork.position[key]}
+              available={!!artwork.prints && artwork.prints.available}
+            />
+          );
+        })}
       </main>
 
       {/** not the way this should be done but oh well */}

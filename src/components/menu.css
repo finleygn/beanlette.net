@@ -1,11 +1,11 @@
 #title {
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
   text-shadow: 0px 0px 20px rgb(255, 255, 255);
   text-align: center;
   padding-bottom: 30px;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
 }
 
 header h1 {
