@@ -12,6 +12,7 @@ import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
 import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
 import { MousePositionTracker } from "@fishley/wwwgraphics/interaction";
 import { clamp } from "@fishley/wwwgraphics/math";
+import { isMobile } from "../utility/isMobile";
 
 const TURBO_CLICK_DELAY_MS = 150;
 
@@ -21,14 +22,62 @@ interface BackgroundPair {
 }
 
 
+class Positioner {
+  private useGyro: boolean = false;
+  private mousePositionTracker: MousePositionTracker =
+    new MousePositionTracker();
+
+  private gyroCoords = {
+    x: 0,
+    y: 0
+  }
+
+  constructor() {
+    window.addEventListener('deviceorientation', this.handleDeviceOrientation)
+  }
+
+  private handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+    if(event.gamma === null || event.beta === null) {
+      return;
+    }
+    this.useGyro = true;
+    this.gyroCoords.x =  (clamp(event.gamma, -45, 45) + 45) / 90;
+    this.gyroCoords.y = (clamp(event.beta, -45, 45) + 45) / 90;
+  }
+
+  get x() {
+    if(this.useGyro) {
+      return this.gyroCoords.x;
+    }
+
+    if(isMobile()) {
+      return 0.5;
+    }
+
+    return this.mousePositionTracker.x;
+  }
+
+  get y() {
+    if(this.useGyro) {
+      return this.gyroCoords.y;
+    }
+
+    if(isMobile()) {
+      return 0.5;
+    }
+
+    return this.mousePositionTracker.y;
+  }
+}
+
 
 class BackgroundRenderer {
   private renderer: Renderer;
   private gl: OGLRenderingContext;
   private canvas: HTMLCanvasElement;
 
-  private mousePositionTracker: MousePositionTracker =
-    new MousePositionTracker();
+  private positioner: Positioner =
+    new Positioner();
 
   private subscribers: Set<() => void>;
   private geometry: Geometry;
@@ -58,8 +107,8 @@ class BackgroundRenderer {
     this.scrollPercentage = new AutonomousSmoothValue(0, 0.1);
 
     this.currentMousePosition = {
-      x: new AutonomousSmoothValue(this.mousePositionTracker.x, 0.2),
-      y: new AutonomousSmoothValue(this.mousePositionTracker.y, 0.2),
+      x: new AutonomousSmoothValue(0.5, 0.2),
+      y: new AutonomousSmoothValue(0.5, 0.2),
     };
 
 
@@ -98,20 +147,6 @@ class BackgroundRenderer {
     this.turbo = new AutonomousSmoothValue(0, 0.1);
 
     this.initializeTurboMouseListener();
-
-    const handleOrientation = (event: DeviceOrientationEvent) => {
-      const alpha = event.alpha || 0
-      const beta = event.beta;
-      const gamma = event.gamma || 0;
-      this.program.uniforms.u_mouse.value[0] =  (clamp(gamma, -45, 45) + 45) / 90;
-      // this.program.uniforms.u_mouse.value[1] = (gamma||0.5)*100;
-      console.log(alpha, beta, gamma)
-      // Do stuff...
-    }
-
-
-    window.addEventListener('deviceorientation', handleOrientation);
-
 
 
     this.initializeResizeWatch();
@@ -158,17 +193,13 @@ class BackgroundRenderer {
     this.program.uniforms.u_time.value = elapsed;
 
     this.program.uniforms.u_mouse_turbo.value = this.turbo.value;
-    this.currentMousePosition.x.target = this.mousePositionTracker.x;
-    this.currentMousePosition.y.target = this.mousePositionTracker.y;
+    this.currentMousePosition.x.target = this.positioner.x;
+    this.currentMousePosition.y.target = this.positioner.y;
 
-    // if (window.innerWidth < 600) {
-    //   this.program.uniforms.u_mouse.value[0] = 0.5;
-    //   this.program.uniforms.u_mouse.value[1] = 0.5;
-    // } else {
-    //   this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
-    //   this.program.uniforms.u_mouse.value[1] =
-    //     1 - this.currentMousePosition.y.value;
-    // }
+
+    this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
+    this.program.uniforms.u_mouse.value[1] =
+      1 - this.currentMousePosition.y.value;
 
 
     /**
