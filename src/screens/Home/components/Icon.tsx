@@ -16,6 +16,7 @@ function Icon({ title, thumbnail, id, position, available, ref }: IconProps) {
     <A
       noScroll
       class="artwork-icon"
+      draggable={false}
       href={`/${id}`}
       ref={ref}
       style={{ top: `${position.y}%`, left: `${position.x}%` }}
