@@ -12,10 +12,17 @@
   max-width: 8vmax;
 }
 
-.artwork-icon img {
-  width: 4.5vmax;
+.artwork-icon__thumbnail {
+  width: 90px;
+   max-height: 90px;
   user-select: none;
   transition: transform 0.1s;
+  box-shadow: 0px 0px 30px white;
+}
+
+.artwork-icon__badge {
+  width: 90px;
+  user-select: none;
 }
 
 .artwork-icon .artwork-icon__text {
@@ -31,7 +38,7 @@
   color: white;
 }
 
-.artwork-icon:hover img:first-child {
+.artwork-icon:hover .artwork-icon__thumbnail {
   transform: scale(1.1);
 }
 
@@ -48,9 +55,11 @@
 }
 
 @media screen and (max-width: 600px) {
-  .artwork-icon img {
-    width: 4vmax;
+  .artwork-icon__thumbnail {
+    width: 50px;
+    max-height: 50px;
   }
+
   .artwork-icon .artwork-icon__text {
     font-size: 10px;
     min-width: 80px;
