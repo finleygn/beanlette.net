@@ -11,6 +11,7 @@ import fragment_shader from "./shaders/displace.glsl?raw";
 import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
 import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
 import { MousePositionTracker } from "@fishley/wwwgraphics/interaction";
+import { clamp } from "@fishley/wwwgraphics/math";
 
 const TURBO_CLICK_DELAY_MS = 150;
 
@@ -18,6 +19,8 @@ interface BackgroundPair {
   color: HTMLImageElement;
   depth: HTMLImageElement;
 }
+
+
 
 class BackgroundRenderer {
   private renderer: Renderer;
@@ -59,6 +62,8 @@ class BackgroundRenderer {
       y: new AutonomousSmoothValue(this.mousePositionTracker.y, 0.2),
     };
 
+
+
     this.geometry = new Geometry(renderer.gl, {
       position: { size: 2, data: new Float32Array([-1, -1, 3, -1, -1, 3]) },
       uv: { size: 2, data: new Float32Array([0, 0, 2, 0, 0, 2]) },
@@ -93,6 +98,21 @@ class BackgroundRenderer {
     this.turbo = new AutonomousSmoothValue(0, 0.1);
 
     this.initializeTurboMouseListener();
+
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      const alpha = event.alpha || 0
+      const beta = event.beta;
+      const gamma = event.gamma || 0;
+      this.program.uniforms.u_mouse.value[0] =  (clamp(gamma, -45, 45) + 45) / 90;
+      // this.program.uniforms.u_mouse.value[1] = (gamma||0.5)*100;
+      console.log(alpha, beta, gamma)
+      // Do stuff...
+    }
+
+
+    window.addEventListener('deviceorientation', handleOrientation);
+
+
 
     this.initializeResizeWatch();
     renderLoop(this.render, { longestFrame: 60 });
@@ -141,14 +161,14 @@ class BackgroundRenderer {
     this.currentMousePosition.x.target = this.mousePositionTracker.x;
     this.currentMousePosition.y.target = this.mousePositionTracker.y;
 
-    if (window.innerWidth < 600) {
-      this.program.uniforms.u_mouse.value[0] = 0.5;
-      this.program.uniforms.u_mouse.value[1] = 0.5;
-    } else {
-      this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
-      this.program.uniforms.u_mouse.value[1] =
-        1 - this.currentMousePosition.y.value;
-    }
+    // if (window.innerWidth < 600) {
+    //   this.program.uniforms.u_mouse.value[0] = 0.5;
+    //   this.program.uniforms.u_mouse.value[1] = 0.5;
+    // } else {
+    //   this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
+    //   this.program.uniforms.u_mouse.value[1] =
+    //     1 - this.currentMousePosition.y.value;
+    // }
 
 
     /**
