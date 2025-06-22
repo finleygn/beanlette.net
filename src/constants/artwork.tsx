@@ -39,7 +39,7 @@ export const artwork: Artwork[] = [
     thumbnail: "/artwork/water_cycle_13_2/thumb.gif",
     id: "water_cycle_13_2",
     position: {
-      [0]: { y: 74, x: 47 },
+      [0]: { y: 78, x: 80 },
       [BREAK_DESKTOP]: { y: 74, x: 47 },
     },
     images: [
@@ -86,7 +86,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/detachable1/full_4.png" },
     ],
     position: {
-      [0]: { y: 60, x: 60 },
+      [0]: { y: 56, x: 60 },
       [BREAK_DESKTOP]: { y: 10, x: 60 },
     },
   },
@@ -98,7 +98,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/hanbee_nya/full_1.jpg", name: "=) ⁿʸᵃ (with hanbee)" },
     ],
     position: {
-      [0]: { y: 60, x: 80 },
+      [0]: { y: 75, x: 30 },
       [BREAK_DESKTOP]: { y: 7, x: 80 },
     },
   },
@@ -141,7 +141,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/plast_emotion_2/full_2.jpg" },
     ],
     position: {
-      [0]: { y: 90, x: 74 },
+      [0]: { y: 92, x: 74 },
       [BREAK_DESKTOP]: { y: 90, x: 74 },
     },
   },
@@ -165,7 +165,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 60, x: 40 },
+      [0]: { y: 64, x: 40 },
       [BREAK_DESKTOP]: { y: 16, x: 40 },
     },
   },
@@ -248,7 +248,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/rei_displace_4/full_2.png" },
     ],
     position: {
-      [0]: { y: 36, x:20 },
+      [0]: { y: 30, x:20 },
       [BREAK_DESKTOP]: { y: 32, x: 13 },
     },
   },
@@ -263,7 +263,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 30, x: 25 },
+      [0]: { y: 24, x: 35 },
       [BREAK_DESKTOP]: { y: 30, x: 37 },
     },
   },
@@ -278,7 +278,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 42, x: 25 },
+      [0]: { y: 36, x: 25 },
       [BREAK_DESKTOP]: { y: 42, x: 25 },
     },
   },
@@ -357,7 +357,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 52, x: 90 },
+      [0]: { y: 52, x: 85 },
       [BREAK_DESKTOP]: { y: 52, x: 90 },
     },
   },
@@ -372,7 +372,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 45, x: 7 },
+      [0]: { y: 45, x: 12 },
       [BREAK_DESKTOP]: { y: 45, x: 7 },
     },
   },
@@ -387,7 +387,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 48, x: 56 },
+      [0]: { y: 48, x: 40 },
       [BREAK_DESKTOP]: { y: 48, x: 56 },
     },
   },
@@ -397,7 +397,7 @@ export const artwork: Artwork[] = [
     id: "img_4791_3",
     images: [{ image: "/artwork/img_4791_3/full_1.gif", name: "img_4791_3" }],
     position: {
-      [0]: { y: 53, x: 40 },
+      [0]: { y: 53, x: 42 },
       [BREAK_DESKTOP]: { y: 53, x: 40 },
     },
   },
@@ -416,7 +416,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 60, x: 60 },
+      [0]: { y: 60, x: 65 },
       [BREAK_DESKTOP]: { y: 60, x: 60 },
     },
   },
@@ -434,7 +434,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/welcome_home_beanlet_final_white/full_4.jpg" },
     ],
     position: {
-      [0]: { y: 65, x: 85 },
+      [0]: { y: 65, x: 80 },
       [BREAK_DESKTOP]: { y: 65, x: 85 },
     },
   },
@@ -449,7 +449,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/flitter1/full_4.jpg", name: "flitter4" },
     ],
     position: {
-      [0]: { y: 57, x: 22 },
+      [0]: { y: 57, x: 18 },
       [BREAK_DESKTOP]: { y: 57, x: 22 },
     },
     prints: {
@@ -487,7 +487,7 @@ export const artwork: Artwork[] = [
     id: "who_knows_3",
     images: [{ image: "/artwork/who_knows_3/full_1.png", name: "who knows" }],
     position: {
-      [0]: { y: 68, x: 34 },
+      [0]: { y: 69, x: 34 },
       [BREAK_DESKTOP]: { y: 68, x: 34 },
     },
   },
@@ -503,7 +503,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/bluebell_process_4/full_2.jpg" },
     ],
     position: {
-      [0]: { y: 77, x: 22 },
+      [0]: { y: 80, x: 22 },
       [BREAK_DESKTOP]: { y: 77, x: 22 },
     },
   },
@@ -558,7 +558,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 83, x: 10 },
+      [0]: { y: 85, x: 16 },
       [BREAK_DESKTOP]: { y: 83, x: 10 },
     },
   },

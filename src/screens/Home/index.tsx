@@ -54,7 +54,7 @@ function HomeScreen(props: ScreenProps) {
       onBackgroundReady={props.onBackgroundReady}
     >
       <div id="built-by">
-        [built by <a href="https://finley.fish" target="_blank">finley garton</a>]
+        [built by <a href="https://finley.fish" target="_blank">finley.fish</a>]
       </div>
       
       <main ref={containerRef}>
