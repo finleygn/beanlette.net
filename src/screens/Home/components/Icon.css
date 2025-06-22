@@ -13,8 +13,8 @@
 }
 
 .artwork-icon__thumbnail {
-  width: 90px;
-   max-height: 90px;
+  max-width: 90px;
+  max-height: 90px;
   user-select: none;
   transition: transform 0.1s;
   box-shadow: 0px 0px 30px white;
@@ -57,7 +57,7 @@
 
 @media screen and (max-width: 1300px) {
   .artwork-icon__thumbnail {
-    width: 70px;
+    max-width: 70px;
     max-height: 70px;
   }
 }
@@ -65,7 +65,7 @@
 
 @media screen and (max-width: 600px) {
   .artwork-icon__thumbnail {
-    width: 50px;
+    max-width: 50px;
     max-height: 50px;
   }
 
