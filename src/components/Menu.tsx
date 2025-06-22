@@ -1,6 +1,7 @@
 import { onCleanup, onMount } from "solid-js";
 import "./Menu.css";
 import BackgroundRenderer from "../background/BackgroundRenderer";
+import { isMobile } from "../utility/isMobile";
 
 interface MenuProps {
   backgroundRenderer: BackgroundRenderer;
@@ -12,7 +13,7 @@ function Menu({ backgroundRenderer }: MenuProps) {
   onMount(() => {
     const unsubscribe = backgroundRenderer.onUpdate(() => {
       if (!containerRef) return;
-      if (window.innerWidth < 600) {
+      if (isMobile()) {
         containerRef.style.transform = `translate(-50%, -50%)`;
       } else {
         const { x, y } = backgroundRenderer.currentMousePosition;

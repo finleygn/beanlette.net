@@ -6,6 +6,7 @@ import homeScreenAssets from "./assets";
 import { useLocation } from "@solidjs/router";
 import Modal from "./components/Modal";
 import { artwork } from "../../constants/artwork";
+import { isMobile } from "../../utility/isMobile";
 
 interface ScreenProps {
   backgroundRender: BackgroundRenderer;
@@ -20,7 +21,7 @@ function HomeScreen(props: ScreenProps) {
   onMount(() => {
     const unsubscribe = props.backgroundRender.onUpdate(() => {
       if (!containerRef) return;
-      if(window.innerWidth < 600) {
+      if(isMobile()) {
         containerRef.style.transform = `translate(0px, 0px)`;
       } else {
         const { x, y } = props.backgroundRender.currentMousePosition;
@@ -60,7 +61,7 @@ function HomeScreen(props: ScreenProps) {
         {artwork.map((artwork, i) => {
           const key = Object.keys(artwork.position)
             .map(Number)
-            .sort()
+            .sort((a, b) => b - a)
             .filter((s) => s <= width())[0];
 
           return (

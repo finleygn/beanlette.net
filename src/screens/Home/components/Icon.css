@@ -72,6 +72,8 @@
   .artwork-icon .artwork-icon__text {
     font-size: 10px;
     min-width: 80px;
-    text-align: center;
+  }
+  .artwork-icon__badge {
+    width: 70px;
   }
 }
