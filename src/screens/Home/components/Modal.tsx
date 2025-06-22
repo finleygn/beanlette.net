@@ -52,7 +52,7 @@ function Modal(props: ModalProps) {
         (image) =>
           new Promise<JsImage>((res) => {
             AssetLoaders.image(image.image)().then((img) =>
-              res({ name: image.name, image: img, aspect: img.width/img.height })
+              res({ name: image.name, image: img, aspect: img.width / img.height })
             );
           })
       )
@@ -68,7 +68,7 @@ function Modal(props: ModalProps) {
         (image) =>
           new Promise<JsImage>((res) => {
             AssetLoaders.image(image.image)().then((img) =>
-              res({ name: image.name, image: img, aspect: img.width/img.height  })
+              res({ name: image.name, image: img, aspect: img.width / img.height })
             );
           })
       )
@@ -116,99 +116,96 @@ function Modal(props: ModalProps) {
   });
 
   return (
-    <div class="sub-screen" onClick={() => nav("/", { scroll: false })}>
+    <div class="modal" onClick={() => nav("/", { scroll: false })}>
       <img ref={loaderRef} class="modal-loader-image" src="/loader.gif" />
 
-      <div class="sub-screen-scroller">
-      <Switch>
-        <Match when={showPrints() === false}>
-          <div
-            role="dialog"
-            ref={imageContainerRef}
-            classList={{ ["fade-in"]: !loading(), "sub-screen-dialog": true }}
-          >
+      <div class="modal-scroller">
+        <Switch>
+          <Match when={showPrints() === false}>
             <div
-              onClick={(e) => e.stopPropagation()}
-              classList={{
-                "sub-screen__content": true,
-                [`sub-screen__content--${images()?.length}`]: true,
-              }}
+              role="dialog"
+              ref={imageContainerRef}
+              classList={{ ["fade-in"]: !loading(), "modal-content": true }}
             >
-              <For each={images()}>
-                {(item) => (
-                  <div class="sub-screen__content-cell">
-                    <img src={item.image.src} draggable={false} style={{ "aspect-ratio": item.aspect }} />
-                    <Show when={item.name}>
-                      <p>{item.name}</p>
-                    </Show>
-                  </div>
-                )}
-              </For>
-
-             
-            </div>
-             {props.print && (
+              <div
+                onClick={(e) => e.stopPropagation()}
+                classList={{
+                  "modal__img-grid": true,
+                  [`modal__img-grid--${images()?.length}`]: true,
+                }}
+              >
+                <For each={images()}>
+                  {(item) => (
+                    <div class="modal__img-grid-cell">
+                      <img src={item.image.src} draggable={false} style={{ "aspect-ratio": item.aspect }} />
+                      <Show when={item.name}>
+                        <p>{item.name}</p>
+                      </Show>
+                    </div>
+                  )}
+                </For>
+              </div>
+              {props.print && (
                 <div
                   style={{
                     display: "flex",
                     "justify-content": "center",
-                    "flex-shrink": 0
+                    "flex-shrink": 0,
+                    "margin-top": '12px'
                   }}
                 >
-
                   <img
-                    class="for-sale-tag for-sale-tag--button"
+                    class="for-sale-tag"
                     onClick={(e) => e.stopPropagation()}
                     on:click={seePrints}
-                    src="/meow/prints.svg" />
+                    src="/meow/prints.svg"
+                  />
                 </div>
               )}
-          </div>
-        </Match>
-
-        {props.print && (
-          <Match when={showPrints() === true}>
-            <div
-              role="dialog"
-              classList={{ ["fade-in"]: !loading(), "sub-screen-dialog": true }}
-            >
-              <div style={{ display: "flex", gap: "40px" }}>
-                <div
-                  classList={{
-                    "sub-screen__content": true,
-                    [`sub-screen__content--${printImages()?.length}`]: true,
-                  }}
-                >
-                  <For each={printImages()}>
-                    {(item) => (
-                      <div onClick={(e) => e.stopPropagation()}>
-                        <img src={item.image.src} draggable={false} />
-                        <Show when={item.name}>
-                          <p>{item.name}</p>
-                        </Show>
-                      </div>
-                    )}
-                  </For>
-                </div>
-                <div
-                  class="prints-sidebar"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {props.print.description}
-                  <p>worldwide shipping available~</p>
-                  <div style={{ "margin-top": "48px" }} />
-                  <a
-                    href="mailto:"
-                    style={{ "text-decoration": "none", color: "white" }}
-                  >
-                    ✉ : noah@beanlette.net
-                  </a>
-                </div>
-              </div>
             </div>
           </Match>
-        )}
-      </Switch>
+
+          {props.print && (
+            <Match when={showPrints() === true}>
+              <div
+                role="dialog"
+                classList={{ ["fade-in"]: !loading(), "modal-content": true }}
+              >
+                <div class='modal-content-flex'>
+                  <div
+                    classList={{
+                      "modal__prints-img-grid": true,
+                      [`modal__prints-img-grid--${printImages()?.length}`]: true,
+                    }}
+                  >
+                    <For each={printImages()}>
+                      {(item) => (
+
+                        <img src={item.image.src} draggable={false} style={{ "aspect-ratio": item.aspect }} />
+       
+      
+                      )}
+                    </For>
+                  </div>
+                  <div
+                    class="prints-sidebar"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {props.print.description}
+                    <p>worldwide shipping available~</p>
+                    <div style={{ "margin-top": "48px" }} />
+                    <a
+                      href="mailto:"
+                      style={{ "text-decoration": "none", color: "white" }}
+                    >
+                      ✉ : noah@beanlette.net
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Match>
+          )}
+        </Switch>
       </div>
     </div>
   );
