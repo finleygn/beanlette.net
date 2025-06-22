@@ -201,9 +201,15 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Oh? £250 300x300mm</p>
+          <p>Daisy — £250</p>
           <p>Feels like discovery.</p>
+          <p>300x300mm</p>
           <p>Limited run of 10 signed pieces.</p>
+          <p>worldwide shipping available~</p>
+
+          <br />
+
+          {email}
         </>
       ),
     },
@@ -222,18 +228,19 @@ export const artwork: Artwork[] = [
     prints: {
       available: true,
       images: [
-        { image: "/artwork/oaksplitt/prints/oaksplit real 1.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 2.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 3.jpg" },
+        { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/prints/ascii girl real 1.jpg" },
+        { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/prints/ascii girl real 2.jpg" },
       ],
       description: (
         <>
-          <p>ascii girl: £900 400x506mm</p>
-          <p>
-            From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and
-            beanlette.
-          </p>
+          <p>ascii girl — £900 / ¥180,000</p>
+          <p>From 'Skybox' exhibition in Tokyo. </p>
+          <p>Collaboration between jyoucyo and beanlette.</p>
+          <p>400x506mm</p>
           <p>Signed 1 of 1.</p>
+          <br />
+          <a href="https://suchas.square.site/product/ascii-girl-jyoucyo-beanlette/2006" class="nice-link">available at Such As, Gallery</a>
+          {email}
         </>
       ),
     },
@@ -343,9 +350,15 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Mossy sit: £300 300x400mm</p>
+          <p>Mossy sit — £300</p>
           <p>Girl sitting in a strange green world.</p>
+          <p>300x400mm</p>
           <p>Limited run of 10 signed pieces.</p>
+          <p>worldwide shipping available~</p>
+
+          <br />
+
+          {email}
         </>
       ),
     },

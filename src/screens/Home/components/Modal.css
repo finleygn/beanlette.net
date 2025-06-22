@@ -24,7 +24,7 @@
 
 .modal-content {
   opacity: 0;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 48px;
   gap: 12px;
 }
@@ -122,6 +122,11 @@
 .modal__prints-img-grid--3 {
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
+}
+
+.modal__prints-img-grid--2 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
 }
 
 .modal__prints-img-grid--3 img:first-child {

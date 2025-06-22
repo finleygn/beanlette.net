@@ -53,10 +53,6 @@ function HomeScreen(props: ScreenProps) {
       backgroundRender={props.backgroundRender}
       onBackgroundReady={props.onBackgroundReady}
     >
-      <div id="built-by">
-        [built by <a href="https://finley.fish" target="_blank">finley.fish</a>]
-      </div>
-      
       <main ref={containerRef}>
         {artwork.map((artwork, i) => {
           const key = Object.keys(artwork.position)
