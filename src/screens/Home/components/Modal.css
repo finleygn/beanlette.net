@@ -12,6 +12,7 @@
   bottom: 0;
   animation: fadeIn 0.5s;
   display: flex;
+  z-index: 2;
 }
 
 .modal-scroller {
@@ -132,8 +133,9 @@
   padding: 24px 8px;
 }
 
-.prints-sidebar p {
+.prints-sidebar > p, .prints-sidebar > a {
   margin-bottom: 17px;
+  display: block;
 }
 
 @media screen and (max-width: 1000px) {

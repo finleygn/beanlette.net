@@ -18,6 +18,15 @@ export interface Artwork {
 
 const BREAK_DESKTOP = 600;
 
+const email = (
+  <a
+    href="mailto:noah@beanlette.net"
+    style={{ "text-decoration": "none", color: "white" }}
+  >
+    ✉ : noah@beanlette.net
+  </a>
+)
+
 export const artwork: Artwork[] = [
   {
     title: "nagato_cherry_style",
@@ -67,10 +76,15 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Oaksplit — £300</p>
+          <p>Oaksplit — £300 / ¥55,000</p>
           <p>A tree in Suffolk.</p>
           <p>Limited run of 10 signed pieces.</p>
           <p>300x400mm</p>
+          <p>worldwide shipping available~</p>
+          <br />
+
+          {email}
+          <a href="https://suchas.square.site/product/oaksplit-beanlette/2008" class="nice-link">available at Such As, Gallery</a>
         </>
       ),
     },
@@ -421,7 +435,7 @@ export const artwork: Artwork[] = [
     },
   },
   {
-    title: "welcome_home_beanlet_final_white",
+    title: <>welcome_home_beanlet_<wbr/>final_white</>,
     thumbnail: "/artwork/welcome_home_beanlet_final_white/thumb.gif",
     id: "welcome_home_beanlet_final_white",
     images: [
@@ -534,15 +548,22 @@ export const artwork: Artwork[] = [
     prints: {
       available: true,
       images: [
-        { image: "/artwork/oaksplitt/prints/oaksplit real 1.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 2.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 3.jpg" },
+        { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 1.jpg" },
+        { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 2.jpg" },
+        { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 3.jpg" },
       ],
       description: (
         <>
-          <p>Doesn't have to mean much at all: £350 533x300mm</p>
+          <p>Doesn't have to mean much at all — £350 / ¥70,000</p>
           <p>Computer screenshot.</p>
+          <p>533x300mm</p>
           <p>Limited run of 10 signed pieces.</p>
+          <p>worldwide shipping available~</p>
+
+          <br />
+
+          {email}
+          <a href="https://suchas.square.site/product/doesn-t-have-to-beanlette/2007" class="nice-link">available at Such As, Gallery</a>
         </>
       ),
     },
@@ -657,9 +678,16 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Daisy: £350 533x300mm</p>
+          <p>Daisy — £350 / ¥70,000</p>
           <p>38.70560 N, 139.96610 E.</p>
+          <p>533x300mm</p>
           <p>Limited run of 10 signed pieces.</p>
+          <p>worldwide shipping available~</p>
+
+          <br />
+
+          {email}
+          <a href="https://suchas.square.site/product/daisy-beanlette/2011" class="nice-link">available at Such As, Gallery</a>
         </>
       ),
     },

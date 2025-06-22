@@ -57,6 +57,11 @@ canvas {
   text-shadow: 0px 0px 20px #ffffff8a;
 }
 
+.nice-link {
+  color: white;
+  text-underline-offset: 5px;
+}
+
 @media screen and (max-width: 600px) {
   body {
     margin: 0;

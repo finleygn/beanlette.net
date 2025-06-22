@@ -189,14 +189,6 @@ function Modal(props: ModalProps) {
                     onClick={(e) => e.stopPropagation()}
                   >
                     {props.print.description}
-                    <p>worldwide shipping available~</p>
-                    <div style={{ "margin-top": "48px" }} />
-                    <a
-                      href="mailto:"
-                      style={{ "text-decoration": "none", color: "white" }}
-                    >
-                      ✉ : noah@beanlette.net
-                    </a>
                   </div>
                 </div>
               </div>
