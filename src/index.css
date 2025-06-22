@@ -38,6 +38,7 @@ canvas {
 }
 
 #built-by {
+  font-size: 12px;
   position: absolute;
   bottom: 20px;
   width: 100%;
