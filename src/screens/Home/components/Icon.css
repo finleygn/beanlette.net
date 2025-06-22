@@ -54,6 +54,15 @@
   }
 }
 
+
+@media screen and (max-width: 1300px) {
+  .artwork-icon__thumbnail {
+    width: 70px;
+    max-height: 70px;
+  }
+}
+
+
 @media screen and (max-width: 600px) {
   .artwork-icon__thumbnail {
     width: 50px;

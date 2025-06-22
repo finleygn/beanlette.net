@@ -1,3 +1,7 @@
+/**
+ * The following is awful:
+ */
+
 type Remap<T> = {
   [K in keyof T]: T[K]
 }

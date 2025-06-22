@@ -24,6 +24,7 @@ export const artwork: Artwork[] = [
     thumbnail: "/artwork/nagato_cherry_style/thumb.gif",
     id: "nagato_cherry_style",
     position: {
+      [0]: { y: 3, x: 20 },
       [BREAK_DESKTOP]: { y: 3, x: 20 },
     },
     images: [
@@ -38,6 +39,7 @@ export const artwork: Artwork[] = [
     thumbnail: "/artwork/water_cycle_13_2/thumb.gif",
     id: "water_cycle_13_2",
     position: {
+      [0]: { y: 74, x: 47 },
       [BREAK_DESKTOP]: { y: 74, x: 47 },
     },
     images: [
@@ -49,6 +51,7 @@ export const artwork: Artwork[] = [
     thumbnail: "/artwork/oaksplitt/thumb.gif",
     id: "oaksplitt",
     position: {
+      [0]: { y: 16, x: 8 },
       [BREAK_DESKTOP]: { y: 16, x: 8 },
     },
     images: [
@@ -83,6 +86,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/detachable1/full_4.png" },
     ],
     position: {
+      [0]: { y: 10, x: 60 },
       [BREAK_DESKTOP]: { y: 10, x: 60 },
     },
   },
@@ -94,6 +98,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/hanbee_nya/full_1.jpg", name: "=) ⁿʸᵃ (with hanbee)" },
     ],
     position: {
+      [0]: { y: 7, x: 80 },
       [BREAK_DESKTOP]: { y: 7, x: 80 },
     },
   },
@@ -120,6 +125,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 15, x: 90 },
       [BREAK_DESKTOP]: { y: 15, x: 90 },
     },
   },
@@ -135,6 +141,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/plast_emotion_2/full_2.jpg" },
     ],
     position: {
+      [0]: { y: 90, x: 74 },
       [BREAK_DESKTOP]: { y: 90, x: 74 },
     },
   },
@@ -158,6 +165,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 16, x: 40 },
       [BREAK_DESKTOP]: { y: 16, x: 40 },
     },
   },
@@ -167,6 +175,7 @@ export const artwork: Artwork[] = [
     id: "oh_2",
     images: [{ image: "/artwork/oh_2/full_1.jpg", name: "Oh?" }],
     position: {
+      [0]: { y: 18, x: 70 },
       [BREAK_DESKTOP]: { y: 18, x: 70 },
     },
     prints: {
@@ -193,6 +202,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/full_1.jpg", name: "Oh?" },
     ],
     position: {
+      [0]: { y: 30, x: 80 },
       [BREAK_DESKTOP]: { y: 30, x: 80 },
     },
     prints: {
@@ -225,6 +235,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/fetterless/full_4.jpg", name: "fetterless 7" },
     ],
     position: {
+      [0]: { y: 24, x: 22 },
       [BREAK_DESKTOP]: { y: 24, x: 22 },
     },
   },
@@ -237,6 +248,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/rei_displace_4/full_2.png" },
     ],
     position: {
+      [0]: { y: 32, x: 13 },
       [BREAK_DESKTOP]: { y: 32, x: 13 },
     },
   },
@@ -251,6 +263,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 30, x: 37 },
       [BREAK_DESKTOP]: { y: 30, x: 37 },
     },
   },
@@ -265,6 +278,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 42, x: 25 },
       [BREAK_DESKTOP]: { y: 42, x: 25 },
     },
   },
@@ -274,6 +288,7 @@ export const artwork: Artwork[] = [
     id: "tvr_kyoto",
     images: [{ image: "/artwork/tvr_kyoto/full_1.gif", name: "tvr kyoto" }],
     position: {
+      [0]: { y: 37, x: 63 },
       [BREAK_DESKTOP]: { y: 37, x: 63 },
     },
   },
@@ -289,6 +304,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/chiyo_chan_3/full_2.jpg", name: "ちーちゃんごめんね" },
     ],
     position: {
+      [0]: { y: 42, x: 45 },
       [BREAK_DESKTOP]: { y: 42, x: 45 },
     },
   },
@@ -301,6 +317,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/moss_sit_7/full_2.jpg", name: "moss sit" },
     ],
     position: {
+      [0]: { y: 38, x: 92 },
       [BREAK_DESKTOP]: { y: 38, x: 92 },
     },
     prints: {
@@ -325,6 +342,7 @@ export const artwork: Artwork[] = [
     id: "what_a_day_3",
     images: [{ image: "/artwork/what_a_day_3/full_1.png", name: "what a day" }],
     position: {
+      [0]: { y: 45, x: 75 },
       [BREAK_DESKTOP]: { y: 45, x: 75 },
     },
   },
@@ -339,6 +357,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 52, x: 90 },
       [BREAK_DESKTOP]: { y: 52, x: 90 },
     },
   },
@@ -353,6 +372,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 45, x: 7 },
       [BREAK_DESKTOP]: { y: 45, x: 7 },
     },
   },
@@ -367,6 +387,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 48, x: 56 },
       [BREAK_DESKTOP]: { y: 48, x: 56 },
     },
   },
@@ -376,6 +397,7 @@ export const artwork: Artwork[] = [
     id: "img_4791_3",
     images: [{ image: "/artwork/img_4791_3/full_1.gif", name: "img_4791_3" }],
     position: {
+      [0]: { y: 53, x: 40 },
       [BREAK_DESKTOP]: { y: 53, x: 40 },
     },
   },
@@ -394,6 +416,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 60, x: 60 },
       [BREAK_DESKTOP]: { y: 60, x: 60 },
     },
   },
@@ -411,6 +434,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/welcome_home_beanlet_final_white/full_4.jpg" },
     ],
     position: {
+      [0]: { y: 65, x: 85 },
       [BREAK_DESKTOP]: { y: 65, x: 85 },
     },
   },
@@ -425,6 +449,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/flitter1/full_4.jpg", name: "flitter4" },
     ],
     position: {
+      [0]: { y: 57, x: 22 },
       [BREAK_DESKTOP]: { y: 57, x: 22 },
     },
     prints: {
@@ -452,6 +477,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/blipblop21/full_2.jpg" },
     ],
     position: {
+      [0]: { y: 65, x: 10 },
       [BREAK_DESKTOP]: { y: 65, x: 10 },
     },
   },
@@ -461,6 +487,7 @@ export const artwork: Artwork[] = [
     id: "who_knows_3",
     images: [{ image: "/artwork/who_knows_3/full_1.png", name: "who knows" }],
     position: {
+      [0]: { y: 68, x: 34 },
       [BREAK_DESKTOP]: { y: 68, x: 34 },
     },
   },
@@ -476,6 +503,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/bluebell_process_4/full_2.jpg" },
     ],
     position: {
+      [0]: { y: 77, x: 22 },
       [BREAK_DESKTOP]: { y: 77, x: 22 },
     },
   },
@@ -500,6 +528,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 6, x: 45 },
       [BREAK_DESKTOP]: { y: 6, x: 45 },
     },
     prints: {
@@ -529,6 +558,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 83, x: 10 },
       [BREAK_DESKTOP]: { y: 83, x: 10 },
     },
   },
@@ -538,6 +568,7 @@ export const artwork: Artwork[] = [
     id: "farreach1",
     images: [{ image: "/artwork/farreach1/full_1.jpg", name: "farrreach" }],
     position: {
+      [0]: { y: 94, x: 16 },
       [BREAK_DESKTOP]: { y: 94, x: 16 },
     },
   },
@@ -552,6 +583,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 90, x: 40 },
       [BREAK_DESKTOP]: { y: 90, x: 40 },
     },
   },
@@ -574,6 +606,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 83, x: 60 },
       [BREAK_DESKTOP]: { y: 83, x: 60 },
     },
   },
@@ -585,6 +618,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/plast_create/full_1.jpg", name: "plast:create ₂₀₀₃" },
     ],
     position: {
+      [0]: { y: 85, x: 90 },
       [BREAK_DESKTOP]: { y: 85, x: 90 },
     },
   },
@@ -599,6 +633,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
+      [0]: { y: 71, x: 70 },
       [BREAK_DESKTOP]: { y: 71, x: 70 },
     },
   },
@@ -610,6 +645,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/daisy_phritz/full_1.jpg", name: "daisy phritz" },
     ],
     position: {
+      [0]: { y: 12, x: 27 },
       [BREAK_DESKTOP]: { y: 12, x: 27 },
     },
     prints: {

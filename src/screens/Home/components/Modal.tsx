@@ -12,6 +12,8 @@ import "./Modal.css";
 import { useNavigate } from "@solidjs/router";
 import { AssetLoaders } from "../../../utility/assetLoader";
 
+type JsImage = { name?: string; image: HTMLImageElement, aspect: number };
+
 interface ModalProps {
   images: { name?: string; image: string }[];
   print?: {
@@ -23,9 +25,9 @@ interface ModalProps {
 
 function Modal(props: ModalProps) {
   const [images, setImages] =
-    createSignal<{ name?: string; image: HTMLImageElement }[]>();
+    createSignal<JsImage[]>();
   const [printImages, setPrintImages] =
-    createSignal<{ name?: string; image: HTMLImageElement }[]>();
+    createSignal<JsImage[]>();
   const [loading, setLoading] = createSignal(true);
   const [showPrints, setShowPrints] = createSignal(false);
 
@@ -43,14 +45,14 @@ function Modal(props: ModalProps) {
   }
 
   function loadImages(): Promise<
-    PromiseSettledResult<{ name?: string; image: HTMLImageElement }>[]
+    PromiseSettledResult<JsImage>[]
   > {
     return Promise.allSettled(
       props.images.map(
         (image) =>
-          new Promise<{ name?: string; image: HTMLImageElement }>((res) => {
+          new Promise<JsImage>((res) => {
             AssetLoaders.image(image.image)().then((img) =>
-              res({ name: image.name, image: img })
+              res({ name: image.name, image: img, aspect: img.width/img.height })
             );
           })
       )
@@ -58,15 +60,15 @@ function Modal(props: ModalProps) {
   }
 
   function loadPrintImages(): Promise<
-    PromiseSettledResult<{ name?: string; image: HTMLImageElement }>[]
+    PromiseSettledResult<JsImage>[]
   > {
     if (!props.print) return Promise.resolve([]);
     return Promise.allSettled(
       props.print?.images.map(
         (image) =>
-          new Promise<{ name?: string; image: HTMLImageElement }>((res) => {
+          new Promise<JsImage>((res) => {
             AssetLoaders.image(image.image)().then((img) =>
-              res({ name: image.name, image: img })
+              res({ name: image.name, image: img, aspect: img.width/img.height  })
             );
           })
       )
@@ -117,15 +119,16 @@ function Modal(props: ModalProps) {
     <div class="sub-screen" onClick={() => nav("/", { scroll: false })}>
       <img ref={loaderRef} class="modal-loader-image" src="/loader.gif" />
 
+      <div class="sub-screen-scroller">
       <Switch>
         <Match when={showPrints() === false}>
           <div
             role="dialog"
             ref={imageContainerRef}
             classList={{ ["fade-in"]: !loading(), "sub-screen-dialog": true }}
-            style={{ "align-content": "center" }}
           >
             <div
+              onClick={(e) => e.stopPropagation()}
               classList={{
                 "sub-screen__content": true,
                 [`sub-screen__content--${images()?.length}`]: true,
@@ -133,32 +136,33 @@ function Modal(props: ModalProps) {
             >
               <For each={images()}>
                 {(item) => (
-                  <div onClick={(e) => e.stopPropagation()}>
-                    <img src={item.image.src} draggable={false} />
+                  <div class="sub-screen__content-cell">
+                    <img src={item.image.src} draggable={false} style={{ "aspect-ratio": item.aspect }} />
                     <Show when={item.name}>
                       <p>{item.name}</p>
                     </Show>
                   </div>
                 )}
               </For>
-            </div>
-            {props.print && (
-              <div
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  display: "flex",
-                  "justify-content": "center",
-                  "margin-top": "12px",
-                }}
-              >
 
-                <img
-                  class="for-sale-tag for-sale-tag--button"
-                  onClick={(e) => e.stopPropagation()}
-                  on:click={seePrints}
-                  src="/meow/prints.svg" />
-              </div>
-            )}
+             
+            </div>
+             {props.print && (
+                <div
+                  style={{
+                    display: "flex",
+                    "justify-content": "center",
+                    "flex-shrink": 0
+                  }}
+                >
+
+                  <img
+                    class="for-sale-tag for-sale-tag--button"
+                    onClick={(e) => e.stopPropagation()}
+                    on:click={seePrints}
+                    src="/meow/prints.svg" />
+                </div>
+              )}
           </div>
         </Match>
 
@@ -167,7 +171,6 @@ function Modal(props: ModalProps) {
             <div
               role="dialog"
               classList={{ ["fade-in"]: !loading(), "sub-screen-dialog": true }}
-              style={{ "align-content": "center" }}
             >
               <div style={{ display: "flex", gap: "40px" }}>
                 <div
@@ -206,6 +209,7 @@ function Modal(props: ModalProps) {
           </Match>
         )}
       </Switch>
+      </div>
     </div>
   );
 }

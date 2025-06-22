@@ -41,10 +41,11 @@ canvas {
   width: 100%;
   text-align: center;
   color: #fff;
+  text-shadow: 0px 0px 20px #000, 0px 0px 20px #000;
 }
 
 #built-by a {
   color: #fff;
   text-decoration: none;
-  text-shadow: 0px 0px 10px #fff;
+  font-weight: bold;
 }
