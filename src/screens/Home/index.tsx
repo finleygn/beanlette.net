@@ -77,6 +77,10 @@ function HomeScreen(props: ScreenProps) {
           </Match>
         ))}
       </Switch>
+
+      <div id="built-by">
+        [built by <a href="https://finley.fish" target="_blank">finley garton</a>]
+      </div>
     </Screen>
   );
 }

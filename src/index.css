@@ -34,3 +34,17 @@ canvas {
 .for-sale-tag {
   max-width: 80px;
 }
+
+#built-by {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+#built-by a {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0px 0px 10px #fff;
+}
