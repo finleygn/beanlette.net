@@ -20,12 +20,15 @@ function HomeScreen(props: ScreenProps) {
   onMount(() => {
     const unsubscribe = props.backgroundRender.onUpdate(() => {
       if (!containerRef) return;
-      const { x, y } = props.backgroundRender.currentMousePosition;
-      const xTransform = `${(x.value - 0.5) * -1 * 10}%`;
-      const yTransform = `${(y.value - 0.5) * -1 * 0.5 * 10}%`;
-      containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
+      if(window.innerWidth < 600) {
+        containerRef.style.transform = `translate(0px, 0px)`;
+      } else {
+        const { x, y } = props.backgroundRender.currentMousePosition;
+        const xTransform = `${(x.value - 0.5) * -1 * 10}%`;
+        const yTransform = `${(y.value - 0.5) * -1 * 0.5 * 10}%`;
+        containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
+      }
     });
-
     onCleanup(unsubscribe);
   });
 

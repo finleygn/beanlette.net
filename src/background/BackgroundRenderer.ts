@@ -44,6 +44,7 @@ class BackgroundRenderer {
     const renderer = new Renderer({
       antialias: false,
       depth: false,
+      canvas: document.getElementById("bgcanvas") as HTMLCanvasElement || undefined
       // dpr: window.devicePixelRatio,
     });
 
@@ -91,7 +92,6 @@ class BackgroundRenderer {
 
     this.turbo = new AutonomousSmoothValue(0, 0.1);
 
-    this.initializeCanvasDOM();
     this.initializeTurboMouseListener();
 
     this.initializeResizeWatch();
@@ -141,9 +141,15 @@ class BackgroundRenderer {
     this.currentMousePosition.x.target = this.mousePositionTracker.x;
     this.currentMousePosition.y.target = this.mousePositionTracker.y;
 
-    this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
-    this.program.uniforms.u_mouse.value[1] =
-      1 - this.currentMousePosition.y.value;
+    if (window.innerWidth < 600) {
+      this.program.uniforms.u_mouse.value[0] = 0.5;
+      this.program.uniforms.u_mouse.value[1] = 0.5;
+    } else {
+      this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
+      this.program.uniforms.u_mouse.value[1] =
+        1 - this.currentMousePosition.y.value;
+    }
+
 
     /**
      * Resolution updates
@@ -181,18 +187,14 @@ class BackgroundRenderer {
     });
   };
 
-  private initializeCanvasDOM = () => {
-    document.body.prepend(this.canvas);
-    this.canvas.style.position = "fixed";
-    this.canvas.style.top = "0px";
-    this.canvas.style.left = "0px";
-    this.canvas.style.right = "0px";
-    this.canvas.style.bottom = "0px";
-  };
-
   private initializeResizeWatch = () => {
-    const resize = () =>
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    const resize = () => {
+      const {width, height} = this.canvas.getBoundingClientRect();
+      if(width !== this.renderer.width || height !== this.renderer.height) {
+        this.renderer.setSize(width, height);
+      }
+    }
+    
     window.addEventListener("resize", resize, false);
     resize();
   };

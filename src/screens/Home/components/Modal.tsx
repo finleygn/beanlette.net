@@ -125,10 +125,10 @@ function Modal(props: ModalProps) {
             <div
               role="dialog"
               ref={imageContainerRef}
+              onClick={(e) => e.stopPropagation()}
               classList={{ ["fade-in"]: !loading(), "modal-content": true }}
             >
               <div
-                onClick={(e) => e.stopPropagation()}
                 classList={{
                   "modal__img-grid": true,
                   [`modal__img-grid--${images()?.length}`]: true,
@@ -171,7 +171,7 @@ function Modal(props: ModalProps) {
                 role="dialog"
                 classList={{ ["fade-in"]: !loading(), "modal-content": true }}
               >
-                <div class='modal-content-flex'>
+                <div class='modal-content-flex' onClick={(e) => e.stopPropagation()}>
                   <div
                     classList={{
                       "modal__prints-img-grid": true,
@@ -180,10 +180,7 @@ function Modal(props: ModalProps) {
                   >
                     <For each={printImages()}>
                       {(item) => (
-
                         <img src={item.image.src} draggable={false} style={{ "aspect-ratio": item.aspect }} />
-       
-      
                       )}
                     </For>
                   </div>

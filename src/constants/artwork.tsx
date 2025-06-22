@@ -199,7 +199,7 @@ export const artwork: Artwork[] = [
     thumbnail: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/thumb.gif",
     id: "jyoucyo_ascii_3_FINAL_MAYBE",
     images: [
-      { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/full_1.jpg", name: "Oh?" },
+      { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/full_1.jpg", name: "jyoucyo_ascii_3" },
     ],
     position: {
       [0]: { y: 30, x: 80 },
@@ -651,9 +651,9 @@ export const artwork: Artwork[] = [
     prints: {
       available: true,
       images: [
-        { image: "/artwork/oaksplitt/prints/oaksplit real 1.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 2.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 3.jpg" },
+        { image: "/artwork/daisy_phritz/prints/daisy real 1.jpg" },
+        { image: "/artwork/daisy_phritz/prints/daisy real 2.jpg" },
+        { image: "/artwork/daisy_phritz/prints/daisy real 3.jpg" },
       ],
       description: (
         <>

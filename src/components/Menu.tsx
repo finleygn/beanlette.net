@@ -12,10 +12,14 @@ function Menu({ backgroundRenderer }: MenuProps) {
   onMount(() => {
     const unsubscribe = backgroundRenderer.onUpdate(() => {
       if (!containerRef) return;
-      const { x, y } = backgroundRenderer.currentMousePosition;
-      const xTransform = `calc(-50% + ${(x.value - 0.5) * -1 * 80}%)`;
-      const yTransform = `calc(-50% + ${(y.value - 0.5) * -1 * 80}%)`;
-      containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
+      if (window.innerWidth < 600) {
+        containerRef.style.transform = `translate(-50%, -50%)`;
+      } else {
+        const { x, y } = backgroundRenderer.currentMousePosition;
+        const xTransform = `calc(-50% + ${(x.value - 0.5) * -1 * 80}%)`;
+        const yTransform = `calc(-50% + ${(y.value - 0.5) * -1 * 80}%)`;
+        containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
+      }
     });
 
     onCleanup(unsubscribe);
