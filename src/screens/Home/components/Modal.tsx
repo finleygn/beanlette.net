@@ -151,13 +151,12 @@ function Modal(props: ModalProps) {
                   "margin-top": "12px",
                 }}
               >
-                <button
+
+                <img
                   class="for-sale-tag for-sale-tag--button"
                   onClick={(e) => e.stopPropagation()}
                   on:click={seePrints}
-                >
-                  prints &gt;
-                </button>
+                  src="/meow/prints.svg" />
               </div>
             )}
           </div>
