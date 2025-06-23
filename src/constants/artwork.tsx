@@ -482,15 +482,24 @@ export const artwork: Artwork[] = [
     prints: {
       available: true,
       images: [
-        { image: "/artwork/oaksplitt/prints/oaksplit real 1.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 2.jpg" },
-        { image: "/artwork/oaksplitt/prints/oaksplit real 3.jpg" },
+        { image: "/artwork/flitter1/prints/flitter 1 real 1.jpg" },
+        { image: "/artwork/flitter1/prints/flitter 1 real 2.jpg" },
+        { image: "/artwork/flitter1/prints/flitter 1 real 3.jpg" },
+        { image: "/artwork/flitter1/prints/flitter 2 real 1.jpg" },
+        { image: "/artwork/flitter1/prints/flitter 2 real 2.jpg" },
+        { image: "/artwork/flitter1/prints/flitter 2 real 3.jpg" },
       ],
       description: (
         <>
-          <p>flitter 1 + 2: £350 400x400mm</p>
+          <p>flitter 1 + 2 — £300</p>
           <p>Distorted petals.</p>
+          <p>400x400mm</p>
           <p>Limited run of 10 signed pieces.</p>
+          <p>worldwide shipping available~</p>
+
+          <br />
+
+          {email}
         </>
       ),
     },

@@ -129,6 +129,11 @@
   grid-template-rows: 1fr;
 }
 
+.modal__prints-img-grid--6 {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
 .modal__prints-img-grid--3 img:first-child {
   grid-row: span 2;
 }

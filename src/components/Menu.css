@@ -7,6 +7,7 @@
   left: 50vw;
   transform: translate(-50%, -50%);
   z-index: 1;
+  user-select: none;
 }
 
 header h1 {
