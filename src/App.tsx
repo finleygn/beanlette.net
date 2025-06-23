@@ -71,8 +71,8 @@ function App(props: { backgroundRenderer: BackgroundRenderer }) {
       </Router>
 
       <div id="built-by">
-      [built by <a href="https://finley.fish" target="_blank">finley.fish</a>]
-    </div>
+        [built by <a href="https://finley.fish" target="_blank">finley.fish</a>]
+      </div>
     </Show>
   );
 }

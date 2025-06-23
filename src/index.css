@@ -26,11 +26,10 @@ main {
 
 canvas {
   image-rendering: pixelated;
-  height: 100lvh !important;
+  height: max(100lvh, 100%) !important;
   width: 100vw !important;
   position: fixed;
-  bottom: 0;
-
+  top: 0;
 }
 
 .for-sale-tag {

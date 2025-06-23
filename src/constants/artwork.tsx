@@ -491,7 +491,8 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>flitter 1 + 2 — £300</p>
+          <p>flitter 1 — £300</p>
+          <p>flitter 2 — £300</p>
           <p>Distorted petals.</p>
           <p>400x400mm</p>
           <p>Limited run of 10 signed pieces.</p>
