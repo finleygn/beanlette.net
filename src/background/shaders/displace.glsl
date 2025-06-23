@@ -1,27 +1,23 @@
 #version 300 es
-#define PI 3.1415
 precision highp float;
 
 uniform vec2 u_mouse;
 uniform float u_mouse_turbo;
 uniform vec2 u_resolution;
 uniform float u_scroll_percent;
-uniform float u_animation_progress;
-uniform float u_loading_time;
 uniform float u_time;
 uniform sampler2D u_depth_texture;
 uniform sampler2D u_color_texture;
-uniform sampler2D u_b_depth_texture;
-uniform sampler2D u_b_color_texture;
 
 in vec2 v_uv;
 
 out vec4 fragColor;
 
-const float MAX_SCROLL_AMOUNT = 0.05;
-const float SCROLL_DISTORT = 0.15;
-const float ZOOM = 0.99;
-const float PORTRAIT_ZOOM = 0.9;
+#define PI 3.1415
+#define MAX_SCROLL_AMOUNT 0.05
+#define SCROLL_DISTORT 0.15
+#define ZOOM 0.99
+#define PORTRAIT_ZOOM 0.9
 
 // 0-1 to -1-1 range
 vec2 signedRange(vec2 v) {
