@@ -10,7 +10,7 @@
 body {
   margin: 0;
   z-index: 1;
-  height: max(200lvh, 1200px);
+  min-height: max(200lvh, 1200px);
   position: relative;
 }
 

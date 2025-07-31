@@ -1,81 +1,101 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link rel="preload" href="/loader.gif" as="image" type="image/gif">
-    <link rel="preload" href="/fonts/nitrods-font.otf" as="font" type="font/otf" crossorigin="">
 
-    <title>beanlette</title>
-    <meta name="description" content="digital nature world art ❦ by noah (beanlette)" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="preload" href="/loader.gif" as="image" type="image/gif">
+  <link rel="preload" href="/fonts/nitrods-font.otf" as="font" type="font/otf" crossorigin="">
 
-    <style>
-      @font-face {
-        font-family: pixel;
-        font-display: block;
-        src: url("/fonts/nitrods-font.otf") format("opentype");
-      }
+  <title>beanlette</title>
+  <meta name="description" content="digital nature world art ❦ by noah (beanlette)" />
 
-      *,
-      *:hover {
-        cursor: none;
-      }
+  <style>
+    @font-face {
+      font-family: pixel;
+      font-display: block;
+      src: url("/fonts/nitrods-font.otf") format("opentype");
+    }
 
-      @keyframes loader-fade-out {
-        0% { opacity: 1; }
-        40% { transform: translate(-50%, -50%) scale(1); }
-        70% { transform: translate(-50%, -50%) scale(1.4); }
-        90% { opacity: 1; }
-        100% {
-          transform: translate(-50%, -50%) scale(0);
-          opacity: 0;
-        }
-      }
-      
-      .blocking-loader {
-        z-index: 9999;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.5s;
-      }
+    *,
+    *:hover {
+      cursor: none;
+    }
 
-      .blocking-loader--removed {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .blocking-loader-image {
-        z-index: 9999;
+    @keyframes loader-fade-out {
+      0% {
         opacity: 1;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
       }
 
-      .blocking-loader-image--removed {
-        animation-name: loader-fade-out;
-        animation-timing-function: ease-in;
-        animation-duration: 0.5s;
-        animation-delay: 0.2s;
-        animation-fill-mode: forwards;
-        pointer-events: none;
+      40% {
+        transform: translate(-50%, -50%) scale(1);
       }
-    </style>
-  </head>
-  <body>
-    <canvas id="bgcanvas"></canvas>
-    <div class="blocking-loader"></div>
-    <img class="blocking-loader-image" src="/loader.gif">
-    <div id="root"></div>
-    <script type="module" src="/src/index.tsx"></script>
-  </body>
+
+      70% {
+        transform: translate(-50%, -50%) scale(1.4);
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+      }
+    }
+
+    .blocking-loader {
+      z-index: 9999;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s;
+    }
+
+    .blocking-loader--removed {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .blocking-loader-image {
+      z-index: 9999;
+      opacity: 1;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .blocking-loader-image--removed {
+      animation-name: loader-fade-out;
+      animation-timing-function: ease-in;
+      animation-duration: 0.5s;
+      animation-delay: 0.2s;
+      animation-fill-mode: forwards;
+      pointer-events: none;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bgcanvas"></canvas>
+  <div class="blocking-loader"></div>
+  <img class="blocking-loader-image" src="/loader.gif">
+  <div id="root"></div>
+  <script type="module" src="/src/index.tsx"></script>
+</body>
+
 </html>
