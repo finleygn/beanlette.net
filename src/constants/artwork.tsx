@@ -338,8 +338,8 @@ export const artwork: Artwork[] = [
     id: "tvr_kyoto",
     images: [{ image: "/artwork/tvr_kyoto/full_1.gif", name: "tvr kyoto" }],
     position: {
-      [0]: { y: 37, x: 54 },
-      [BREAK_DESKTOP]: { y: 37, x: 63 },
+      [0]: { y: 57, x: 18 },
+      [BREAK_DESKTOP]: { y: 57, x: 22 },
     },
   },
   {
@@ -513,8 +513,8 @@ export const artwork: Artwork[] = [
       { image: "/artwork/flitter1/full_4.jpg", name: "flitter4" },
     ],
     position: {
-      [0]: { y: 57, x: 18 },
-      [BREAK_DESKTOP]: { y: 57, x: 22 },
+      [0]: { y: 37, x: 54 },
+      [BREAK_DESKTOP]: { y: 37, x: 63 },
     },
     prints: {
       available: true,

@@ -18,7 +18,7 @@ const options = [
   },
   {
     color: "/backgrounds/other_screen_color.jpg",
-    depth: "/backgrounds/other_screen_depth.png",
+    depth: "/backgrounds/other_screen_depth.jpg",
     starting: true,
   },
 ];
