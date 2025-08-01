@@ -1,5 +1,5 @@
 /**
- * The following is awful:
+ * The following is awful but has good typing yayyyy
  */
 
 type Remap<T> = {
@@ -24,9 +24,8 @@ export const AssetLoaders = {
     return new Promise<HTMLImageElement>((resolve, reject) => {
       const image = new Image();
       image.decoding = "sync";
-      image.src = resourcePath + "?test=" + Math.random();
+      image.src = resourcePath;
       image.onload = () => resolve(image);
-
       image.onerror = () => reject();
     });
   }),

@@ -93,9 +93,11 @@ class BackgroundRenderer {
     const renderer = new Renderer({
       antialias: false,
       depth: false,
+      dpr: 1,
+      webgl: 2,
+      powerPreference: "high-performance",
       canvas:
         (document.getElementById("bgcanvas") as HTMLCanvasElement) || undefined,
-      // dpr: window.devicePixelRatio,
     });
 
     this.renderer = renderer;

@@ -17,8 +17,13 @@ const options = [
     starting: true,
   },
   {
-    color: "/backgrounds/other_screen_color.jpg",
-    depth: "/backgrounds/other_screen_depth.jpg",
+    color: "/backgrounds/lilypad_color.jpg",
+    depth: "/backgrounds/lilypad_depth.jpg",
+    starting: true,
+  },
+  {
+    color: "/backgrounds/nagano_color.jpg",
+    depth: "/backgrounds/nagano_depth.jpg",
     starting: true,
   },
 ];
