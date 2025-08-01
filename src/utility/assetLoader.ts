@@ -24,10 +24,9 @@ export const AssetLoaders = {
     const image = new Image();
     image.src = resourcePath;
     return new Promise<HTMLImageElement>((resolve, reject) => {
-      image.onload = () => {
-        console.log(image.naturalWidth);
+      image.addEventListener("load", () => {
         resolve(image);
-      };
+      });
       image.onerror = () => reject();
     });
   }),
