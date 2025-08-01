@@ -154,8 +154,7 @@ class BackgroundRenderer {
   };
 
   public setTextures = async ({ color, depth }: BackgroundPair) => {
-    await color.decode();
-    await depth.decode();
+    await Promise.all([color.decode(), depth.decode()]);
 
     const newColorTexture = new Texture(this.gl, {
       generateMipmaps: false,
