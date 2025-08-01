@@ -178,6 +178,8 @@ class BackgroundRenderer {
   };
 
   private render = ({ elapsed, dt }: RenderLoopTimeData) => {
+    this.resize();
+
     this.scrollPercentage.tick(dt);
     this.turbo.tick(dt);
     this.currentMousePosition.x.tick(dt);
@@ -230,16 +232,16 @@ class BackgroundRenderer {
     });
   };
 
-  private initializeResizeWatch = () => {
-    const resize = () => {
-      const { width, height } = this.canvas.getBoundingClientRect();
-      if (width !== this.renderer.width || height !== this.renderer.height) {
-        this.renderer.setSize(width, height);
-      }
-    };
+  private resize = () => {
+    const { width, height } = this.canvas.getBoundingClientRect();
+    if (width !== this.renderer.width || height !== this.renderer.height) {
+      this.renderer.setSize(width, height);
+    }
+  };
 
-    window.addEventListener("resize", resize, false);
-    resize();
+  private initializeResizeWatch = () => {
+    window.addEventListener("resize", this.resize, false);
+    this.resize();
   };
 }
 
