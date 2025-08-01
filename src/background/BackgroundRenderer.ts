@@ -21,7 +21,6 @@ interface BackgroundPair {
   depth: HTMLImageElement;
 }
 
-
 class Positioner {
   private useGyro: boolean = false;
   private mousePositionTracker: MousePositionTracker =
@@ -29,28 +28,28 @@ class Positioner {
 
   private gyroCoords = {
     x: 0,
-    y: 0
-  }
+    y: 0,
+  };
 
   constructor() {
-    window.addEventListener('deviceorientation', this.handleDeviceOrientation)
+    window.addEventListener("deviceorientation", this.handleDeviceOrientation);
   }
 
   private handleDeviceOrientation = (event: DeviceOrientationEvent) => {
-    if(event.gamma === null || event.beta === null) {
+    if (event.gamma === null || event.beta === null) {
       return;
     }
     this.useGyro = true;
-    this.gyroCoords.x =  (clamp(event.gamma, -45, 45) + 45) / 90;
+    this.gyroCoords.x = (clamp(event.gamma, -45, 45) + 45) / 90;
     this.gyroCoords.y = (clamp(event.beta, -45, 45) + 45) / 90;
-  }
+  };
 
   get x() {
-    if(this.useGyro) {
+    if (this.useGyro) {
       return this.gyroCoords.x;
     }
 
-    if(isMobile()) {
+    if (isMobile()) {
       return 0.5;
     }
 
@@ -58,11 +57,11 @@ class Positioner {
   }
 
   get y() {
-    if(this.useGyro) {
+    if (this.useGyro) {
       return this.gyroCoords.y;
     }
 
-    if(isMobile()) {
+    if (isMobile()) {
       return 0.5;
     }
 
@@ -70,14 +69,12 @@ class Positioner {
   }
 }
 
-
 class BackgroundRenderer {
   private renderer: Renderer;
   private gl: OGLRenderingContext;
   private canvas: HTMLCanvasElement;
 
-  private positioner: Positioner =
-    new Positioner();
+  private positioner: Positioner = new Positioner();
 
   private subscribers: Set<() => void>;
   private geometry: Geometry;
@@ -96,7 +93,8 @@ class BackgroundRenderer {
     const renderer = new Renderer({
       antialias: false,
       depth: false,
-      canvas: document.getElementById("bgcanvas") as HTMLCanvasElement || undefined
+      canvas:
+        (document.getElementById("bgcanvas") as HTMLCanvasElement) || undefined,
       // dpr: window.devicePixelRatio,
     });
 
@@ -110,8 +108,6 @@ class BackgroundRenderer {
       x: new AutonomousSmoothValue(0.5, 0.2),
       y: new AutonomousSmoothValue(0.5, 0.2),
     };
-
-
 
     this.geometry = new Geometry(renderer.gl, {
       position: { size: 2, data: new Float32Array([-1, -1, 3, -1, -1, 3]) },
@@ -148,7 +144,6 @@ class BackgroundRenderer {
 
     this.initializeTurboMouseListener();
 
-
     this.initializeResizeWatch();
     renderLoop(this.render, { longestFrame: 60 });
   }
@@ -159,8 +154,19 @@ class BackgroundRenderer {
   };
 
   public setTextures = async ({ color, depth }: BackgroundPair) => {
-    const newColorTexture = new Texture(this.gl, { generateMipmaps: false });
-    const newDepthTexture = new Texture(this.gl, { generateMipmaps: false });
+    await color.decode();
+    await depth.decode();
+
+    const newColorTexture = new Texture(this.gl, {
+      generateMipmaps: false,
+      minFilter: this.gl.NEAREST,
+      magFilter: this.gl.NEAREST,
+    });
+    const newDepthTexture = new Texture(this.gl, {
+      generateMipmaps: false,
+      minFilter: this.gl.NEAREST,
+      magFilter: this.gl.NEAREST,
+    });
 
     newColorTexture.image = color;
     newDepthTexture.image = depth;
@@ -170,17 +176,6 @@ class BackgroundRenderer {
 
     this.program.uniforms.u_color_texture.value = newColorTexture;
     this.program.uniforms.u_depth_texture.value = newDepthTexture;
-
-    this.gl.texParameteri(
-      newColorTexture.target,
-      this.gl.TEXTURE_MIN_FILTER,
-      this.gl.NEAREST
-    );
-    this.gl.texParameteri(
-      newDepthTexture.target,
-      this.gl.TEXTURE_MAG_FILTER,
-      this.gl.NEAREST
-    );
   };
 
   private render = ({ elapsed, dt }: RenderLoopTimeData) => {
@@ -196,11 +191,9 @@ class BackgroundRenderer {
     this.currentMousePosition.x.target = this.positioner.x;
     this.currentMousePosition.y.target = this.positioner.y;
 
-
     this.program.uniforms.u_mouse.value[0] = this.currentMousePosition.x.value;
     this.program.uniforms.u_mouse.value[1] =
       1 - this.currentMousePosition.y.value;
-
 
     /**
      * Resolution updates
@@ -240,12 +233,12 @@ class BackgroundRenderer {
 
   private initializeResizeWatch = () => {
     const resize = () => {
-      const {width, height} = this.canvas.getBoundingClientRect();
-      if(width !== this.renderer.width || height !== this.renderer.height) {
+      const { width, height } = this.canvas.getBoundingClientRect();
+      if (width !== this.renderer.width || height !== this.renderer.height) {
         this.renderer.setSize(width, height);
       }
-    }
-    
+    };
+
     window.addEventListener("resize", resize, false);
     resize();
   };

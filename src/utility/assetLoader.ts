@@ -44,7 +44,7 @@ function createAssetLoader<
           const result = await loader();
           loaded[name] = result;
         } catch (e) {
-          // Should probably do something here
+          // Should probably do something here lmaooo
         }
       })
     );
