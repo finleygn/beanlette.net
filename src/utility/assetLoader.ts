@@ -22,7 +22,9 @@ export function createAssetLoaderFactory<T>(
 export const AssetLoaders = {
   image: createAssetLoaderFactory<HTMLImageElement>((resourcePath) => {
     const image = new Image();
+    image.decoding = "sync";
     image.src = resourcePath + "?test=" + Math.random();
+
     return new Promise<HTMLImageElement>((resolve, reject) => {
       image.addEventListener("load", () => {
         resolve(image);
