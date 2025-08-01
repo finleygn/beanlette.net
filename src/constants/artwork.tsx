@@ -25,7 +25,7 @@ const email = (
   >
     ✉ : noah@beanlette.net
   </a>
-)
+);
 
 export const artwork: Artwork[] = [
   {
@@ -77,14 +77,21 @@ export const artwork: Artwork[] = [
       description: (
         <>
           <p>Oaksplit — £300 / ¥55,000</p>
+          <br />
           <p>A tree in Suffolk.</p>
+          <br />
           <p>Limited run of 10 signed pieces.</p>
           <p>300x400mm</p>
-          <p>worldwide shipping available~</p>
+          <p>Aluminum diabond print, epoxy resin</p>
           <br />
-
+          <p>worldwide shipping available~</p>
           {email}
-          <a href="https://suchas.square.site/product/oaksplit-beanlette/2008" class="nice-link">available at Such As, Gallery</a>
+          <a
+            href="https://suchas.square.site/product/oaksplit-beanlette/2008"
+            class="nice-link"
+          >
+            available at Such As, Gallery
+          </a>
         </>
       ),
     },
@@ -202,13 +209,14 @@ export const artwork: Artwork[] = [
       description: (
         <>
           <p>Daisy — £250</p>
-          <p>Feels like discovery.</p>
-          <p>300x300mm</p>
-          <p>Limited run of 10 signed pieces.</p>
-          <p>worldwide shipping available~</p>
-
           <br />
-
+          <p>Feels like discovery.</p>
+          <br />
+          <p>300x300mm</p>
+          <p>Aluminum diabond print, epoxy resin</p>
+          <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <p>worldwide shipping available~</p>
           {email}
         </>
       ),
@@ -219,7 +227,10 @@ export const artwork: Artwork[] = [
     thumbnail: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/thumb.gif",
     id: "jyoucyo_ascii_3_FINAL_MAYBE",
     images: [
-      { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/full_1.jpg", name: "jyoucyo_ascii_3" },
+      {
+        image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/full_1.jpg",
+        name: "jyoucyo_ascii_3",
+      },
     ],
     position: {
       [0]: { y: 31, x: 70 },
@@ -228,18 +239,36 @@ export const artwork: Artwork[] = [
     prints: {
       available: true,
       images: [
-        { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/prints/ascii girl real 1.jpg" },
-        { image: "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/prints/ascii girl real 2.jpg" },
+        {
+          image:
+            "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/prints/ascii girl real 1.jpg",
+        },
+        {
+          image:
+            "/artwork/jyoucyo_ascii_3_FINAL_MAYBE/prints/ascii girl real 2.jpg",
+        },
       ],
       description: (
         <>
           <p>ascii girl — £900 / ¥180,000</p>
-          <p>From 'Skybox' exhibition in Tokyo. </p>
-          <p>Collaboration between jyoucyo and beanlette.</p>
-          <p>400x506mm</p>
-          <p>Signed 1 of 1.</p>
           <br />
-          <a href="https://suchas.square.site/product/ascii-girl-jyoucyo-beanlette/2006" class="nice-link">available at Such As, Gallery</a>
+          <p>
+            From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and
+            beanlette.
+          </p>
+
+          <br />
+          <p>400x506mm</p>
+          <p>Aluminum diabond print, epoxy resin, acrylic bubbles</p>
+          <p>Signed 1 of 1.</p>
+
+          <br />
+          <a
+            href="https://suchas.square.site/product/ascii-girl-jyoucyo-beanlette/2006"
+            class="nice-link"
+          >
+            available at Such As, Gallery
+          </a>
           {email}
         </>
       ),
@@ -269,7 +298,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/rei_displace_4/full_2.png" },
     ],
     position: {
-      [0]: { y: 30, x:20 },
+      [0]: { y: 30, x: 20 },
       [BREAK_DESKTOP]: { y: 32, x: 13 },
     },
   },
@@ -351,12 +380,14 @@ export const artwork: Artwork[] = [
       description: (
         <>
           <p>Mossy sit — £300</p>
-          <p>Girl sitting in a strange green world.</p>
-          <p>300x400mm</p>
-          <p>Limited run of 10 signed pieces.</p>
-          <p>worldwide shipping available~</p>
-
           <br />
+          <p>Girl sitting in a strange green world.</p>
+          <br />
+          <p>300x400mm</p>
+          <p>Aluminum diabond print, epoxy resin</p>
+          <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <p>worldwide shipping available~</p>
 
           {email}
         </>
@@ -448,7 +479,13 @@ export const artwork: Artwork[] = [
     },
   },
   {
-    title: <>welcome_home_beanlet_<wbr/>final_white</>,
+    title: (
+      <>
+        welcome_home_beanlet_
+        <wbr />
+        final_white
+      </>
+    ),
     thumbnail: "/artwork/welcome_home_beanlet_final_white/thumb.gif",
     id: "welcome_home_beanlet_final_white",
     images: [
@@ -493,12 +530,14 @@ export const artwork: Artwork[] = [
         <>
           <p>flitter 1 — £300</p>
           <p>flitter 2 — £300</p>
-          <p>Distorted petals.</p>
-          <p>400x400mm</p>
-          <p>Limited run of 10 signed pieces.</p>
-          <p>worldwide shipping available~</p>
-
           <br />
+          <p>Distorted petals.</p>
+          <br />
+          <p>400x400mm</p>
+          <p>Aluminum diabond print, epoxy resin</p>
+          <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <p>worldwide shipping available~</p>
 
           {email}
         </>
@@ -571,22 +610,38 @@ export const artwork: Artwork[] = [
     prints: {
       available: true,
       images: [
-        { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 1.jpg" },
-        { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 2.jpg" },
-        { image: "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 3.jpg" },
+        {
+          image:
+            "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 1.jpg",
+        },
+        {
+          image:
+            "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 2.jpg",
+        },
+        {
+          image:
+            "/artwork/google_maps__doesnt_have_to_make_much_sense_at_all_1/prints/doesnt have to real 3.jpg",
+        },
       ],
       description: (
         <>
           <p>Doesn't have to mean much at all — £350 / ¥70,000</p>
+          <br />
           <p>Computer screenshot.</p>
+          <br />
           <p>533x300mm</p>
+          <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
+          <br />
           <p>worldwide shipping available~</p>
 
-          <br />
-
           {email}
-          <a href="https://suchas.square.site/product/doesn-t-have-to-beanlette/2007" class="nice-link">available at Such As, Gallery</a>
+          <a
+            href="https://suchas.square.site/product/doesn-t-have-to-beanlette/2007"
+            class="nice-link"
+          >
+            available at Such As, Gallery
+          </a>
         </>
       ),
     },
@@ -702,15 +757,22 @@ export const artwork: Artwork[] = [
       description: (
         <>
           <p>Daisy — £350 / ¥70,000</p>
+          <br />
           <p>38.70560 N, 139.96610 E.</p>
+          <br />
           <p>533x300mm</p>
+          <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
+          <br />
           <p>worldwide shipping available~</p>
 
-          <br />
-
           {email}
-          <a href="https://suchas.square.site/product/daisy-beanlette/2011" class="nice-link">available at Such As, Gallery</a>
+          <a
+            href="https://suchas.square.site/product/daisy-beanlette/2011"
+            class="nice-link"
+          >
+            available at Such As, Gallery
+          </a>
         </>
       ),
     },

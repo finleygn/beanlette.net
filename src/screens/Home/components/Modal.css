@@ -1,6 +1,10 @@
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .modal {
@@ -143,8 +147,9 @@
   padding: 24px 8px;
 }
 
-.prints-sidebar > p, .prints-sidebar > a {
-  margin-bottom: 17px;
+.prints-sidebar > p,
+.prints-sidebar > a {
+  margin-bottom: 12px;
   display: block;
 }
 
@@ -153,7 +158,6 @@
     flex-direction: column;
   }
 }
-
 
 @media screen and (max-width: 600px) {
   .modal-content {
