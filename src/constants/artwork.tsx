@@ -107,8 +107,8 @@ export const artwork: Artwork[] = [
       { image: "/artwork/detachable1/full_4.png" },
     ],
     position: {
-      [0]: { y: 56, x: 60 },
-      [BREAK_DESKTOP]: { y: 10, x: 60 },
+      [0]: { y: 38, x: 85 },
+      [BREAK_DESKTOP]: { y: 38, x: 92 },
     },
   },
   {
@@ -367,8 +367,8 @@ export const artwork: Artwork[] = [
       { image: "/artwork/moss_sit_7/full_2.jpg", name: "moss sit" },
     ],
     position: {
-      [0]: { y: 38, x: 85 },
-      [BREAK_DESKTOP]: { y: 38, x: 92 },
+      [0]: { y: 56, x: 60 },
+      [BREAK_DESKTOP]: { y: 10, x: 60 },
     },
     prints: {
       available: true,

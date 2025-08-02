@@ -147,7 +147,7 @@ class BackgroundRenderer {
     this.initializeTurboMouseListener();
 
     this.initializeResizeWatch();
-    renderLoop(this.render, { longestFrame: 60 });
+    renderLoop(this.render, { longestFrame: 100 });
   }
 
   public onUpdate = (cb: () => void) => {

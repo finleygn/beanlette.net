@@ -92,7 +92,7 @@
 }
 
 .modal__img-grid--4 img {
-  max-height: max(350px, 30vh);
+  max-height: max(300px, 35vh);
 }
 
 .modal p {

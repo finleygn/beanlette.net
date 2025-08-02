@@ -15,13 +15,12 @@ interface ScreenProps {
 
 function HomeScreen(props: ScreenProps) {
   let containerRef: HTMLImageElement | undefined;
-  let linkRefs: HTMLAnchorElement[] = [];
   const location = useLocation();
 
   onMount(() => {
     const unsubscribe = props.backgroundRender.onUpdate(() => {
       if (!containerRef) return;
-      if(isMobile()) {
+      if (isMobile()) {
         containerRef.style.transform = `translate(0px, 0px)`;
       } else {
         const { x, y } = props.backgroundRender.currentMousePosition;
@@ -62,7 +61,6 @@ function HomeScreen(props: ScreenProps) {
 
           return (
             <Icon
-              ref={(el) => (linkRefs[i] = el)}
               title={artwork.title}
               thumbnail={artwork.thumbnail}
               id={artwork.id}
@@ -81,8 +79,6 @@ function HomeScreen(props: ScreenProps) {
           </Match>
         ))}
       </Switch>
-
-      
     </Screen>
   );
 }

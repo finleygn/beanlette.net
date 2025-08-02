@@ -22,6 +22,11 @@ const options = [
     starting: true,
   },
   {
+    color: "/backgrounds/treedee_color.jpg",
+    depth: "/backgrounds/treedee_depth.jpg",
+    starting: true,
+  },
+  {
     color: "/backgrounds/nagano_color.jpg",
     depth: "/backgrounds/nagano_depth.jpg",
     starting: true,

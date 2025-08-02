@@ -22,7 +22,6 @@ function Menu({ backgroundRenderer }: MenuProps) {
         containerRef.style.transform = `translate(${xTransform}, ${yTransform})`;
       }
     });
-
     onCleanup(unsubscribe);
   });
 
