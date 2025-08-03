@@ -25,7 +25,6 @@ main {
 }
 
 canvas {
-  image-rendering: pixelated;
   height: max(100lvh, 100%) !important;
   width: 100vw !important;
   position: fixed;

@@ -12,13 +12,14 @@ import { renderLoop, RenderLoopTimeData } from "@fishley/wwwgraphics/app";
 import { AutonomousSmoothValue } from "@fishley/wwwgraphics/animation";
 import { MousePositionTracker } from "@fishley/wwwgraphics/interaction";
 import { clamp } from "@fishley/wwwgraphics/math";
-import { isMobile } from "../utility/isMobile";
 
 const TURBO_CLICK_DELAY_MS = 150;
 
 interface BackgroundPair {
   color: HTMLImageElement;
   depth: HTMLImageElement;
+  colourPerChannel: number;
+  contrastBoost: number;
 }
 
 class Positioner {
@@ -117,6 +118,8 @@ class BackgroundRenderer {
         u_time: { value: 0 },
         u_scroll_percent: { value: 0 },
         u_resolution: { value: [this.renderer.width, this.renderer.height] },
+        u_colour_per_channel: { value: 2.8 },
+        u_contrast_boost: { value: 1.0 },
         u_depth_texture: {
           value: new Texture(this.gl),
         },
@@ -147,7 +150,12 @@ class BackgroundRenderer {
     return () => this.subscribers.delete(cb);
   };
 
-  public setTextures = async ({ color, depth }: BackgroundPair) => {
+  public setTextures = async ({
+    color,
+    depth,
+    colourPerChannel,
+    contrastBoost,
+  }: BackgroundPair) => {
     await Promise.all([color.decode(), depth.decode()]);
 
     const newColorTexture = new Texture(this.gl, {
@@ -169,6 +177,8 @@ class BackgroundRenderer {
 
     this.program.uniforms.u_color_texture.value = newColorTexture;
     this.program.uniforms.u_depth_texture.value = newDepthTexture;
+    this.program.uniforms.u_colour_per_channel.value = colourPerChannel;
+    this.program.uniforms.u_contrast_boost.value = contrastBoost;
   };
 
   private render = ({ elapsed, dt }: RenderLoopTimeData) => {

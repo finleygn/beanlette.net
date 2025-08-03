@@ -4,6 +4,8 @@ precision highp float;
 uniform vec2 u_mouse;
 uniform float u_mouse_turbo;
 uniform vec2 u_resolution;
+uniform float u_colour_per_channel;
+uniform float u_contrast_boost;
 uniform float u_scroll_percent;
 uniform float u_time;
 uniform sampler2D u_depth_texture;
@@ -143,16 +145,22 @@ void main() {
     );
 
     // Sample colour with displacement
-    vec4 colour = texture(u_color_texture, uv + colour_distort * depth);
+    vec3 colour = texture(u_color_texture, uv + colour_distort * depth).rgb;
+    colour = pow(colour.rgb, vec3(u_contrast_boost));
 
+    
     // Sickums
     fragColor = vec4(
-        dither4x4Colour(
-            v_uv,
-            u_resolution,
+        mix(
             colour.rgb,
-            4.0
-        ).rgb,
+            dither4x4Colour(
+                v_uv,
+                u_resolution,
+                colour.rgb,
+                u_colour_per_channel
+            ).rgb,
+            1.0
+        ),
         1.0
     );
 }

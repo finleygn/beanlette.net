@@ -5,6 +5,8 @@ interface ScreenProps {
   assetLoader: () => Promise<{
     readonly color: HTMLImageElement;
     readonly depth: HTMLImageElement;
+    readonly colourPerChannel: number;
+    readonly contrastBoost: number;
   }>;
   backgroundRender: BackgroundRenderer;
   children: JSXElement;
@@ -18,6 +20,8 @@ function Screen(props: ScreenProps) {
     await props.backgroundRender.setTextures({
       color: assets.color,
       depth: assets.depth,
+      colourPerChannel: assets.colourPerChannel,
+      contrastBoost: assets.contrastBoost,
     });
 
     props.onBackgroundReady();
