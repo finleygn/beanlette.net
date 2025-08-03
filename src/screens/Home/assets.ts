@@ -31,6 +31,11 @@ const options = [
     depth: "/backgrounds/nagano_depth.jpg",
     starting: true,
   },
+  {
+    color: "/backgrounds/viaduct_color.jpg",
+    depth: "/backgrounds/viaduct_depth.jpg",
+    starting: true,
+  },
 ];
 
 function get_previous_index() {
