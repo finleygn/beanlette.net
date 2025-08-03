@@ -53,7 +53,7 @@ function HomeScreen(props: ScreenProps) {
       onBackgroundReady={props.onBackgroundReady}
     >
       <main ref={containerRef}>
-        {artwork.map((artwork, i) => {
+        {artwork.map((artwork) => {
           const key = Object.keys(artwork.position)
             .map(Number)
             .sort((a, b) => b - a)
