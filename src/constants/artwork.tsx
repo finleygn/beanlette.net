@@ -234,7 +234,7 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 29, x: 75 },
-      [BREAK_DESKTOP]: { y: 33, x: 72 },
+      [BREAK_DESKTOP]: { y: 32, x: 13 },
     },
     prints: {
       available: true,
@@ -297,7 +297,7 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 30, x: 18 },
-      [BREAK_DESKTOP]: { y: 32, x: 13 },
+      [BREAK_DESKTOP]: { y: 33, x: 72 },
     },
   },
   {
@@ -316,13 +316,13 @@ export const artwork: Artwork[] = [
     },
   },
   {
-    title: "fish light ○｀。",
+    title: "fish_light_3",
     thumbnail: "/artwork/fish_light_3/thumb.gif",
     id: "fish_light_3",
     images: [
       {
         image: "/artwork/fish_light_3/full_1.jpg",
-        name: "fish_light_3",
+        name: "fish light ○｀。",
       },
     ],
     position: {
