@@ -76,13 +76,19 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Oaksplit — £300 / ¥55,000</p>
+          <p>Oaksplit - £300 / ¥55,000</p>
           <br />
           <p>A tree in Suffolk.</p>
+          <br />
           <br />
           <p>Limited run of 10 signed pieces.</p>
           <p>300x400mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <p>worldwide shipping available~</p>
           {email}
@@ -208,13 +214,19 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Daisy — £250</p>
+          <p>Daisy - £250</p>
           <br />
           <p>Feels like discovery.</p>
+          <br />
           <br />
           <p>300x300mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <p>worldwide shipping available~</p>
           {email}
@@ -250,18 +262,22 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>ascii girl — £900 / ¥180,000</p>
+          <p>ascii girl - £900 / ¥180,000</p>
           <br />
           <p>
             From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and
             beanlette.
           </p>
-
+          <br />
           <br />
           <p>400x506mm</p>
           <p>Aluminum diabond print, epoxy resin, acrylic bubbles</p>
           <p>Signed 1 of 1.</p>
-
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <a
             href="https://suchas.square.site/product/ascii-girl-jyoucyo-beanlette/2006"
@@ -396,16 +412,22 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Spawn Point — £750 / ¥150,000</p>
+          <p>Spawn Point - £750 / ¥150,000</p>
           <br />
           <p>
             From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and
             beanlette.
           </p>
           <br />
+          <br />
           <p>370x500mm</p>
           <p>Giclee print on canvas.</p>
           <p>Signed one of one.</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <p>worldwide shipping available~</p>
 
@@ -436,13 +458,19 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Mossy sit — £300</p>
+          <p>Mossy sit - £300</p>
           <br />
           <p>Girl sitting in a strange green world.</p>
+          <br />
           <br />
           <p>300x400mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <p>worldwide shipping available~</p>
 
@@ -585,14 +613,20 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>flitter 1 — £300</p>
-          <p>flitter 2 — £300</p>
+          <p>flitter 1 - £300</p>
+          <p>flitter 2 - £300</p>
           <br />
           <p>Distorted petals.</p>
+          <br />
           <br />
           <p>400x400mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <p>worldwide shipping available~</p>
 
@@ -682,13 +716,19 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Doesn't have to mean much at all — £350 / ¥70,000</p>
+          <p>Doesn't have to mean much at all - £350 / ¥70,000</p>
           <br />
           <p>Computer screenshot.</p>
+          <br />
           <br />
           <p>533x300mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <p>worldwide shipping available~</p>
 
@@ -813,13 +853,19 @@ export const artwork: Artwork[] = [
       ],
       description: (
         <>
-          <p>Daisy — £350 / ¥70,000</p>
+          <p>Daisy - £350 / ¥70,000</p>
           <br />
           <p>38.70560 N, 139.96610 E.</p>
+          <br />
           <br />
           <p>533x300mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <p>worldwide shipping available~</p>
 
