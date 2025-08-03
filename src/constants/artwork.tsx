@@ -79,17 +79,11 @@ export const artwork: Artwork[] = [
           <p>Oaksplit - £300 / ¥55,000</p>
           <br />
           <p>A tree in Suffolk.</p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>Limited run of 10 signed pieces.</p>
           <p>300x400mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <p>worldwide shipping available</p>
           {email}
           <a
@@ -217,17 +211,11 @@ export const artwork: Artwork[] = [
           <p>Daisy - £250</p>
           <br />
           <p>Feels like discovery.</p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>300x300mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <p>worldwide shipping available</p>
           {email}
         </>
@@ -268,17 +256,11 @@ export const artwork: Artwork[] = [
             From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and
             beanlette.
           </p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>400x506mm</p>
           <p>Aluminum diabond print, epoxy resin, acrylic bubbles</p>
           <p>Signed 1 of 1.</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <a
             href="https://suchas.square.site/product/ascii-girl-jyoucyo-beanlette/2006"
             class="nice-link"
@@ -329,7 +311,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 24, x: 35 },
+      [0]: { y: 45, x: 75 },
       [BREAK_DESKTOP]: { y: 32, x: 34 },
     },
   },
@@ -401,7 +383,7 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 32, x: 47 },
+      [0]: { y: 30, x: 45 },
       [BREAK_DESKTOP]: { y: 37, x: 56 },
     },
     prints: {
@@ -418,17 +400,11 @@ export const artwork: Artwork[] = [
             From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and
             beanlette.
           </p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>370x500mm</p>
           <p>Giclee print on canvas.</p>
           <p>Signed one of one.</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <p>worldwide shipping available</p>
 
           {email}
@@ -446,7 +422,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/moss_sit_7/full_2.jpg", name: "moss sit" },
     ],
     position: {
-      [0]: { y: 56, x: 60 },
+      [0]: { y: 24, x: 35 },
       [BREAK_DESKTOP]: { y: 10, x: 60 },
     },
     prints: {
@@ -461,17 +437,11 @@ export const artwork: Artwork[] = [
           <p>Mossy sit - £300</p>
           <br />
           <p>Girl sitting in a strange green world.</p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>300x400mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <p>worldwide shipping available</p>
 
           {email}
@@ -485,7 +455,7 @@ export const artwork: Artwork[] = [
     id: "what_a_day_3",
     images: [{ image: "/artwork/what_a_day_3/full_1.png", name: "what a day" }],
     position: {
-      [0]: { y: 45, x: 75 },
+      [0]: { y: 56, x: 60 },
       [BREAK_DESKTOP]: { y: 45, x: 75 },
     },
   },
@@ -617,17 +587,11 @@ export const artwork: Artwork[] = [
           <p>flitter 2 - £300</p>
           <br />
           <p>Distorted petals.</p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>400x400mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <p>worldwide shipping available</p>
 
           {email}
@@ -719,17 +683,11 @@ export const artwork: Artwork[] = [
           <p>Doesn't have to mean much at all - £350 / ¥70,000</p>
           <br />
           <p>Computer screenshot.</p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>533x300mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <p>worldwide shipping available</p>
 
           {email}
@@ -856,17 +814,11 @@ export const artwork: Artwork[] = [
           <p>Daisy - £350 / ¥70,000</p>
           <br />
           <p>38.70560 N, 139.96610 E.</p>
-          <br />
-          <br />
+          <div class="mobile-para-spacer--small" />
           <p>533x300mm</p>
           <p>Aluminum diabond print, epoxy resin</p>
           <p>Limited run of 10 signed pieces.</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="mobile-para-spacer--large" />
           <p>worldwide shipping available</p>
 
           {email}

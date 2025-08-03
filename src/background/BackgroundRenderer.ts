@@ -49,20 +49,12 @@ class Positioner {
       return this.gyroCoords.x;
     }
 
-    if (isMobile()) {
-      return 0.5;
-    }
-
     return this.mousePositionTracker.x;
   }
 
   get y() {
     if (this.useGyro) {
       return this.gyroCoords.y;
-    }
-
-    if (isMobile()) {
-      return 0.5;
     }
 
     return this.mousePositionTracker.y;
