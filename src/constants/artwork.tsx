@@ -187,7 +187,7 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 64, x: 40 },
-      [BREAK_DESKTOP]: { y: 16, x: 40 },
+      [BREAK_DESKTOP]: { y: 88, x: 32 },
     },
   },
   {
@@ -233,8 +233,8 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 31, x: 70 },
-      [BREAK_DESKTOP]: { y: 30, x: 80 },
+      [0]: { y: 29, x: 75 },
+      [BREAK_DESKTOP]: { y: 33, x: 72 },
     },
     prints: {
       available: true,
@@ -285,7 +285,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/fetterless/full_4.jpg", name: "fetterless 7" },
     ],
     position: {
-      [0]: { y: 9, x: 55 },
+      [0]: { y: 10, x: 65 },
       [BREAK_DESKTOP]: { y: 24, x: 22 },
     },
   },
@@ -298,7 +298,7 @@ export const artwork: Artwork[] = [
       { image: "/artwork/rei_displace_4/full_2.png" },
     ],
     position: {
-      [0]: { y: 30, x: 20 },
+      [0]: { y: 30, x: 18 },
       [BREAK_DESKTOP]: { y: 32, x: 13 },
     },
   },
@@ -314,7 +314,22 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 24, x: 35 },
-      [BREAK_DESKTOP]: { y: 30, x: 37 },
+      [BREAK_DESKTOP]: { y: 32, x: 34 },
+    },
+  },
+  {
+    title: "fish light ○｀。",
+    thumbnail: "/artwork/fish_light_3/thumb.gif",
+    id: "fish_light_3",
+    images: [
+      {
+        image: "/artwork/fish_light_3/full_1.jpg",
+        name: "fish_light_3",
+      },
+    ],
+    position: {
+      [0]: { y: 14, x: 17 },
+      [BREAK_DESKTOP]: { y: 17, x: 36 },
     },
   },
   {
@@ -328,8 +343,8 @@ export const artwork: Artwork[] = [
       },
     ],
     position: {
-      [0]: { y: 36, x: 25 },
-      [BREAK_DESKTOP]: { y: 42, x: 25 },
+      [0]: { y: 38, x: 20 },
+      [BREAK_DESKTOP]: { y: 44, x: 25 },
     },
   },
   {
@@ -355,7 +370,49 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 42, x: 45 },
-      [BREAK_DESKTOP]: { y: 42, x: 45 },
+      [BREAK_DESKTOP]: { y: 42, x: 43 },
+    },
+  },
+  {
+    title: "spawn_point_5",
+    id: "spawn_point_5",
+    thumbnail: "/artwork/spawn_point_5/thumb.gif",
+    images: [
+      { image: "/artwork/spawn_point_5/full_1.jpg", name: "spawn_point_5" },
+      {
+        image: "/artwork/spawn_point_5/full_2.jpg",
+        name: "mystery_spawn_girl",
+      },
+    ],
+    position: {
+      [0]: { y: 32, x: 47 },
+      [BREAK_DESKTOP]: { y: 37, x: 56 },
+    },
+    prints: {
+      available: true,
+      images: [
+        { image: "/artwork/spawn_point_5/prints/real 1.jpg" },
+        { image: "/artwork/spawn_point_5/prints/real 2.jpg" },
+      ],
+      description: (
+        <>
+          <p>Spawn Point — £750 / ¥150,000</p>
+          <br />
+          <p>
+            From 'Skybox' exhibition in Tokyo. Collaboration between jyoucyo and
+            beanlette.
+          </p>
+          <br />
+          <p>370x500mm</p>
+          <p>Giclee print on canvas.</p>
+          <p>Signed one of one.</p>
+          <br />
+          <p>worldwide shipping available~</p>
+
+          {email}
+          <p>Available at Such As, Gallery</p>
+        </>
+      ),
     },
   },
   {
@@ -446,7 +503,7 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 48, x: 40 },
-      [BREAK_DESKTOP]: { y: 48, x: 56 },
+      [BREAK_DESKTOP]: { y: 50, x: 56 },
     },
   },
   {
@@ -456,7 +513,7 @@ export const artwork: Artwork[] = [
     images: [{ image: "/artwork/img_4791_3/full_1.gif", name: "img_4791_3" }],
     position: {
       [0]: { y: 53, x: 42 },
-      [BREAK_DESKTOP]: { y: 53, x: 40 },
+      [BREAK_DESKTOP]: { y: 55, x: 40 },
     },
   },
   {
@@ -514,7 +571,7 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 37, x: 54 },
-      [BREAK_DESKTOP]: { y: 37, x: 63 },
+      [BREAK_DESKTOP]: { y: 27, x: 89 },
     },
     prints: {
       available: true,
@@ -683,7 +740,7 @@ export const artwork: Artwork[] = [
     ],
     position: {
       [0]: { y: 90, x: 40 },
-      [BREAK_DESKTOP]: { y: 90, x: 40 },
+      [BREAK_DESKTOP]: { y: 92, x: 46 },
     },
   },
   {
@@ -744,8 +801,8 @@ export const artwork: Artwork[] = [
       { image: "/artwork/daisy_phritz/full_1.jpg", name: "daisy phritz" },
     ],
     position: {
-      [0]: { y: 11, x: 24 },
-      [BREAK_DESKTOP]: { y: 12, x: 27 },
+      [0]: { y: 9, x: 35 },
+      [BREAK_DESKTOP]: { y: 14, x: 23 },
     },
     prints: {
       available: true,
