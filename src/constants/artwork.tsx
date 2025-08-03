@@ -90,7 +90,7 @@ export const artwork: Artwork[] = [
           <br />
           <br />
           <br />
-          <p>worldwide shipping available~</p>
+          <p>worldwide shipping available</p>
           {email}
           <a
             href="https://suchas.square.site/product/oaksplit-beanlette/2008"
@@ -228,7 +228,7 @@ export const artwork: Artwork[] = [
           <br />
           <br />
           <br />
-          <p>worldwide shipping available~</p>
+          <p>worldwide shipping available</p>
           {email}
         </>
       ),
@@ -429,7 +429,7 @@ export const artwork: Artwork[] = [
           <br />
           <br />
           <br />
-          <p>worldwide shipping available~</p>
+          <p>worldwide shipping available</p>
 
           {email}
           <p>Available at Such As, Gallery</p>
@@ -472,7 +472,7 @@ export const artwork: Artwork[] = [
           <br />
           <br />
           <br />
-          <p>worldwide shipping available~</p>
+          <p>worldwide shipping available</p>
 
           {email}
         </>
@@ -628,7 +628,7 @@ export const artwork: Artwork[] = [
           <br />
           <br />
           <br />
-          <p>worldwide shipping available~</p>
+          <p>worldwide shipping available</p>
 
           {email}
         </>
@@ -730,7 +730,7 @@ export const artwork: Artwork[] = [
           <br />
           <br />
           <br />
-          <p>worldwide shipping available~</p>
+          <p>worldwide shipping available</p>
 
           {email}
           <a
@@ -867,7 +867,7 @@ export const artwork: Artwork[] = [
           <br />
           <br />
           <br />
-          <p>worldwide shipping available~</p>
+          <p>worldwide shipping available</p>
 
           {email}
           <a
