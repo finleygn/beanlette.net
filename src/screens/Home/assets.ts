@@ -16,11 +16,11 @@ const options = [
     depth: "/backgrounds/church_depth.jpg",
     starting: true,
   },
-  {
-    color: "/backgrounds/lilypad_color.jpg",
-    depth: "/backgrounds/lilypad_depth.jpg",
-    starting: true,
-  },
+  // {
+  //   color: "/backgrounds/lilypad_color.jpg",
+  //   depth: "/backgrounds/lilypad_depth.jpg",
+  //   starting: true,
+  // },
   {
     color: "/backgrounds/treedee_color.jpg",
     depth: "/backgrounds/treedee_depth.jpg",
