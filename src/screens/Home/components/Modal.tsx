@@ -12,7 +12,7 @@ import "./Modal.css";
 import { useNavigate } from "@solidjs/router";
 import { AssetLoaders } from "../../../utility/assetLoader";
 
-type JsImage = { name?: string; image: HTMLImageElement, aspect: number };
+type JsImage = { name?: string; image: HTMLImageElement; aspect: number };
 
 interface ModalProps {
   images: { name?: string; image: string }[];
@@ -24,10 +24,8 @@ interface ModalProps {
 }
 
 function Modal(props: ModalProps) {
-  const [images, setImages] =
-    createSignal<JsImage[]>();
-  const [printImages, setPrintImages] =
-    createSignal<JsImage[]>();
+  const [images, setImages] = createSignal<JsImage[]>();
+  const [printImages, setPrintImages] = createSignal<JsImage[]>();
   const [loading, setLoading] = createSignal(true);
   const [showPrints, setShowPrints] = createSignal(false);
 
@@ -44,31 +42,35 @@ function Modal(props: ModalProps) {
     if (loaderRef) loaderRef.classList.remove("modal-loader-image--removed");
   }
 
-  function loadImages(): Promise<
-    PromiseSettledResult<JsImage>[]
-  > {
+  function loadImages(): Promise<PromiseSettledResult<JsImage>[]> {
     return Promise.allSettled(
       props.images.map(
         (image) =>
           new Promise<JsImage>((res) => {
             AssetLoaders.image(image.image)().then((img) =>
-              res({ name: image.name, image: img, aspect: img.width / img.height })
+              res({
+                name: image.name,
+                image: img,
+                aspect: img.width / img.height,
+              })
             );
           })
       )
     );
   }
 
-  function loadPrintImages(): Promise<
-    PromiseSettledResult<JsImage>[]
-  > {
+  function loadPrintImages(): Promise<PromiseSettledResult<JsImage>[]> {
     if (!props.print) return Promise.resolve([]);
     return Promise.allSettled(
       props.print?.images.map(
         (image) =>
           new Promise<JsImage>((res) => {
             AssetLoaders.image(image.image)().then((img) =>
-              res({ name: image.name, image: img, aspect: img.width / img.height })
+              res({
+                name: image.name,
+                image: img,
+                aspect: img.width / img.height,
+              })
             );
           })
       )
@@ -137,7 +139,11 @@ function Modal(props: ModalProps) {
                 <For each={images()}>
                   {(item) => (
                     <div class="modal__img-grid-cell">
-                      <img src={item.image.src} draggable={false} style={{ "aspect-ratio": item.aspect }} />
+                      <img
+                        src={item.image.src}
+                        draggable={false}
+                        style={{ "aspect-ratio": item.aspect }}
+                      />
                       <Show when={item.name}>
                         <p>{item.name}</p>
                       </Show>
@@ -151,7 +157,7 @@ function Modal(props: ModalProps) {
                     display: "flex",
                     "justify-content": "center",
                     "flex-shrink": 0,
-                    "margin-top": '12px'
+                    "margin-top": "12px",
                   }}
                 >
                   <img
@@ -171,16 +177,24 @@ function Modal(props: ModalProps) {
                 role="dialog"
                 classList={{ ["fade-in"]: !loading(), "modal-content": true }}
               >
-                <div class='modal-content-flex' onClick={(e) => e.stopPropagation()}>
+                <div
+                  class="modal-content-flex"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <div
                     classList={{
                       "modal__prints-img-grid": true,
-                      [`modal__prints-img-grid--${printImages()?.length}`]: true,
+                      [`modal__prints-img-grid--${printImages()?.length}`]:
+                        true,
                     }}
                   >
                     <For each={printImages()}>
                       {(item) => (
-                        <img src={item.image.src} draggable={false} style={{ "aspect-ratio": item.aspect }} />
+                        <img
+                          src={item.image.src}
+                          draggable={false}
+                          style={{ "aspect-ratio": item.aspect }}
+                        />
                       )}
                     </For>
                   </div>
