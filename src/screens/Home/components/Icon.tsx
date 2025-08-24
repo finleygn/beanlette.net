@@ -12,24 +12,30 @@ interface IconProps {
 
 function Icon({ title, thumbnail, id, position, available }: IconProps) {
   return (
-    <A
-      noScroll
+    <div
       class="artwork-icon"
-      draggable={false}
-      href={`/${id}`}
       style={{ top: `${position.y}%`, left: `${position.x}%` }}
     >
-      <img
-        src={thumbnail}
-        draggable={false}
-        alt={`${title} thumbnail`}
-        class="artwork-icon__thumbnail"
-      />
-      <span class="artwork-icon__text">{title}</span>
+      <A noScroll draggable={false} href={`/${id}`} class="artwork-icon__link">
+        <img
+          src={thumbnail}
+          draggable={false}
+          alt={`${title} thumbnail`}
+          class="artwork-icon__thumbnail"
+        />
+        <span class="artwork-icon__text">{title}</span>
+      </A>
       {available && (
-        <img src="/meow/prints-available.svg" class="artwork-icon__badge" />
+        <A
+          noScroll
+          draggable={false}
+          href={`/${id}/pieces`}
+          class="artwork-icon__badge_link"
+        >
+          <img src="/meow/prints-available.svg" class="artwork-icon__badge" />
+        </A>
       )}
-    </A>
+    </div>
   );
 }
 

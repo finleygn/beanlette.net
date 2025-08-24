@@ -7,6 +7,8 @@ import { useLocation } from "@solidjs/router";
 import Modal from "./components/Modal";
 import { artwork } from "../../constants/artwork";
 import { isMobile } from "../../utility/isMobile";
+import ModalPrint from "./components/ModalPrint";
+import { pathcmp } from "../../utility/path";
 
 interface ScreenProps {
   backgroundRender: BackgroundRenderer;
@@ -74,9 +76,16 @@ function HomeScreen(props: ScreenProps) {
       {/** not the way this should be done but oh well */}
       <Switch>
         {artwork.map((artwork) => (
-          <Match when={`/${artwork.id}` === location.pathname}>
-            <Modal images={artwork.images} print={artwork.prints} />
-          </Match>
+          <>
+            <Match when={pathcmp(`/${artwork.id}`, location.pathname)}>
+              <Modal images={artwork.images} print={artwork.prints} />
+            </Match>
+            {artwork.prints && (
+              <Match when={pathcmp(`/${artwork.id}/pieces`, location.pathname)}>
+                <ModalPrint {...artwork.prints} />
+              </Match>
+            )}
+          </>
         ))}
       </Switch>
     </Screen>

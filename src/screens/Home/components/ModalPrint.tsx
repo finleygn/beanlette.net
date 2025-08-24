@@ -1,37 +1,21 @@
-import {
-  createSignal,
-  For,
-  JSXElement,
-  Match,
-  onCleanup,
-  onMount,
-  Show,
-  Switch,
-} from "solid-js";
+import { createSignal, For, JSXElement, onCleanup, onMount } from "solid-js";
 import "./Modal.css";
-import { useLocation, useNavigate } from "@solidjs/router";
+import { useNavigate } from "@solidjs/router";
 import { AssetLoaders } from "../../../utility/assetLoader";
-import { path_append } from "../../../utility/path";
 
 type JsImage = { name?: string; image: HTMLImageElement; aspect: number };
 
 interface ModalProps {
   images: { name?: string; image: string }[];
-  print?: {
-    available: boolean;
-    images: { name?: string; image: string }[];
-    description: JSXElement;
-  };
+  description: JSXElement;
 }
 
-function Modal(props: ModalProps) {
+function ModalPrint(props: ModalProps) {
   const [images, setImages] = createSignal<JsImage[]>();
   const [loading, setLoading] = createSignal(true);
-  const location = useLocation();
 
   const nav = useNavigate();
   let loaderRef: HTMLImageElement | undefined = undefined;
-  let imageContainerRef: HTMLImageElement | undefined = undefined;
 
   function hideLoader() {
     setLoading(false);
@@ -90,53 +74,33 @@ function Modal(props: ModalProps) {
       <div class="modal-scroller">
         <div
           role="dialog"
-          ref={imageContainerRef}
-          onClick={(e) => e.stopPropagation()}
           classList={{ ["fade-in"]: !loading(), "modal-content": true }}
         >
-          <div
-            classList={{
-              "modal__img-grid": true,
-              [`modal__img-grid--${images()?.length}`]: true,
-            }}
-          >
-            <For each={images()}>
-              {(item) => (
-                <div class="modal__img-grid-cell">
+          <div class="modal-content-flex" onClick={(e) => e.stopPropagation()}>
+            <div
+              classList={{
+                "modal__prints-img-grid": true,
+                [`modal__prints-img-grid--${images()?.length}`]: true,
+              }}
+            >
+              <For each={images()}>
+                {(item) => (
                   <img
                     src={item.image.src}
                     draggable={false}
                     style={{ "aspect-ratio": item.aspect }}
                   />
-                  <Show when={item.name}>
-                    <p>{item.name}</p>
-                  </Show>
-                </div>
-              )}
-            </For>
-          </div>
-          {props.print && (
-            <div
-              style={{
-                display: "flex",
-                "justify-content": "center",
-                "flex-shrink": 0,
-                "margin-top": "12px",
-              }}
-            >
-              <a href={path_append(location.pathname, "pieces")}>
-                <img
-                  class="for-sale-tag"
-                  onClick={(e) => e.stopPropagation()}
-                  src="/meow/prints.svg"
-                />
-              </a>
+                )}
+              </For>
             </div>
-          )}
+            <div class="prints-sidebar" onClick={(e) => e.stopPropagation()}>
+              {props.description}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default Modal;
+export default ModalPrint;
