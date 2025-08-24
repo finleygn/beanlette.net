@@ -2,11 +2,9 @@ import {
   createSignal,
   For,
   JSXElement,
-  Match,
   onCleanup,
   onMount,
   Show,
-  Switch,
 } from "solid-js";
 import "./Modal.css";
 import { useLocation, useNavigate } from "@solidjs/router";
