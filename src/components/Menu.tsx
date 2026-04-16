@@ -34,7 +34,7 @@ function Menu({ backgroundRenderer }: MenuProps) {
         <a href="https://x.com/majorbean_" target="_blank">
           twitter ♪
         </a>
-        <a href="https://www.instagram.com/beanlette.aep" target="_blank">
+        <a href="https://www.instagram.com/beanlette_" target="_blank">
           instagram ☆
         </a>
         <a href="mailto:noah@beanlette.net" target="_blank">
